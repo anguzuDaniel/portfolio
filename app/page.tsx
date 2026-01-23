@@ -1,65 +1,100 @@
-import Image from "next/image";
+import { Github, ExternalLink, Code2, Cpu, Globe, Mail } from 'lucide-react';
+import { getGithubRepos } from '@/lib/github';
+import Hero from './components/Hero';
+import About from './components/About';
+import { siteConfig } from '@/config/profile';
+import { ModeToggle } from './components/ModeToggle';
 
-export default function Home() {
+export default async function Page() {
+  const repos = await getGithubRepos();
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+    <main className="min-h-screen bg-white dark:bg-[#050505] text-slate-900 dark:text-slate-300 transition-colors duration-300">
+      <div className="fixed top-6 right-6 z-50">
+        <ModeToggle />
+      </div>
+
+      <Hero />
+      <About />
+
+      {/* SKILLS SECTION */}
+      <section id="skills" className="py-20 bg-slate-50 dark:bg-white/5 border-y border-slate-200 dark:border-white/5">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid md:grid-cols-3 gap-10">
+            {/* These now match the keys in your profile.ts */}
+            <SkillCard 
+              icon={<Code2 className="text-cyan-600 dark:text-cyan-500" />} 
+              title="Frontend" 
+              list={siteConfig.skills.frontend.join(", ")} 
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
+            <SkillCard 
+              icon={<Cpu className="text-cyan-600 dark:text-cyan-500" />} 
+              title="Backend" 
+              list={siteConfig.skills.backend.join(", ")} 
+            />
+            <SkillCard 
+              icon={<Globe className="text-cyan-600 dark:text-cyan-500" />} 
+              title="Tools & Branches" 
+              list={siteConfig.skills.tools.join(", ")} 
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* GITHUB REPOS SECTION */}
+      <section id="projects" className="py-24 px-6 max-w-6xl mx-auto">
+        <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-12">Open Source Work</h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {repos.map((repo: any) => (
+            <div key={repo.id} className="p-6 rounded-2xl bg-slate-100 dark:bg-slate-900/40 border border-slate-200 dark:border-white/5 hover:border-cyan-500 transition-all flex flex-col justify-between shadow-sm">
+              <div>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{repo.name}</h3>
+                <p className="text-sm text-slate-600 dark:text-slate-400 mb-6 line-clamp-2">
+                  {repo.description || "Software solution developed for regional impact."}
+                </p>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-xs font-mono text-cyan-600 dark:text-cyan-400 bg-cyan-100 dark:bg-cyan-400/10 px-2 py-1 rounded">
+                  {repo.language || 'Code'}
+                </span>
+                <a href={repo.html_url} target="_blank" className="text-slate-500 hover:text-cyan-500 transition">
+                  <Github size={18} />
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CONTACT SECTION */}
+      <section id="contact" className="py-24 px-6 text-center">
+        <div className="max-w-xl mx-auto bg-slate-100 dark:bg-gradient-to-b dark:from-cyan-900/20 dark:to-transparent p-12 rounded-3xl border border-slate-200 dark:border-cyan-500/10 shadow-lg">
+          <Mail className="mx-auto mb-6 text-cyan-600 dark:text-cyan-500" size={40} />
+          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">Let's work together</h2>
+          <p className="text-slate-600 dark:text-slate-400 mb-8">
+            Currently looking for new opportunities in software development.
+          </p>
+          <a href={`mailto:${siteConfig.email}`} className="bg-slate-900 dark:bg-white text-white dark:text-black px-10 py-4 rounded-xl font-bold hover:bg-cyan-500 dark:hover:bg-cyan-400 transition inline-block">
+            Send me an Email
           </a>
         </div>
-      </main>
+      </section>
+      
+      <footer className="py-10 text-center text-slate-500 text-xs">
+        © 2026 {siteConfig.name} • Built with Next.js
+      </footer>
+    </main>
+  );
+}
+
+function SkillCard({ icon, title, list }: { icon: any, title: string, list: string }) {
+  return (
+    <div className="flex flex-col items-center text-center p-6 group">
+      <div className="mb-4 p-3 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-white/5 shadow-sm group-hover:scale-110 transition-transform">
+        {icon}
+      </div>
+      <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{title}</h3>
+      <p className="text-slate-500 dark:text-slate-500 text-sm leading-relaxed">{list}</p>
     </div>
   );
 }

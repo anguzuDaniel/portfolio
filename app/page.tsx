@@ -68,13 +68,21 @@ export default async function Page() {
 
       {/* CONTACT SECTION */}
       <section id="contact" className="py-24 px-6 text-center">
-        <div className="max-w-xl mx-auto bg-slate-100 dark:bg-gradient-to-b dark:from-cyan-900/20 dark:to-transparent p-12 rounded-3xl border border-slate-200 dark:border-cyan-500/10 shadow-lg">
-          <Mail className="mx-auto mb-6 text-cyan-600 dark:text-cyan-500" size={40} />
-          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">Let's work together</h2>
+        <div className="max-w-xl mx-auto bg-slate-50 dark:bg-gradient-to-b dark:from-cyan-900/20 dark:to-slate-900/50 p-12 rounded-3xl border border-slate-200 dark:border-cyan-500/10 shadow-lg transition-colors duration-300">
+          <Mail className="mx-auto mb-6 text-cyan-600 dark:text-cyan-400" size={40} />
+          
+          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">
+            Let's work together
+          </h2>
+          
           <p className="text-slate-600 dark:text-slate-400 mb-8">
             Currently looking for new opportunities in software development.
           </p>
-          <a href={`mailto:${siteConfig.email}`} className="bg-slate-900 dark:bg-white text-white dark:text-black px-10 py-4 rounded-xl font-bold hover:bg-cyan-500 dark:hover:bg-cyan-400 transition inline-block">
+          
+          <a 
+            href={`mailto:${siteConfig.email}`} 
+            className="bg-slate-900 dark:bg-white text-white dark:text-black px-10 py-4 rounded-xl font-bold hover:bg-cyan-600 dark:hover:bg-cyan-400 transition-all inline-block shadow-md"
+          >
             Send me an Email
           </a>
         </div>

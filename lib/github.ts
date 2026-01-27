@@ -13,3 +13,35 @@ export async function getGithubRepos() {
   // Filter for projects you actually want to show (optional)
   return repos.filter((repo: any) => !repo.fork);
 }
+
+export async function getRepoDescription(repoName: string) {
+  try {
+    const response = await fetch(
+      `https://api.github.com/repos/anguzuDaniel/${repoName}/readme`,
+      {
+        headers: {
+          // Optional: Add a GitHub Token here if you hit rate limits
+          // 'Authorization': `token ${process.env.GITHUB_TOKEN}`
+        },
+        next: { revalidate: 3600 } // Cache for 1 hour
+      }
+    );
+
+    if (!response.ok) return null;
+
+    const data = await response.json();
+    
+    // GitHub sends README as Base64. We need to decode it.
+    const decodedContent = Buffer.from(data.content, 'base64').toString('utf-8');
+
+    // Clean up the text: Take the first 150 characters and remove Markdown symbols
+    return decodedContent
+      .replace(/[#*`]/g, '') // Remove #, *, and ` symbols
+      .split('\n')
+      .find(line => line.trim().length > 10) // Find the first real sentence
+      ?.substring(0, 160) + "...";
+      
+  } catch (error) {
+    return null;
+  }
+}

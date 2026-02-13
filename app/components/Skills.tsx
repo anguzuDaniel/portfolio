@@ -34,7 +34,7 @@ export default function Skills({ siteConfig }: { siteConfig: { skills: { fronten
 
 
   return (
-    <section id="skills" className="section-padding dark:bg-zinc-950/50">
+    <section id="skills" className="section-padding">
       <div className="container-max">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

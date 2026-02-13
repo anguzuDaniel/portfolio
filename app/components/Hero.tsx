@@ -9,9 +9,6 @@ export default function Hero() {
   return (
     <section className="relative container-max overflow-hidden min-h-[90vh] flex items-center pt-32 pb-20">
 
-      {/* Background Decorative Element */}
-      <div className="absolute top-0 right-0 -z-10 w-[500px] h-[500px] bg-brand-500/10 blur-[150px] rounded-full translate-x-1/2 -translate-y-1/2 animate-pulse" />
-      <div className="absolute bottom-0 left-0 -z-10 w-[400px] h-[400px] bg-blue-500/10 blur-[120px] rounded-full -translate-x-1/2 translate-y-1/2" />
 
       <div className="grid md:grid-cols-2 gap-12 items-center">
 

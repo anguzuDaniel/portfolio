@@ -9,7 +9,7 @@ export const siteConfig = {
   hero: {
     title: "Crafting code that bridges",
     titleAccent: "innovation and scale.",
-    subtext: "Passionate about building robust backend systems and intuitive web & mobile applications across diverse campus ecosystems."
+    subtext: "Passionate about building robust backend systems and intuitive web & mobile applications across diverse ecosystems."
   },
 
   // About Me - Pulled from your LinkedIn Summary style

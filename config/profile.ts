@@ -29,10 +29,11 @@ export const siteConfig = {
   // Skills - Categorized for recruiters
   skills: {
     languages: ["Typescript", "JavaScript", "SQL", "Kotlin", "Python"],
-    frameworks: ["React", "React Native", "Jetpack compose", "Next.js", "Node.js", "Express"],
+    frameworks: ["React", "React Native", "Jetpack Compose", "Next.js", "Node.js", "Express"],
     tools: ["Git", "PostgreSQL", "Docker", "Vercel"],
     frontend: ["React", "Next.js", "Tailwind CSS", "TypeScript"],
     backend: ["Node.js", "Java", "PostgreSQL", "Express"],
+    mobile: ["React Native", "Jetpack Compose", "Kotlin", "Android SDK"],
   },
 
   featuredRepos: [

@@ -1,16 +1,22 @@
 "use client";
 
-import { Cpu, Globe, Layers } from "lucide-react";
+import { Cpu, Globe, Layers, Smartphone } from "lucide-react";
 import SkillCard from "./SkillCard";
 import { motion } from "framer-motion";
 
-export default function Skills({ siteConfig }: { siteConfig: { skills: { frontend: string[], backend: string[], languages: string[] } } }) {
+export default function Skills({ siteConfig }: { siteConfig: { skills: { frontend: string[], backend: string[], languages: string[], mobile: string[] } } }) {
   const skillCategories = [
     {
       icon: <Layers className="text-brand-500" />,
       title: "Frontend Development",
       list: siteConfig.skills.frontend,
       description: "Crafting beautiful, responsive, and high-performance user interfaces."
+    },
+    {
+      icon: <Smartphone className="text-brand-500" />,
+      title: "Mobile Development",
+      list: siteConfig.skills.mobile,
+      description: "Building native and cross-platform mobile applications for iOS and Android."
     },
     {
       icon: <Cpu className="text-brand-500" />,
@@ -25,6 +31,7 @@ export default function Skills({ siteConfig }: { siteConfig: { skills: { fronten
       description: "Modern languages and frameworks for cross-platform solutions."
     }
   ];
+
 
   return (
     <section id="skills" className="section-padding bg-zinc-100/30 dark:bg-zinc-950/50 border-y border-zinc-200/50 dark:border-zinc-800/50">
@@ -44,7 +51,7 @@ export default function Skills({ siteConfig }: { siteConfig: { skills: { fronten
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {skillCategories.map((category, index) => (
             <motion.div
               key={category.title}

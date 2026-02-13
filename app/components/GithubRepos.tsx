@@ -21,12 +21,12 @@ export default function GithubRepos({ repos }: { repos: Repo[] }) {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="mb-12"
+        className="text-center mb-16"
       >
-        <h2 className="text-4xl md:text-5xl font-display font-black text-zinc-900 dark:text-white mb-4 tracking-tighter">
+        <h2 className="text-4xl md:text-5xl font-display font-black text-zinc-900 dark:text-white mb-4 tracking-tighter uppercase italic">
           Featured Projects
         </h2>
-        <p className="text-zinc-500 dark:text-zinc-400 text-lg max-w-2xl mx-auto font-medium">
+        <p className="text-zinc-500 dark:text-zinc-400 text-lg max-w-2xl mx-auto font-medium text-center">
           A selection of my professional work and open-source contributions.
         </p>
       </motion.div>

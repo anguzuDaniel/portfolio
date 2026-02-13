@@ -16,7 +16,7 @@ interface Repo {
 
 export default function GithubRepos({ repos }: { repos: Repo[] }) {
   return (
-    <section id="projects" className="section-padding px-6 max-w-6xl mx-auto">
+    <section id="projects" className="section-padding container-max">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

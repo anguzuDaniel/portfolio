@@ -1,28 +1,36 @@
+"use client";
+
 import { FaGithub } from 'react-icons/fa';
+import ProjectCard from './ProjectCard'; // Ensure you import the card we just fixed
 
 export default function GithubProjects({ repos, github }: { repos: any, github: any }) {
     return (
-      <section id="projects" className="py-24 px-6 max-w-6xl mx-auto">
-        <div className="flex justify-between items-end mb-12">
+      <section id="projects" className="section-padding px-6 max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-4">
           <div>
-            <h2 className="text-3xl font-bold text-white">Live Projects</h2>
-            <p className="text-slate-500 mt-2">Fetched directly from my GitHub activity.</p>
+            {/* Using the text-gradient class from your CSS for the heading */}
+            <h2 className="text-4xl md:text-5xl font-display font-black text-zinc-900 dark:text-white tracking-tight">
+              Live Projects
+            </h2>
+            <p className="text-zinc-500 dark:text-zinc-400 mt-4 text-lg font-medium">
+              A curated selection of my latest open-source contributions and systems.
+            </p>
           </div>
-          <a href={github} className="text-cyan-500 hover:underline text-sm font-mono">view_all_repos()</a>
+          
+          <a 
+            href={github} 
+            target="_blank"
+            className="group flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 text-sm font-bold border border-zinc-200 dark:border-zinc-700 hover:border-brand-500 transition-all shadow-sm"
+          >
+            <FaGithub className="group-hover:rotate-12 transition-transform" />
+            view_all_repos()
+          </a>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* MODERN GRID: Staggered Bento-like columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {repos.map((repo: any) => (
-            <div key={repo.id} className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-cyan-500/40 transition-all flex flex-col justify-between">
-              <div>
-                <h3 className="text-lg font-bold text-white mb-2">{repo.name}</h3>
-                <p className="text-sm text-slate-400 mb-6">{repo.description || "Project developed for school branch optimization."}</p>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-xs font-mono text-cyan-400 bg-cyan-400/10 px-2 py-1 rounded">{repo.language}</span>
-                <a href={repo.html_url} target="_blank"><FaGithub size={18} className="text-slate-500 hover:text-white transition" /></a>
-              </div>
-            </div>
+            <ProjectCard key={repo.id} repo={repo} />
           ))}
         </div>
       </section>

@@ -51,17 +51,19 @@
   }
 
   body {
-    @apply bg-theme-background text-theme-foreground antialiased selection:bg-brand-500/30;
+    @apply bg-theme-background text-theme-foreground antialiased;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
+  /* FIXED: Headings now follow the theme foreground variable */
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    @apply font-display tracking-tight font-bold;
+    @apply font-display tracking-tight font-black;
+    color: var(--foreground);
   }
 }
 
@@ -70,29 +72,63 @@
     @apply bg-white/70 dark:bg-zinc-900/40 backdrop-blur-2xl border border-zinc-200/50 dark:border-zinc-800/50 shadow-glass dark:shadow-none;
   }
 
-  .glass-darker {
-    @apply bg-white/50 dark:bg-zinc-950/60 backdrop-blur-3xl border border-zinc-200 dark:border-zinc-800 shadow-2xl;
-  }
-
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-600 via-blue-600 to-indigo-600 dark:from-brand-400 dark:via-blue-400 dark:to-indigo-400;
   }
 
-  .section-padding {
-    @apply py-16 md:py-24;
-  }
-
+  /* --- THE PREMIUM CARD SYSTEM --- */
   .premium-card {
-    @apply bg-white dark:bg-zinc-900/50 rounded-[2.5rem] border border-zinc-200/60 dark:border-zinc-800/50 transition-all duration-500 shadow-premium-light dark:shadow-none;
+    background-color: var(--background);
+    color: var(--foreground);
+    border-radius: 2.5rem;
+    border: 1px solid var(--border);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-premium-light);
+    position: relative;
+    overflow: hidden;
   }
 
-  .premium-card-hover {
-    @apply hover:border-brand-500/50 hover:shadow-premium-light-hover dark:hover:shadow-brand-500/10 hover:-translate-y-2;
+  .premium-card h3 {
+    @apply text-zinc-900 dark:text-white transition-colors duration-300;
+  }
+
+  .premium-card p {
+    @apply text-zinc-600 dark:text-zinc-400 transition-colors duration-300;
+  }
+
+  /* FIXED HOVER: Light Mode focus */
+  .premium-card-hover:hover {
+    @apply -translate-y-2;
+    /* In light mode, we give it a crisp white look with a stronger, "airy" shadow */
+    background-color: #ffffff;
+    border-color: var(--color-brand-500);
+    /* Use your brand color for the border on hover */
+    box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.08), var(--shadow-premium-light-hover);
+  }
+
+  /* Dark Mode specific overrides */
+  .dark .premium-card {
+    background-color: rgba(24, 24, 27, 0.5);
+    backdrop-filter: blur(12px);
+    border-color: rgba(255, 255, 255, 0.05);
+    box-shadow: none;
+  }
+
+  .dark .premium-card-hover:hover {
+    background-color: rgba(24, 24, 27, 0.85);
+    border-color: rgba(59, 130, 246, 0.5);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 25px rgba(59, 130, 246, 0.15);
+  }
+
+  /* Standardized Spacing */
+  .section-padding {
+    @apply py-20 md:py-32;
+  }
+
+  .container-max {
+    @apply max-w-6xl mx-auto px-6;
   }
 }
-
-
-
 
 
 html {

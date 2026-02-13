@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 
 export default function Hero() {
   return (
-    <section className="relative px-6 max-w-6xl mx-auto overflow-hidden min-h-[90vh] flex items-center pt-32 pb-20">
+    <section className="relative container-max overflow-hidden min-h-[90vh] flex items-center pt-32 pb-20">
 
       {/* Background Decorative Element */}
       <div className="absolute top-0 right-0 -z-10 w-[500px] h-[500px] bg-brand-500/10 blur-[150px] rounded-full translate-x-1/2 -translate-y-1/2 animate-pulse" />

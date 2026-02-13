@@ -29,7 +29,6 @@ export default async function Page() {
       <Hero />
       <About />
 
-
       {/* SKILLS SECTION */}
       <Skills siteConfig={siteConfig} />
 

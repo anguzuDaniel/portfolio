@@ -35,7 +35,7 @@ export default function Skills({ siteConfig }: { siteConfig: { skills: { fronten
 
   return (
     <section id="skills" className="section-padding bg-zinc-50 dark:bg-zinc-950/50 border-y border-zinc-100 dark:border-zinc-800/50">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="container-max">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

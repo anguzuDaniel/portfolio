@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 export default function ContactForm() {
     return (
-        <section id="contact" className="section-padding px-6 max-w-6xl mx-auto">
+        <section id="contact" className="section-padding container-max">
             <div className="premium-card overflow-hidden !rounded-[3rem]">
 
                 <div className="grid md:grid-cols-2">

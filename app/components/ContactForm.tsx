@@ -5,12 +5,17 @@ import { Mail, Linkedin, Github, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function ContactForm() {
+    // Reusable input style to keep code clean
+    const inputStyles = "w-full px-6 py-4 rounded-2xl transition-all font-bold focus:outline-none focus:ring-2 focus:ring-brand-500/50 border " + 
+                        "bg-zinc-50 border-zinc-200 text-zinc-900 placeholder:text-zinc-400 " + // Light Mode
+                        "dark:bg-zinc-900/50 dark:border-zinc-700/50 dark:text-zinc-100 dark:placeholder:text-zinc-500"; // Dark Mode
+
     return (
         <section id="contact" className="section-padding container-max">
-            <div className="premium-card overflow-hidden !rounded-[3rem]">
-
+            <div className="premium-card overflow-hidden !rounded-[3rem] border-none shadow-2xl">
                 <div className="grid md:grid-cols-2">
 
+                    {/* Left Sidebar: Brand Info */}
                     <div className="p-10 md:p-16 bg-brand-600 text-white relative overflow-hidden">
                         {/* Decorative circles */}
                         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
@@ -22,7 +27,7 @@ export default function ContactForm() {
                             viewport={{ once: true }}
                             className="relative z-10"
                         >
-                            <h2 className="text-4xl md:text-5xl font-display font-black mb-6 leading-tight tracking-tighter text-white">
+                            <h2 className="text-4xl md:text-5xl font-display font-black mb-6 leading-tight tracking-tighter">
                                 Let&apos;s Build Something <span className="text-blue-200">Exceptional</span>
                             </h2>
                             <p className="text-blue-100 text-lg mb-8 font-medium leading-relaxed">
@@ -30,7 +35,6 @@ export default function ContactForm() {
                             </p>
 
                             <div className="space-y-6 mt-10">
-
                                 {[
                                     { icon: <Mail className="w-6 h-6" />, label: "Email", value: siteConfig.email, href: `mailto:${siteConfig.email}` },
                                     { icon: <Github className="w-6 h-6" />, label: "GitHub", value: "anguzuDaniel", href: siteConfig.github },
@@ -55,59 +59,38 @@ export default function ContactForm() {
                         </motion.div>
                     </div>
 
-                    <div className="p-10 md:p-16 bg-white dark:bg-zinc-950/30">
+                    {/* Right Side: Actual Form */}
+                    <div className="p-10 md:p-16 bg-white dark:bg-zinc-950/40 backdrop-blur-md">
                         <motion.form
                             initial={{ opacity: 0, x: 20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             className="space-y-6"
                         >
-
                             <div className="space-y-3">
-                                <label className="text-sm font-bold text-zinc-500 uppercase tracking-widest px-1">Your Name</label>
-                                <input
-                                    type="text"
-                                    placeholder="Daniel Anguzu"
-                                    suppressHydrationWarning
-                                    className="w-full bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-700/50 px-6 py-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all font-bold text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400"
-                                />
+                                <label className="text-sm font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest px-1">Your Name</label>
+                                <input type="text" placeholder="Daniel Anguzu" className={inputStyles} />
                             </div>
 
                             <div className="space-y-3">
-                                <label className="text-sm font-bold text-zinc-500 uppercase tracking-widest px-1">Email Address</label>
-                                <input
-                                    type="email"
-                                    placeholder="daniel@exceptional.com"
-                                    suppressHydrationWarning
-                                    className="w-full bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-700/50 px-6 py-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all font-bold text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400"
-                                />
+                                <label className="text-sm font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest px-1">Email Address</label>
+                                <input type="email" placeholder="daniel@exceptional.com" className={inputStyles} />
                             </div>
 
                             <div className="space-y-3">
-                                <label className="text-sm font-bold text-zinc-500 uppercase tracking-widest px-1">Subject</label>
-                                <input
-                                    type="text"
-                                    placeholder="Project Collaboration"
-                                    suppressHydrationWarning
-                                    className="w-full bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-700/50 px-6 py-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all font-bold text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400"
-                                />
+                                <label className="text-sm font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest px-1">Subject</label>
+                                <input type="text" placeholder="Project Collaboration" className={inputStyles} />
                             </div>
 
                             <div className="space-y-3">
-                                <label className="text-sm font-bold text-zinc-500 uppercase tracking-widest px-1">Your Message</label>
-                                <textarea
-                                    rows={4}
-                                    placeholder="Hello Daniel, I'd like to talk about..."
-                                    suppressHydrationWarning
-                                    className="w-full bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-700/50 px-6 py-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all font-bold text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 resize-none shadow-sm"
-                                />
+                                <label className="text-sm font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest px-1">Your Message</label>
+                                <textarea rows={4} placeholder="Hello Daniel, I'd like to talk about..." className={`${inputStyles} resize-none`} />
                             </div>
 
                             <motion.button
                                 whileHover={{ scale: 1.02, y: -2 }}
                                 whileTap={{ scale: 0.98 }}
                                 type="submit"
-                                suppressHydrationWarning
                                 className="w-full bg-brand-600 text-white py-5 rounded-2xl font-bold hover:bg-brand-700 transition-all shadow-xl shadow-brand-500/25 flex items-center justify-center gap-3 text-lg"
                             >
                                 Send Message

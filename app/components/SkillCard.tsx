@@ -16,12 +16,13 @@ export default function SkillCard({ icon, title, list, description }: { icon: Re
         {list.map((item) => (
           <span
             key={item}
-            className="text-[10px] uppercase tracking-wider font-bold text-brand-700 dark:text-brand-400 bg-brand-500/10 dark:bg-brand-500/5 px-3 py-1.5 rounded-lg border border-brand-500/10 whitespace-nowrap"
+            className="text-[11px] uppercase tracking-wider font-extrabold text-brand-700 dark:text-brand-400 bg-brand-50 dark:bg-brand-500/10 px-3.5 py-2 rounded-xl border border-brand-100 dark:border-brand-500/20 whitespace-nowrap bubble-hover"
           >
             {item}
           </span>
         ))}
       </div>
+
     </div>
 
   );

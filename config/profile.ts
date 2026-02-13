@@ -1,5 +1,3 @@
-// config/profile.ts
-
 export const siteConfig = {
   name: "Anguzu Daniel",
   role: "Full Stack Software Developer",

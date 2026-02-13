@@ -63,7 +63,7 @@ export default function Skills({ siteConfig }: { siteConfig: { skills: { fronten
               <SkillCard
                 icon={category.icon}
                 title={category.title}
-                list={category.list.join(", ")}
+                list={category.list}
                 description={category.description}
               />
             </motion.div>

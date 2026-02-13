@@ -3,7 +3,7 @@
 
 
 
-export default function SkillCard({ icon, title, list, description }: { icon: React.ReactNode, title: string, list: string, description?: string }) {
+export default function SkillCard({ icon, title, list, description }: { icon: React.ReactNode, title: string, list: string[], description?: string }) {
   return (
     <div className="group premium-card premium-card-hover p-10 h-full flex flex-col">
 
@@ -11,11 +11,16 @@ export default function SkillCard({ icon, title, list, description }: { icon: Re
         {icon}
       </div>
       <h3 className="text-2xl font-display font-black text-zinc-900 dark:text-white mb-4 tracking-tight">{title}</h3>
-      {description && <p className="text-base text-zinc-500 dark:text-zinc-400 mb-6 line-clamp-2 font-medium leading-relaxed">{description}</p>}
-      <div className="mt-auto">
-        <p className="text-xs font-mono font-bold text-brand-700 dark:text-brand-400 bg-brand-500/10 dark:bg-brand-500/5 px-4 py-2.5 rounded-xl inline-block border border-brand-500/20">
-          {list}
-        </p>
+      {description && <p className="text-base text-zinc-500 dark:text-zinc-400 mb-8 font-medium leading-relaxed">{description}</p>}
+      <div className="mt-auto flex flex-wrap gap-2">
+        {list.map((item) => (
+          <span
+            key={item}
+            className="text-[10px] uppercase tracking-wider font-bold text-brand-700 dark:text-brand-400 bg-brand-500/10 dark:bg-brand-500/5 px-3 py-1.5 rounded-lg border border-brand-500/10 whitespace-nowrap"
+          >
+            {item}
+          </span>
+        ))}
       </div>
     </div>
 

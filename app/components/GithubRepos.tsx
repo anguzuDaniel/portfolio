@@ -23,7 +23,7 @@ export default function GithubRepos({ repos }: { repos: Repo[] }) {
         viewport={{ once: true }}
         className="text-center mb-16"
       >
-        <h2 className="text-4xl md:text-5xl font-display font-black text-zinc-950 dark:text-white mb-4 tracking-tighter uppercase italic">
+        <h2 className="text-4xl md:text-5xl mb-4 tracking-tighter uppercase">
           Featured Projects
         </h2>
         <p className="text-zinc-500 dark:text-zinc-400 text-lg max-w-2xl mx-auto font-medium text-center">

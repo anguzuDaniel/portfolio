@@ -13,7 +13,7 @@ export default function About() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl font-display font-black text-zinc-950 dark:text-white mb-6 flex items-center gap-4">
+          <h2 className="text-4xl md:text-5xl mb-6 flex items-center gap-4">
             <span className="w-12 h-1.5 bg-brand-600 rounded-full" />
             About Me
           </h2>
@@ -51,12 +51,12 @@ export default function About() {
         >
           <div className="absolute -inset-1 bg-gradient-to-r from-brand-500 to-blue-600 rounded-[2rem] blur opacity-10" />
           <div className="relative premium-card p-12 !rounded-[2.5rem]">
-            <h3 className="text-zinc-900 dark:text-white font-display font-black text-2xl mb-8">Technical Arsenal</h3>
+            <h3 className="text-2xl mb-8">Technical Arsenal</h3>
             <div className="flex flex-wrap gap-3">
               {[...siteConfig.skills.languages, ...siteConfig.skills.frameworks].slice(0, 10).map((skill) => (
                 <span
                   key={skill}
-                  className="px-5 py-2.5 bg-zinc-100/50 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 text-xs font-bold rounded-xl border border-zinc-200/50 dark:border-zinc-800/50 hover:border-brand-500 dark:hover:border-brand-500 transition-all duration-300 hover:scale-105"
+                  className="px-5 py-2.5 bg-zinc-100/50 dark:bg-white/5 text-xs font-bold rounded-xl border border-zinc-200/50 dark:border-zinc-800/50 hover:border-brand-500 dark:hover:border-brand-500 transition-all duration-300 hover:scale-105"
                 >
                   {skill}
                 </span>

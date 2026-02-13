@@ -6,7 +6,7 @@ export default function SkillCard({ icon, title, list, description }: { icon: Re
       <div className="w-16 h-16 bg-zinc-50 dark:bg-white/5 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-brand-600 group-hover:text-white transition-all duration-500 group-hover:rotate-12 border border-zinc-100 dark:border-zinc-800/50 shadow-sm">
         {icon}
       </div>
-      <h3 className="text-2xl font-display font-black text-zinc-950 dark:text-white mb-4 tracking-tight text-gradient">{title}</h3>
+      <h3 className="text-2xl mb-4 tracking-tight text-gradient">{title}</h3>
       {description && <p className="text-base text-zinc-500 dark:text-zinc-400 mb-8 font-medium leading-relaxed">{description}</p>}
       <div className="mt-auto flex flex-wrap gap-2">
         {list.map((item) => (

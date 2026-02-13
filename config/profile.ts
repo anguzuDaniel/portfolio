@@ -41,6 +41,8 @@ export const siteConfig = {
     "Adik",
     "task-managment-api",
     "Carpool",
-    "Rinfo"
+    "Rinfo",
+    "adik-android",
+    "Sevaa"
   ]
 };

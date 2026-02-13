@@ -83,11 +83,11 @@
   }
 
   .premium-card {
-    @apply bg-white dark:bg-zinc-900/50 rounded-[2.5rem] border border-zinc-200/60 dark:border-zinc-800/50 transition-all duration-500 shadow-[0_8px_30px_rgb(0, 0, 0, 0.04)] dark:shadow-none;
+    @apply bg-white dark:bg-zinc-900/50 rounded-[2.5rem] border border-zinc-200/60 dark:border-zinc-800/50 transition-all duration-500 shadow-premium-light dark:shadow-none;
   }
 
   .premium-card-hover {
-    @apply hover:border-brand-500/50 hover:shadow-[0_20px_50px_rgba(0, 0, 0, 0.08)] dark:hover:shadow-brand-500/10 hover:-translate-y-2;
+    @apply hover:border-brand-500/50 hover:shadow-premium-light-hover dark:hover:shadow-brand-500/10 hover:-translate-y-2;
   }
 }
 

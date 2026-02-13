@@ -25,6 +25,8 @@
 
   /* Custom Shadows */
   --shadow-premium: 0px 1px 3px rgba(0, 0, 0, 0.05), 0px 10px 20px rgba(0, 0, 0, 0.02);
+  --shadow-premium-light: 0 8px 30px rgba(0, 0, 0, 0.04);
+  --shadow-premium-light-hover: 0 20px 50px rgba(0, 0, 0, 0.08);
   --shadow-glass: 0px 8px 30px rgba(0, 0, 0, 0.04);
 }
 

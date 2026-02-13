@@ -34,7 +34,7 @@ export default function Hero() {
 
           </motion.div>
 
-          <h1 className="text-5xl md:text-7xl font-display font-black tracking-tighter text-zinc-900 dark:text-white mb-6 leading-[1.1] md:leading-[1.05]">
+          <h1 className="text-5xl md:text-7xl font-display font-black tracking-tighter text-zinc-950 dark:text-white mb-6 leading-[1.1] md:leading-[1.05]">
             Crafting code that <span className="relative inline-block">
               <span className="relative z-10 text-brand-600 dark:text-brand-500 italic">bridges</span>
               <motion.span

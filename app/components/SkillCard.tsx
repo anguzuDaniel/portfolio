@@ -1,11 +1,23 @@
-export default function SkillCard({ icon, title, list }: { icon: any, title: string, list: string }) {
+"use client";
+
+
+
+
+export default function SkillCard({ icon, title, list, description }: { icon: React.ReactNode, title: string, list: string, description?: string }) {
   return (
-    <div className="flex flex-col items-center text-center p-6 group">
-      <div className="mb-4 p-3 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-white/5 shadow-sm group-hover:scale-110 transition-transform">
+    <div className="group premium-card premium-card-hover p-10 h-full flex flex-col">
+
+      <div className="w-16 h-16 bg-zinc-50 dark:bg-white/5 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-brand-600 group-hover:text-white transition-all duration-500 group-hover:rotate-12 border border-zinc-100 dark:border-zinc-800/50 shadow-sm">
         {icon}
       </div>
-      <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{title}</h3>
-      <p className="text-slate-500 dark:text-slate-500 text-sm leading-relaxed">{list}</p>
+      <h3 className="text-2xl font-display font-black text-zinc-900 dark:text-white mb-4 tracking-tight">{title}</h3>
+      {description && <p className="text-base text-zinc-500 dark:text-zinc-400 mb-6 line-clamp-2 font-medium leading-relaxed">{description}</p>}
+      <div className="mt-auto">
+        <p className="text-xs font-mono font-bold text-brand-700 dark:text-brand-400 bg-brand-500/10 dark:bg-brand-500/5 px-4 py-2.5 rounded-xl inline-block border border-brand-500/20">
+          {list}
+        </p>
+      </div>
     </div>
+
   );
 }

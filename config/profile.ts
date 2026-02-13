@@ -3,10 +3,10 @@
 export const siteConfig = {
   name: "Anguzu Daniel",
   role: "Full Stack Software Developer",
-  email: "anguzudaniel@example.com", // Replace with your actual email
+  email: "anguzudaniel1@gmail.com",
   github: "https://github.com/anguzuDaniel",
   linkedIn: "https://linkedin.com/in/anguzu-daniel-7b793023a/",
-  
+
   // Hero Section text
   hero: {
     title: "Crafting code that bridges",
@@ -37,10 +37,11 @@ export const siteConfig = {
 
   featuredRepos: [
     "excel-international-schools",
-    "stoic-pips-academy",
+    "clipar",
+    "learner-agent-ai-model",
     "Adik",
-    "carpool",
     "task-managment-api",
-    "twitter-api-clone"
+    "Carpool",
+    "Rinfo"
   ]
 };

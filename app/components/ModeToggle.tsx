@@ -8,20 +8,24 @@ export function ModeToggle() {
   const [mounted, setMounted] = useState(false)
 
   // Avoid hydration mismatch by waiting for mount
-  useEffect(() => setMounted(true), [])
-  if (!mounted) return null
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+
+  if (!mounted) return null;
 
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="p-2 rounded-lg bg-slate-200 dark:bg-slate-800 hover:ring-2 ring-cyan-500 transition-all"
+      className="p-3 rounded-xl bg-zinc-100 dark:bg-zinc-800/50 hover:ring-2 hover:ring-brand-500/50 transition-all duration-300 shadow-sm border border-zinc-200/50 dark:border-zinc-700/50 group"
       aria-label="Toggle Theme"
     >
       {theme === "dark" ? (
-        <Sun className="text-yellow-400" size={20} />
+        <Sun className="text-yellow-500 group-hover:rotate-180 transition-transform duration-500" size={20} />
       ) : (
-        <Moon className="text-slate-700" size={20} />
+        <Moon className="text-zinc-700 group-hover:-rotate-12 transition-transform duration-500" size={20} />
       )}
     </button>
-  )
+  );
 }

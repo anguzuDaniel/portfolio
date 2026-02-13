@@ -1,28 +1,50 @@
-import { Github } from "lucide-react";
+"use client";
 
-export default function GithubRepos({ repos }: { repos: any }) {
-    return (
-      <section id="projects" className="py-24 px-6 max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-12">Open Source Work</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {repos.map((repo: any) => (
-            <div key={repo.id} className="p-6 rounded-2xl bg-slate-100 dark:bg-slate-900/40 border border-slate-200 dark:border-white/5 hover:border-cyan-500 transition-all flex flex-col justify-between shadow-sm">
-              <div>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{repo.name}</h3>
-                <p className="text-sm text-slate-600 dark:text-slate-400 mb-6 line-clamp-2">
-                    {repo.readmeDescription || repo.description || "Building impactful tools across various school branches."}                </p>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-xs font-mono text-cyan-600 dark:text-cyan-400 bg-cyan-100 dark:bg-cyan-400/10 px-2 py-1 rounded">
-                  {repo.language || 'Code'}
-                </span>
-                <a href={repo.html_url} target="_blank" className="text-slate-500 hover:text-cyan-500 transition">
-                  <Github size={18} />
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-    );
+import ProjectCard from "./ProjectCard";
+import { motion } from "framer-motion";
+
+interface Repo {
+  id: number;
+  name: string;
+  description: string | null;
+  readmeDescription?: string;
+  html_url: string;
+  language: string | null;
+  stargazers_count: number;
+  forks_count: number;
+}
+
+export default function GithubRepos({ repos }: { repos: Repo[] }) {
+  return (
+    <section id="projects" className="section-padding px-6 max-w-6xl mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="mb-12"
+      >
+        <h2 className="text-4xl md:text-5xl font-display font-black text-zinc-900 dark:text-white mb-4 tracking-tighter">
+          Featured Projects
+        </h2>
+        <p className="text-zinc-500 dark:text-zinc-400 text-lg max-w-2xl mx-auto font-medium">
+          A selection of my professional work and open-source contributions.
+        </p>
+      </motion.div>
+
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {repos.map((repo: Repo, index: number) => (
+
+          <motion.div
+            key={repo.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.1 }}
+          >
+            <ProjectCard repo={repo} />
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
 }

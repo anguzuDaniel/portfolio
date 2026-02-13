@@ -1,17 +1,16 @@
 // lib/github.ts
 export async function getGithubRepos() {
   const username = "anguzuDaniel"; // Replace with your actual username
-  
+
   const res = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`, {
     next: { revalidate: 3600 } // This refreshes the data every hour
   });
 
   if (!res.ok) throw new Error('Failed to fetch repos');
-  
+
   const repos = await res.json();
-  
-  // Filter for projects you actually want to show (optional)
-  return repos.filter((repo: any) => !repo.fork);
+
+  return repos.filter((repo: { fork: boolean }) => !repo.fork);
 }
 
 export async function getRepoDescription(repoName: string) {
@@ -19,29 +18,25 @@ export async function getRepoDescription(repoName: string) {
     const response = await fetch(
       `https://api.github.com/repos/anguzuDaniel/${repoName}/readme`,
       {
-        headers: {
-          // Optional: Add a GitHub Token here if you hit rate limits
-          // 'Authorization': `token ${process.env.GITHUB_TOKEN}`
-        },
-        next: { revalidate: 3600 } // Cache for 1 hour
+        next: { revalidate: 3600 }
       }
     );
 
     if (!response.ok) return null;
 
     const data = await response.json();
-    
+
     // GitHub sends README as Base64. We need to decode it.
     const decodedContent = Buffer.from(data.content, 'base64').toString('utf-8');
 
     // Clean up the text: Take the first 150 characters and remove Markdown symbols
     return decodedContent
-      .replace(/[#*`]/g, '') // Remove #, *, and ` symbols
+      .replace(/[#*`]/g, '')
       .split('\n')
-      .find(line => line.trim().length > 10) // Find the first real sentence
+      .find(line => line.trim().length > 10)
       ?.substring(0, 160) + "...";
-      
-  } catch (error) {
+
+  } catch {
     return null;
   }
 }

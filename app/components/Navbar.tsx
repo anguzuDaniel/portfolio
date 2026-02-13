@@ -39,8 +39,12 @@ export default function Navbar() {
                 >
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2 group">
-                        <div className="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center text-white group-hover:rotate-12 group-hover:scale-110 transition-all duration-300 shadow-xl shadow-brand-500/20">
-                            <Code2 size={24} />
+                        <div className="relative w-10 h-10 overflow-hidden rounded-xl">
+                            <img
+                                src="/logo.svg"
+                                alt="Logo"
+                                className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-300"
+                            />
                         </div>
                         <span className="font-bold text-xl tracking-tighter hidden sm:block">
                             Anguzu<span className="text-brand-500">.</span>

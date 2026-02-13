@@ -68,7 +68,7 @@ export default function Navbar() {
                         <ModeToggle />
                         <button
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className="p-2 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-lg transition-colors"
+                            className="p-2 text-zinc-600  dark:hover:bg-zinc-900 rounded-lg transition-colors"
                         >
                             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>
@@ -86,7 +86,7 @@ export default function Navbar() {
                         exit={{ opacity: 0, y: -20 }}
                         className="md:hidden absolute top-full left-0 right-0 px-6 pt-2"
                     >
-                        <div className="glass rounded-2xl p-6 flex flex-col gap-4 shadow-2xl border border-zinc-200/50 dark:border-zinc-800/50">
+                        <div className="glass rounded-2xl p-6 flex flex-col gap-4 shadow-2xl border border-zinc-200/50">
                             {navLinks.map((link) => (
                                 <Link
                                     key={link.name}

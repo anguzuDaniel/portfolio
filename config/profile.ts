@@ -16,7 +16,7 @@ export const siteConfig = {
   about: {
     description: `I am a tech enthusiast who believes in the power of clean code and meaningful solutions. 
     My journey is driven by curiosity and a desire to help others succeed, whether it's building backend 
-    systems, crafting web & mobile applications, or managing technical infrastructure for multiple school branches.`,
+    systems, crafting web & mobile applications, or managing technical infrastructure for multiple organizations.`,
     stats: [
       { label: "Repositories", value: "50+" },
       { label: "Branch Projects", value: "10+" },

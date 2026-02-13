@@ -22,7 +22,7 @@ export default function ContactForm() {
                             viewport={{ once: true }}
                             className="relative z-10"
                         >
-                            <h2 className="text-4xl md:text-5xl font-display font-black mb-6 leading-tight tracking-tighter">
+                            <h2 className="text-4xl md:text-5xl font-display font-black mb-6 leading-tight tracking-tighter text-white">
                                 Let&apos;s Build Something <span className="text-blue-200">Exceptional</span>
                             </h2>
                             <p className="text-blue-100 text-lg mb-8 font-medium leading-relaxed">
@@ -42,12 +42,12 @@ export default function ContactForm() {
                                         target={item.label !== "Email" ? "_blank" : undefined}
                                         className="flex items-center gap-5 group/item transition-all duration-300"
                                     >
-                                        <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center group-hover/item:bg-white/20 transition-all duration-300 backdrop-blur-sm border border-white/10">
+                                        <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center group-hover/item:bg-white/20 transition-all duration-300 backdrop-blur-sm border border-white/10 text-white">
                                             {item.icon}
                                         </div>
                                         <div>
                                             <div className="text-xs font-bold uppercase tracking-[0.2em] text-blue-200 mb-1">{item.label}</div>
-                                            <div className="text-lg font-bold group-hover/item:translate-x-1 transition-transform">{item.value}</div>
+                                            <div className="text-lg font-bold group-hover/item:translate-x-1 transition-transform text-white">{item.value}</div>
                                         </div>
                                     </a>
                                 ))}
@@ -55,7 +55,7 @@ export default function ContactForm() {
                         </motion.div>
                     </div>
 
-                    <div className="p-10 md:p-16 bg-white dark:bg-transparent">
+                    <div className="p-10 md:p-16 bg-white dark:bg-zinc-950/30">
                         <motion.form
                             initial={{ opacity: 0, x: 20 }}
                             whileInView={{ opacity: 1, x: 0 }}
@@ -69,7 +69,7 @@ export default function ContactForm() {
                                     type="text"
                                     placeholder="Daniel Anguzu"
                                     suppressHydrationWarning
-                                    className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200/80 dark:border-zinc-700/50 px-6 py-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all font-medium"
+                                    className="w-full bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-700/50 px-6 py-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all font-bold text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400"
                                 />
                             </div>
 
@@ -79,7 +79,7 @@ export default function ContactForm() {
                                     type="email"
                                     placeholder="daniel@exceptional.com"
                                     suppressHydrationWarning
-                                    className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200/80 dark:border-zinc-700/50 px-6 py-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all font-medium"
+                                    className="w-full bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-700/50 px-6 py-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all font-bold text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400"
                                 />
                             </div>
 
@@ -89,7 +89,7 @@ export default function ContactForm() {
                                     type="text"
                                     placeholder="Project Collaboration"
                                     suppressHydrationWarning
-                                    className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200/80 dark:border-zinc-700/50 px-6 py-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all font-medium"
+                                    className="w-full bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-700/50 px-6 py-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all font-bold text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400"
                                 />
                             </div>
 
@@ -99,7 +99,7 @@ export default function ContactForm() {
                                     rows={4}
                                     placeholder="Hello Daniel, I'd like to talk about..."
                                     suppressHydrationWarning
-                                    className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200/80 dark:border-zinc-700/50 px-6 py-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all font-medium resize-none shadow-inner"
+                                    className="w-full bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-700/50 px-6 py-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all font-bold text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 resize-none shadow-sm"
                                 />
                             </div>
 

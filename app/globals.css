@@ -68,12 +68,14 @@
 }
 
 @layer utilities {
-  .glass {
-    @apply bg-white/70 dark:bg-zinc-900/40 backdrop-blur-2xl border border-zinc-200/50 dark:border-zinc-800/50 shadow-glass dark:shadow-none;
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r 
+         from-brand-700 via-blue-600 to-indigo-700 /* Darker for Light Mode */
+         dark:from-brand-400 dark:via-blue-400 dark:to-indigo-400; /* Lighter for Dark Mode */
   }
 
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-600 via-blue-600 to-indigo-600 dark:from-brand-400 dark:via-blue-400 dark:to-indigo-400;
+  .glass {
+    @apply bg-white/70 dark:bg-zinc-900/40 backdrop-blur-2xl border border-zinc-200/50 dark:border-zinc-800/50 shadow-glass dark:shadow-none;
   }
 
   /* --- THE PREMIUM CARD SYSTEM --- */

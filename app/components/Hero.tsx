@@ -34,14 +34,18 @@ export default function Hero() {
 
           </motion.div>
 
-          <h1 className="text-5xl md:text-7xl font-display font-black tracking-tighter text-zinc-950 dark:text-white mb-6 leading-[1.1] md:leading-[1.05]">
-            Crafting code that <span className="relative inline-block">
-              <span className="relative z-10 text-brand-600 dark:text-brand-500 italic">bridges</span>
+          <h1 className="text-5xl md:text-7xl tracking-tighter text-zinc-950 dark:text-white mb-6 leading-[1.1] md:leading-[1.05] font-black">
+            Crafting code that{" "}
+            <span className="relative inline-block">
+              <span className="relative z-10 text-brand-600 dark:text-brand-400 italic">
+                bridges
+              </span>
               <motion.span
                 initial={{ width: 0 }}
                 whileInView={{ width: "100%" }}
                 transition={{ delay: 0.5, duration: 0.8 }}
-                className="absolute bottom-1 md:bottom-2 left-0 h-2 md:h-3 bg-brand-500/10 -rotate-1"
+                // Updated background for better visibility in light mode
+                className="absolute bottom-1 md:bottom-2 left-0 h-2 md:h-3 bg-brand-500/20 dark:bg-brand-500/10 -rotate-1"
               />
             </span>
             <br />

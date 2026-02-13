@@ -89,7 +89,7 @@
   }
 
   .premium-card h3 {
-    @apply text-zinc-900 dark:text-white transition-colors duration-300;
+    @apply text-zinc-950 dark:text-white transition-colors duration-300;
   }
 
   .premium-card p {

@@ -4,11 +4,31 @@ import { siteConfig } from '@/config/profile';
 import { Mail, Linkedin, Github, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
+import { useState } from 'react';
+import { sendEmail } from '../actions/sendEmail';
+import { toast } from 'sonner';
+
 export default function ContactForm() {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    async function handleSubmit(formData: FormData) {
+        setIsSubmitting(true);
+        const result = await sendEmail(formData);
+        setIsSubmitting(false);
+
+        if (result.error) {
+            toast.error(result.error);
+        } else {
+            toast.success("Message sent successfully! I'll get back to you soon.");
+            // Optional: Reset form here if needed, or rely on native form reset
+            (document.getElementById("contact-form") as HTMLFormElement)?.reset();
+        }
+    }
+
     // Reusable input style to keep code clean
-    const inputStyles = "w-full px-6 py-4 rounded-2xl transition-all font-bold focus:outline-none focus:ring-2 focus:ring-brand-500/50 border " + 
-                        "bg-zinc-50 border-zinc-200 text-zinc-900 placeholder:text-zinc-400 " + // Light Mode
-                        "dark:bg-zinc-900/50 dark:border-zinc-700/50 dark:text-zinc-100 dark:placeholder:text-zinc-500"; // Dark Mode
+    const inputStyles = "w-full px-6 py-4 rounded-2xl transition-all font-bold focus:outline-none focus:ring-2 focus:ring-brand-500/50 border " +
+        "bg-zinc-50 border-zinc-200 text-zinc-900 placeholder:text-zinc-400 " + // Light Mode
+        "dark:bg-zinc-900/50 dark:border-zinc-700/50 dark:text-zinc-100 dark:placeholder:text-zinc-500"; // Dark Mode
 
     return (
         <section id="contact" className="section-padding container-max">
@@ -66,36 +86,39 @@ export default function ContactForm() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             className="space-y-6"
+                            action={handleSubmit}
+                            id="contact-form"
                         >
                             <div className="space-y-3">
                                 <label className="text-sm font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest px-1">Your Name</label>
-                                <input type="text" placeholder="Daniel Anguzu" className={inputStyles} suppressHydrationWarning />
+                                <input type="text" name="name" placeholder="Daniel Anguzu" className={inputStyles} suppressHydrationWarning required />
                             </div>
 
                             <div className="space-y-3">
                                 <label className="text-sm font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest px-1">Email Address</label>
-                                <input type="email" placeholder="daniel@exceptional.com" className={inputStyles} suppressHydrationWarning />
+                                <input type="email" name="email" placeholder="daniel@exceptional.com" className={inputStyles} suppressHydrationWarning required />
                             </div>
 
                             <div className="space-y-3">
                                 <label className="text-sm font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest px-1">Subject</label>
-                                <input type="text" placeholder="Project Collaboration" className={inputStyles} suppressHydrationWarning />
+                                <input type="text" name="subject" placeholder="Project Collaboration" className={inputStyles} suppressHydrationWarning required />
                             </div>
 
                             <div className="space-y-3">
                                 <label className="text-sm font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest px-1">Your Message</label>
-                                <textarea rows={4} placeholder="Hello Daniel, I'd like to talk about..." className={`${inputStyles} resize-none`} suppressHydrationWarning />
+                                <textarea name="message" rows={4} placeholder="Hello Daniel, I'd like to talk about..." className={`${inputStyles} resize-none`} suppressHydrationWarning required />
                             </div>
 
                             <motion.button
                                 whileHover={{ scale: 1.02, y: -2 }}
                                 whileTap={{ scale: 0.98 }}
                                 type="submit"
+                                disabled={isSubmitting}
                                 suppressHydrationWarning
-                                className="w-full bg-brand-600 text-white py-5 rounded-2xl font-bold hover:bg-brand-700 transition-all shadow-xl shadow-brand-500/25 flex items-center justify-center gap-3 text-lg"
+                                className="w-full bg-brand-600 text-white py-5 rounded-2xl font-bold hover:bg-brand-700 transition-all shadow-xl shadow-brand-500/25 flex items-center justify-center gap-3 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                Send Message
-                                <ArrowRight size={22} />
+                                {isSubmitting ? "Sending..." : "Send Message"}
+                                {!isSubmitting && <ArrowRight size={22} />}
                             </motion.button>
                         </motion.form>
                     </div>

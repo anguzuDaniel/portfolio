@@ -34,10 +34,19 @@ export default function Hero() {
 
           </motion.div>
 
-          <h1 className="text-6xl md:text-8xl font-display font-black tracking-tighter text-zinc-900 dark:text-white mb-6 leading-[0.9]">
-            {siteConfig.hero.title}{" "}
+          <h1 className="text-6xl md:text-8xl font-display font-black tracking-tighter text-zinc-900 dark:text-white mb-8 leading-[1.1] md:leading-[1.05]">
+            Crafting code that <span className="relative inline-block">
+              <span className="relative z-10 text-brand-600 dark:text-brand-500 italic">bridges</span>
+              <motion.span
+                initial={{ width: 0 }}
+                whileInView={{ width: "100%" }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+                className="absolute bottom-2 left-0 h-3 bg-brand-500/10 -rotate-1"
+              />
+            </span>
+            <br />
             <span className="text-gradient">
-              {siteConfig.hero.titleAccent}
+              innovation and scale.
             </span>
           </h1>
 
@@ -78,7 +87,7 @@ export default function Hero() {
             {/* Animated Glow effect */}
             <div className="absolute -inset-6 bg-gradient-to-r from-brand-500 to-blue-600 rounded-[3rem] blur-3xl opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
 
-            <div className="relative w-80 h-80 md:w-[450px] md:h-[450px] overflow-hidden rounded-[3rem] border-8 border-white dark:border-zinc-900 shadow-2xl transition-all duration-700 group-hover:scale-[1.02] group-hover:-rotate-2">
+            <div className="relative w-80 h-80 md:w-[450px] md:h-[450px] overflow-hidden rounded-[3rem] border-4 border-white/50 dark:border-zinc-800/50 shadow-2xl transition-all duration-700 group-hover:scale-[1.02] group-hover:-rotate-2 backdrop-blur-sm">
               <Image
                 src="/profile.jpg"
                 alt={siteConfig.name}
@@ -87,6 +96,7 @@ export default function Hero() {
                 priority
               />
             </div>
+
 
             {/* Floating Badge */}
             <motion.div

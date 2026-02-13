@@ -31,7 +31,7 @@
 }
 
 :root {
-  --background: #ffffff;
+  --background: #fafafa;
   --foreground: #09090b;
   --border: #f4f4f5;
   --ring: #3b82f6;
@@ -69,9 +69,10 @@
 
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r 
-         from-brand-700 via-blue-600 to-indigo-700 /* Darker for Light Mode */
-         dark:from-brand-400 dark:via-blue-400 dark:to-indigo-400; /* Lighter for Dark Mode */
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-700 via-blue-600 to-indigo-700
+    /* Darker for Light Mode */
+    dark:from-brand-400 dark:via-blue-400 dark:to-indigo-400;
+    /* Lighter for Dark Mode */
   }
 
   .glass {
@@ -80,7 +81,8 @@
 
   /* --- THE PREMIUM CARD SYSTEM --- */
   .premium-card {
-    background-color: var(--background);
+    background-color: #ffffff;
+    /* Explicit white for cards in light mode */
     color: var(--foreground);
     border-radius: 2.5rem;
     border: 1px solid var(--border);

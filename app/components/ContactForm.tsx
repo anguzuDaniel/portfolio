@@ -69,28 +69,29 @@ export default function ContactForm() {
                         >
                             <div className="space-y-3">
                                 <label className="text-sm font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest px-1">Your Name</label>
-                                <input type="text" placeholder="Daniel Anguzu" className={inputStyles} />
+                                <input type="text" placeholder="Daniel Anguzu" className={inputStyles} suppressHydrationWarning />
                             </div>
 
                             <div className="space-y-3">
                                 <label className="text-sm font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest px-1">Email Address</label>
-                                <input type="email" placeholder="daniel@exceptional.com" className={inputStyles} />
+                                <input type="email" placeholder="daniel@exceptional.com" className={inputStyles} suppressHydrationWarning />
                             </div>
 
                             <div className="space-y-3">
                                 <label className="text-sm font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest px-1">Subject</label>
-                                <input type="text" placeholder="Project Collaboration" className={inputStyles} />
+                                <input type="text" placeholder="Project Collaboration" className={inputStyles} suppressHydrationWarning />
                             </div>
 
                             <div className="space-y-3">
                                 <label className="text-sm font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest px-1">Your Message</label>
-                                <textarea rows={4} placeholder="Hello Daniel, I'd like to talk about..." className={`${inputStyles} resize-none`} />
+                                <textarea rows={4} placeholder="Hello Daniel, I'd like to talk about..." className={`${inputStyles} resize-none`} suppressHydrationWarning />
                             </div>
 
                             <motion.button
                                 whileHover={{ scale: 1.02, y: -2 }}
                                 whileTap={{ scale: 0.98 }}
                                 type="submit"
+                                suppressHydrationWarning
                                 className="w-full bg-brand-600 text-white py-5 rounded-2xl font-bold hover:bg-brand-700 transition-all shadow-xl shadow-brand-500/25 flex items-center justify-center gap-3 text-lg"
                             >
                                 Send Message

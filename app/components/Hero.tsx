@@ -32,7 +32,7 @@ export default function Hero() {
             Available for New Projects
           </motion.div>
 
-          <h1 className="text-5xl md:text-8xl tracking-tighter text-zinc-950 dark:text-white mb-8 leading-[1] md:leading-[0.95] font-black">
+          <h1 className="text-5xl md:text-8xl tracking-tighter mb-8 leading-[1] md:leading-[0.95] font-black">
             Crafting code that{" "}
             <span className="relative inline-block">
               <span className="relative z-10 text-brand-600 dark:text-brand-400 italic font-serif px-2">

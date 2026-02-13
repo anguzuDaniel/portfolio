@@ -36,7 +36,7 @@ export default function ProjectCard({ repo }: { repo: { name: string, descriptio
                 </div>
 
                 {/* Title: Using the text-gradient class from your CSS */}
-                <h3 className="text-xl font-display font-bold text-zinc-950 dark:text-zinc-100 mb-3 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors tracking-tight">
+                <h3 className="text-xl text-gradient text-zinc-950 mb-3 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors tracking-tight">
                     {repo.name.replace(/-/g, ' ')}
                 </h3>
 

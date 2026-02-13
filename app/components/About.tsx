@@ -51,7 +51,7 @@ export default function About() {
         >
           <div className="absolute -inset-1 bg-gradient-to-r from-brand-500 to-blue-600 rounded-[2rem] blur opacity-10" />
           <div className="relative premium-card p-12 !rounded-[2.5rem]">
-            <h3 className="text-2xl mb-8">Technical Arsenal</h3>
+            <h3 className="text-xl text-gradient text-zinc-950 mb-3 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors tracking-tight">Technical Arsenal</h3>
             <div className="flex flex-wrap gap-3">
               {[...siteConfig.skills.languages, ...siteConfig.skills.frameworks].slice(0, 10).map((skill) => (
                 <span

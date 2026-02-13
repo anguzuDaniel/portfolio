@@ -1,8 +1,6 @@
 "use server";
 
-import { Resend } from "resend";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+import nodemailer from "nodemailer";
 
 export async function sendEmail(formData: FormData) {
     const name = formData.get("name") as string;
@@ -14,21 +12,35 @@ export async function sendEmail(formData: FormData) {
         return { error: "Please fill in all required fields." };
     }
 
+    const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS,
+        },
+    });
+
     try {
-        const { data, error } = await resend.emails.send({
-            from: "Portfolio Contact Form <onboarding@resend.dev>", // Default testing domain
-            to: "anguzudaniel@gmail.com", // Replace with user's actual email or env var
+        const mailOptions = {
+            from: `"${name}" <${process.env.EMAIL_USER}>`, // Sender address
+            to: process.env.EMAIL_USER, // List of receivers (your own email)
             replyTo: email,
-            subject: `New Message from ${name}: ${subject || "Portfolio Inquiry"}`,
-            text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
-        });
+            subject: `Portfolio Contact: ${subject || "New Message"}`,
+            text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+            html: `
+        <h3>New Contact Form Submission</h3>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Subject:</strong> ${subject}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message.replace(/\n/g, "<br>")}</p>
+      `,
+        };
 
-        if (error) {
-            return { error: error.message };
-        }
-
+        await transporter.sendMail(mailOptions);
         return { success: true };
     } catch (error) {
+        console.error("Nodemailer Error:", error);
         return { error: "Failed to send email. Please try again later." };
     }
 }

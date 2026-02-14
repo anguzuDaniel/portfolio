@@ -11,8 +11,8 @@ export default function Hero() {
       {/* Background Decorative Element */}
       <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-[600px] h-[600px] bg-brand-500/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="grid md:grid-cols-2 gap-16 items-center relative z-10">
-        
+      <div className="grid lg:grid-cols-2 gap-16 items-center relative z-10 text-center lg:text-left">
+
         {/* LEFT CONTENT */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -23,7 +23,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/50 text-zinc-600 dark:text-zinc-300 text-[10px] font-black uppercase tracking-[0.2em] mb-8 shadow-sm"
+            className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/50 text-zinc-600 dark:text-zinc-300 text-[10px] font-black uppercase tracking-[0.2em] mb-8 shadow-sm mx-auto lg:mx-0"
           >
             <span className="relative flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -32,7 +32,7 @@ export default function Hero() {
             Available for New Projects
           </motion.div>
 
-          <h1 className="text-5xl md:text-8xl tracking-tighter mb-8 leading-[1] md:leading-[0.95] font-black">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl tracking-tighter mb-8 leading-[1.1] md:leading-[0.95] font-black">
             Crafting code that{" "}
             <span className="relative inline-block">
               <span className="relative z-10 text-brand-600 dark:text-brand-400 italic font-serif px-2">
@@ -51,11 +51,11 @@ export default function Hero() {
             </span>
           </h1>
 
-          <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 mb-10 max-w-lg leading-relaxed font-medium">
+          <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed font-medium">
             {siteConfig.hero.subtext}
           </p>
 
-          <div className="flex flex-wrap gap-5">
+          <div className="flex flex-wrap gap-5 justify-center lg:justify-start">
             <motion.a
               whileHover={{ scale: 1.02, y: -4 }}
               whileTap={{ scale: 0.98 }}
@@ -86,12 +86,12 @@ export default function Hero() {
           className="flex justify-center md:justify-end relative"
         >
           <div className="relative w-full max-w-[500px] aspect-square flex items-center justify-center">
-            
+
             {/* Visual Decorative Grid when Image is hidden */}
             <div className="absolute inset-0 grid grid-cols-3 gap-4 opacity-20 dark:opacity-10 pointer-events-none">
-                {[...Array(9)].map((_, i) => (
-                    <div key={i} className="border border-zinc-400 dark:border-zinc-500 rounded-3xl" />
-                ))}
+              {[...Array(9)].map((_, i) => (
+                <div key={i} className="border border-zinc-400 dark:border-zinc-500 rounded-3xl" />
+              ))}
             </div>
 
             {/* <div className="relative w-64 h-64 md:w-[380px] md:h-[380px] overflow-hidden rounded-[3rem] border-4 border-white/50 dark:border-zinc-800/50 shadow-2xl transition-all duration-700 group-hover:scale-[1.02] group-hover:-rotate-2 backdrop-blur-sm">
@@ -122,20 +122,20 @@ export default function Hero() {
             </motion.div>
 
             {/* Secondary Floating Elements to fill space */}
-            <motion.div 
-                animate={{ y: [0, 15, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute top-10 right-10 p-4 bg-white dark:bg-zinc-800 rounded-2xl shadow-lg border border-zinc-100 dark:border-zinc-700 text-brand-600"
+            <motion.div
+              animate={{ y: [0, 15, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              className="absolute top-10 right-10 p-4 bg-white dark:bg-zinc-800 rounded-2xl shadow-lg border border-zinc-100 dark:border-zinc-700 text-brand-600"
             >
-                <Cpu size={24} />
+              <Cpu size={24} />
             </motion.div>
 
-            <motion.div 
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                className="absolute bottom-20 left-0 p-4 bg-white dark:bg-zinc-800 rounded-2xl shadow-lg border border-zinc-100 dark:border-zinc-700 text-blue-500"
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              className="absolute bottom-20 left-0 p-4 bg-white dark:bg-zinc-800 rounded-2xl shadow-lg border border-zinc-100 dark:border-zinc-700 text-blue-500"
             >
-                <Globe size={24} />
+              <Globe size={24} />
             </motion.div>
           </div>
         </motion.div>

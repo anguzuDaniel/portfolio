@@ -45,7 +45,7 @@ export default function LiveProjects() {
                         className="group relative"
                     >
                         <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-500 to-blue-600 rounded-[2.5rem] opacity-0 group-hover:opacity-20 blur transition duration-500" />
-                        <div className="premium-card premium-card-hover h-full p-8 flex flex-col justify-between cursor-default">
+                        <div className="premium-card premium-card-hover h-full p-6 md:p-8 flex flex-col justify-between cursor-default">
 
                             <div>
                                 <div className="flex items-start justify-between mb-6">

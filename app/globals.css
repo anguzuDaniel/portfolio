@@ -102,7 +102,7 @@
     background-color: #ffffff;
     border-color: var(--color-brand-500);
     /* Use your brand color for the border on hover */
-    box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.08), var(--shadow-premium-light-hover);
+    box-shadow: 0 20px 40px -12px rgba(59, 130, 246, 0.1), var(--shadow-premium-light-hover);
   }
 
   /* Dark Mode specific overrides */
@@ -125,7 +125,7 @@
   }
 
   .container-max {
-    @apply max-w-6xl mx-auto px-6;
+    @apply max-w-6xl mx-auto px-4 md:px-8;
   }
 }
 

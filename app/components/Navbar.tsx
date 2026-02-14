@@ -71,8 +71,9 @@ export default function Navbar() {
                     <div className="flex items-center gap-4 md:hidden">
                         <ModeToggle />
                         <button
+                            suppressHydrationWarning
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className="p-2 text-zinc-600  dark:hover:bg-zinc-900 rounded-lg transition-colors"
+                            className="p-2 text-zinc-600 dark:hover:bg-zinc-900 rounded-lg transition-colors"
                         >
                             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>

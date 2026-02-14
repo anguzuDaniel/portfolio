@@ -32,11 +32,11 @@ export default function ContactForm() {
 
     return (
         <section id="contact" className="section-padding container-max">
-            <div className="premium-card overflow-hidden !rounded-[3rem] border-none shadow-2xl">
+            <div className="premium-card overflow-hidden !rounded-[2.5rem] md:!rounded-[3rem] border-none shadow-2xl bg-white dark:bg-transparent">
                 <div className="grid md:grid-cols-2">
 
                     {/* Left Sidebar: Brand Info */}
-                    <div className="p-10 md:p-16 bg-brand-600 text-white relative overflow-hidden">
+                    <div className="p-6 md:p-16 bg-brand-600 text-white relative overflow-hidden">
                         {/* Decorative circles */}
                         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
                         <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-2xl" />
@@ -80,7 +80,7 @@ export default function ContactForm() {
                     </div>
 
                     {/* Right Side: Actual Form */}
-                    <div className="p-10 md:p-16 bg-white dark:bg-zinc-950/40 backdrop-blur-md">
+                    <div className="p-6 md:p-16 bg-white dark:bg-zinc-950/40 backdrop-blur-md">
                         <motion.form
                             initial={{ opacity: 0, x: 20 }}
                             whileInView={{ opacity: 1, x: 0 }}
@@ -90,22 +90,22 @@ export default function ContactForm() {
                             id="contact-form"
                         >
                             <div className="space-y-3">
-                                <label className="text-sm font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest px-1">Your Name</label>
+                                <label className="text-sm font-bold text-zinc-600 dark:text-zinc-400 uppercase tracking-widest px-1">Your Name</label>
                                 <input type="text" name="name" placeholder="Daniel Anguzu" className={inputStyles} suppressHydrationWarning required />
                             </div>
 
                             <div className="space-y-3">
-                                <label className="text-sm font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest px-1">Email Address</label>
+                                <label className="text-sm font-bold text-zinc-600 dark:text-zinc-400 uppercase tracking-widest px-1">Email Address</label>
                                 <input type="email" name="email" placeholder="daniel@exceptional.com" className={inputStyles} suppressHydrationWarning required />
                             </div>
 
                             <div className="space-y-3">
-                                <label className="text-sm font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest px-1">Subject</label>
+                                <label className="text-sm font-bold text-zinc-600 dark:text-zinc-400 uppercase tracking-widest px-1">Subject</label>
                                 <input type="text" name="subject" placeholder="Project Collaboration" className={inputStyles} suppressHydrationWarning required />
                             </div>
 
                             <div className="space-y-3">
-                                <label className="text-sm font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest px-1">Your Message</label>
+                                <label className="text-sm font-bold text-zinc-600 dark:text-zinc-400 uppercase tracking-widest px-1">Your Message</label>
                                 <textarea name="message" rows={4} placeholder="Hello Daniel, I'd like to talk about..." className={`${inputStyles} resize-none`} suppressHydrationWarning required />
                             </div>
 

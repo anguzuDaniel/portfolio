@@ -5,6 +5,7 @@ import { siteConfig } from '@/config/profile';
 import ContactForm from './components/ContactForm';
 import GithubRepos from './components/GithubRepos';
 import Skills from './components/Skills';
+import LiveProjects from './components/LiveProjects';
 
 export default async function Page() {
   const repos = await getGithubRepos();
@@ -31,6 +32,9 @@ export default async function Page() {
 
       {/* SKILLS SECTION */}
       <Skills siteConfig={siteConfig} />
+
+      {/* LIVE PROJECTS SECTION */}
+      <LiveProjects />
 
       {/* GITHUB REPOS SECTION */}
       <GithubRepos repos={reposWithReadme} />

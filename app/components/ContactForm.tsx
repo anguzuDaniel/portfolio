@@ -27,7 +27,7 @@ export default function ContactForm() {
 
     // Reusable input style to keep code clean
     const inputStyles = "w-full px-6 py-4 rounded-2xl transition-all font-bold focus:outline-none focus:ring-2 focus:ring-brand-500/50 border " +
-        "bg-zinc-50 border-zinc-200 text-zinc-900 placeholder:text-zinc-400 " + // Light Mode
+        "bg-white border-zinc-200 text-zinc-900 placeholder:text-zinc-400 " + // Light Mode
         "dark:bg-zinc-900/50 dark:border-zinc-700/50 dark:text-zinc-100 dark:placeholder:text-zinc-500"; // Dark Mode
 
     return (

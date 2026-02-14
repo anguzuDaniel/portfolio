@@ -44,5 +44,28 @@ export const siteConfig = {
     "Rinfo",
     "adik-android",
     "Sevaa"
+  ],
+
+  projects: [
+    {
+      title: "Stoic Pips",
+      description: "A FinTech application for trading education and resources.",
+      liveUrl: "https://stoicpips.com"
+    },
+    {
+      title: "Clipar",
+      description: "A video clipping tool for social media platforms like TikTok, Reels, and Shorts.",
+      liveUrl: "https://clipar.stoicpips.com"
+    },
+    {
+      title: "Dunam Ai",
+      description: "An AI-powered platform for generating trading signals and market analysis.",
+      liveUrl: "https://dunam.stoicpips.com"
+    },
+    {
+      title: "Adik",
+      description: "A task management API for organizing personal and professional projects.",
+      liveUrl: "https://adik-one.vercel.app"
+    }
   ]
 };

@@ -64,8 +64,8 @@ export const siteConfig = {
     },
     {
       title: "Adik",
-      description: "A task management API for organizing personal and professional projects.",
-      liveUrl: "https://adik-one.vercel.app"
+      description: "Wellness app for addiction recovery and mental health support.",
+      liveUrl: "https://adik.stoicpips.com"
     }
   ]
 };

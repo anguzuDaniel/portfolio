@@ -36,7 +36,7 @@ export default function ProjectCard({ repo }: { repo: { name: string, descriptio
                 </div>
 
                 {/* Title */}
-                <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors tracking-tight leading-snug">
+                <h3 className="text-lg font-bold mb-2 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors tracking-tight leading-snug">
                     {repo.name.replace(/-/g, ' ')}
                 </h3>
 

@@ -13,7 +13,7 @@ export default function About() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl mb-6 flex items-center gap-4">
+          <h2 className="text-4xl md:text-5xl mb-4 tracking-tighter flex items-center gap-4">
             <span className="w-12 h-1.5 bg-brand-600 rounded-full" />
             About Me
           </h2>

@@ -42,7 +42,7 @@ export default function Skills({ siteConfig }: { siteConfig: { skills: { fronten
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl mb-3 tracking-tighter">
+          <h2 className="text-4xl md:text-5xl mb-4 tracking-tighter">
             Core Expertise
           </h2>
           <p className="text-zinc-500 dark:text-zinc-400 text-lg max-w-2xl mx-auto font-medium">

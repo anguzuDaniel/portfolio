@@ -45,7 +45,7 @@ export default function ContactForm() {
                             viewport={{ once: true }}
                             className="relative z-10"
                         >
-                            <h2 className="text-4xl md:text-5xl font-display font-black mb-6 leading-tight tracking-tighter">
+                            <h2 className="text-4xl md:text-5xl tracking-tighter mb-6 leading-tight">
                                 Let&apos;s Build Something <span className="text-blue-200">Exceptional</span>
                             </h2>
                             <p className="text-blue-100 text-lg mb-8 font-medium leading-relaxed">

@@ -26,13 +26,11 @@ export default function ContactForm() {
     }
 
     // Reusable input style to keep code clean
-    const inputStyles = "w-full px-6 py-4 rounded-2xl transition-all font-bold focus:outline-none focus:ring-2 focus:ring-brand-500/50 border " +
-        "bg-white border-zinc-200 text-zinc-900 placeholder:text-zinc-400 " + // Light Mode
-        "dark:bg-zinc-900/50 dark:border-zinc-700/50 dark:text-zinc-100 dark:placeholder:text-zinc-500"; // Dark Mode
+    const inputStyles = "w-full px-6 py-4 rounded-2xl transition-all font-bold focus:outline-none focus:ring-2 focus:ring-brand-500/50 border border-zinc-300"
 
     return (
         <section id="contact" className="section-padding container-max">
-            <div className="premium-card overflow-hidden !rounded-[2.5rem] md:!rounded-[3rem] border-none shadow-2xl bg-white dark:bg-transparent">
+            <div className="premium-card overflow-hidden !rounded-[2.5rem] md:!rounded-[3rem] shadow-2xl bg-white dark:bg-transparent">
                 <div className="grid md:grid-cols-2">
 
                     {/* Left Sidebar: Brand Info */}
@@ -80,7 +78,7 @@ export default function ContactForm() {
                     </div>
 
                     {/* Right Side: Actual Form */}
-                    <div className="p-6 md:p-16 bg-white dark:bg-zinc-950/40 backdrop-blur-md">
+                    <div className="p-6 md:p-16">
                         <motion.form
                             initial={{ opacity: 0, x: 20 }}
                             whileInView={{ opacity: 1, x: 0 }}

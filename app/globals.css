@@ -84,33 +84,44 @@
   .premium-card {
     background-color: #ffffff;
     color: var(--foreground);
-    border-radius: 2.5rem;
+    border-radius: 1.5rem;
     border: 1px solid #e4e4e7;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.04),
+      0 4px 16px rgba(0, 0, 0, 0.04),
+      0 12px 40px rgba(0, 0, 0, 0.02);
     position: relative;
     overflow: hidden;
   }
 
   .premium-card-hover:hover {
-    @apply -translate-y-2;
+    @apply -translate-y-1.5;
     background-color: #ffffff;
-    border-color: var(--color-brand-500);
-    box-shadow: 0 20px 40px -12px rgba(59, 130, 246, 0.1), var(--shadow-premium-light-hover);
+    border-color: #d4d4d8;
+    box-shadow:
+      0 4px 8px rgba(0, 0, 0, 0.04),
+      0 12px 32px rgba(0, 0, 0, 0.06),
+      0 24px 56px rgba(59, 130, 246, 0.06);
   }
 
   /* Dark Mode overrides */
   .dark .premium-card {
-    background-color: rgba(24, 24, 27, 0.5);
-    backdrop-filter: blur(12px);
-    border-color: rgba(255, 255, 255, 0.05);
-    box-shadow: none;
+    background-color: rgba(24, 24, 27, 0.6);
+    backdrop-filter: blur(20px);
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.03);
   }
 
   .dark .premium-card-hover:hover {
-    background-color: rgba(24, 24, 27, 0.85);
-    border-color: rgba(59, 130, 246, 0.5);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 25px rgba(59, 130, 246, 0.15);
+    background-color: rgba(30, 30, 34, 0.85);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(59, 130, 246, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
 
   /* Standardized Spacing */

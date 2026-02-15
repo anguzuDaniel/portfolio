@@ -2,21 +2,24 @@
 
 export default function SkillCard({ icon, title, list, description }: { icon: React.ReactNode, title: string, list: string[], description?: string }) {
   return (
-    <div className="group premium-card premium-card-hover p-10 h-full flex flex-col">
-      {/* Icon Container - Refined for better light mode contrast */}
-      <div className="w-16 h-16 bg-zinc-100 dark:bg-white/5 rounded-2xl flex items-center justify-center mb-8 
-                    group-hover:bg-brand-600 group-hover:text-white transition-all duration-500 
-                    group-hover:rotate-12 border border-zinc-200 dark:border-zinc-800/50 shadow-sm text-zinc-900 dark:text-white">
+    <div className="group premium-card premium-card-hover p-8 md:p-10 h-full flex flex-col relative">
+      {/* Hover accent — top edge gradient stripe */}
+      <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-brand-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+      {/* Icon */}
+      <div className="w-14 h-14 bg-zinc-100 dark:bg-zinc-800/80 rounded-xl flex items-center justify-center mb-6 
+                    group-hover:bg-brand-600 group-hover:text-white transition-all duration-300 
+                    border border-zinc-200/60 dark:border-zinc-700/40 text-zinc-600 dark:text-zinc-300">
         {icon}
       </div>
 
-      {/* FIXED TITLE: High contrast text-zinc-900 for Light Mode, White for Dark Mode */}
-      <h3 className="text-xl text-gradient text-zinc-950 mb-3 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors tracking-tight">
+      {/* Title */}
+      <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors tracking-tight">
         {title}
       </h3>
 
       {description && (
-        <p className="text-base text-zinc-600 dark:text-zinc-400 mb-8 font-medium leading-relaxed">
+        <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-6 font-medium leading-relaxed">
           {description}
         </p>
       )}
@@ -26,12 +29,12 @@ export default function SkillCard({ icon, title, list, description }: { icon: Re
         {list.map((item) => (
           <span
             key={item}
-            className="text-[10px] uppercase tracking-widest font-black 
+            className="text-[10px] uppercase tracking-widest font-bold 
                        text-brand-700 dark:text-brand-300 
                        bg-brand-50 dark:bg-brand-500/10 
-                       px-3.5 py-2 rounded-xl 
+                       px-3 py-1.5 rounded-lg 
                        border border-brand-100 dark:border-brand-500/20 
-                       whitespace-nowrap transition-transform hover:scale-105"
+                       whitespace-nowrap transition-all hover:scale-105 hover:border-brand-300 dark:hover:border-brand-500/40"
           >
             {item}
           </span>

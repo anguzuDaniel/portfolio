@@ -63,6 +63,11 @@ export const siteConfig = {
       liveUrl: "https://dunam.stoicpips.com"
     },
     {
+      title: "Dunam Velocity",
+      description: "An AI-powered high frequency scalping platform",
+      liveUrl: "https://velocity.stoicpips.com"
+    },
+    {
       title: "Adik",
       description: "Wellness app for addiction recovery and mental health support.",
       liveUrl: "https://adik.stoicpips.com"

@@ -22,8 +22,8 @@ export default function GithubRepos({ repos }: { repos: Repo[] }) {
   return (
     <section id="github-projects" className="section-padding container-max">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ y: 20 }}
+        whileInView={{ y: 0 }}
         viewport={{ once: true }}
         className="mb-14 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end"
       >
@@ -43,8 +43,8 @@ export default function GithubRepos({ repos }: { repos: Repo[] }) {
 
           <motion.div
             key={repo.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ y: 20 }}
+            whileInView={{ y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
           >

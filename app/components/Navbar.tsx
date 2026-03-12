@@ -72,7 +72,7 @@ export default function Navbar() {
                     }}
                     className={`relative flex items-center justify-between rounded-[1.75rem] border px-4 py-3 transition-all duration-500 md:px-6 ${isScrolled
                         ? "glass shadow-2xl shadow-zinc-950/10 ring-1 ring-white/40 dark:ring-white/8"
-                        : "border-transparent bg-white/10 backdrop-blur-md dark:bg-zinc-950/15"
+                        : "border border-[rgba(122,65,23,0.12)] bg-[rgba(255,250,244,0.94)] shadow-[0_16px_40px_rgba(61,43,24,0.08)] backdrop-blur-md dark:border-transparent dark:bg-zinc-950/15"
                         }`}
                 >
                     <div className="pointer-events-none absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-brand-400/60 to-transparent" />
@@ -91,13 +91,13 @@ export default function Navbar() {
                             <div className="font-bold text-xl tracking-tighter">
                                 Anguzu<span className="text-brand-500">.</span>
                             </div>
-                            <div className="text-[10px] font-black uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400">
+                            <div className="text-[10px] font-black uppercase tracking-[0.22em] text-zinc-700 dark:text-zinc-400">
                                 Full-Stack Software Developer
                             </div>
                         </div>
                     </Link>
 
-                    <div className="hidden md:flex items-center gap-2 rounded-full border border-zinc-200/80 bg-white/70 px-2 py-2 shadow-sm backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-950/35">
+                    <div className="hidden md:flex items-center gap-2 rounded-full border border-[rgba(97,52,21,0.18)] bg-[rgba(255,248,240,0.96)] px-2 py-2 shadow-sm backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-950/35">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.name}
@@ -105,8 +105,8 @@ export default function Navbar() {
                                 onClick={() => setActiveSection(link.href)}
                                 aria-current={activeSection === link.href ? "page" : undefined}
                                 className={`relative rounded-full px-4 py-2 text-sm font-semibold transition-colors ${activeSection === link.href
-                                    ? "text-zinc-950 dark:text-white"
-                                    : "text-zinc-500 hover:text-brand-600 dark:text-zinc-400 dark:hover:text-brand-400"
+                                    ? "text-[#1f140d] dark:text-white"
+                                    : "text-[#4c2914] hover:text-brand-700 dark:text-zinc-400 dark:hover:text-brand-400"
                                     }`}
                             >
                                 {activeSection === link.href && (
@@ -125,7 +125,7 @@ export default function Navbar() {
                         <a
                             href={siteConfig.resumeUrl}
                             download
-                            className="inline-flex items-center gap-2 rounded-full border border-zinc-200/80 bg-white/75 px-4 py-2 text-sm font-bold text-zinc-700 shadow-sm backdrop-blur-xl transition-colors hover:border-brand-400 hover:text-brand-600 dark:border-zinc-800 dark:bg-zinc-950/35 dark:text-zinc-300 dark:hover:text-brand-400"
+                            className="inline-flex items-center gap-2 rounded-full border border-[rgba(97,52,21,0.18)] bg-[rgba(255,248,240,0.96)] px-4 py-2 text-sm font-bold text-[#3b2819] shadow-sm backdrop-blur-xl transition-colors hover:border-brand-500 hover:text-brand-700 dark:border-zinc-800 dark:bg-zinc-950/35 dark:text-zinc-300 dark:hover:text-brand-400"
                         >
                             <Download size={16} />
                             Download CV
@@ -138,7 +138,7 @@ export default function Navbar() {
                         <button
                             suppressHydrationWarning
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className="rounded-xl border border-zinc-200/80 bg-white/75 p-2 text-zinc-700 shadow-sm backdrop-blur-xl transition-colors dark:border-zinc-800 dark:bg-zinc-950/35 dark:text-zinc-300"
+                            className="rounded-xl border border-[rgba(97,52,21,0.18)] bg-[rgba(255,248,240,0.96)] p-2 text-[#3b2819] shadow-sm backdrop-blur-xl transition-colors dark:border-zinc-800 dark:bg-zinc-950/35 dark:text-zinc-300"
                         >
                             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>
@@ -154,7 +154,7 @@ export default function Navbar() {
                         exit={{ opacity: 0, y: -20 }}
                         className="absolute left-0 right-0 top-full px-4 pt-2 md:hidden"
                     >
-                        <div className="glass rounded-[1.75rem] border border-zinc-200/50 p-5 shadow-2xl">
+                        <div className="glass rounded-[1.75rem] border border-[rgba(97,52,21,0.14)] p-5 shadow-2xl">
                             <div className="flex flex-col gap-2">
                                 {navLinks.map((link) => (
                                     <Link
@@ -165,8 +165,8 @@ export default function Navbar() {
                                             setIsMobileMenuOpen(false);
                                         }}
                                         className={`rounded-2xl px-4 py-3 text-base font-bold transition-colors ${activeSection === link.href
-                                            ? "bg-brand-500/10 text-brand-600 dark:text-brand-400"
-                                            : "text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900/70"
+                                            ? "bg-brand-500/10 text-brand-700 dark:text-brand-400"
+                                            : "text-[#3b2819] hover:bg-[rgba(97,52,21,0.06)] dark:text-zinc-300 dark:hover:bg-zinc-900/70"
                                             }`}
                                     >
                                         {link.name}
@@ -174,9 +174,9 @@ export default function Navbar() {
                                 ))}
                             </div>
 
-                            <div className="mt-4 flex items-center justify-between rounded-2xl border border-zinc-200/70 bg-white/60 px-4 py-3 backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-950/30">
+                            <div className="mt-4 flex items-center justify-between rounded-2xl border border-[rgba(97,52,21,0.14)] bg-[rgba(255,248,240,0.92)] px-4 py-3 backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-950/30">
                                 <div>
-                                    <div className="text-[10px] font-black uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400">
+                                    <div className="text-[10px] font-black uppercase tracking-[0.22em] text-zinc-700 dark:text-zinc-400">
                                         Resume
                                     </div>
                                     <div className="text-sm font-bold text-zinc-900 dark:text-white">

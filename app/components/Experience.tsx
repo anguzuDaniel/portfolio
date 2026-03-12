@@ -26,8 +26,8 @@ export default function Experience() {
   return (
     <section id="experience" className="section-padding container-max">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ y: 20 }}
+        whileInView={{ y: 0 }}
         viewport={{ once: true }}
         className="mb-14 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end"
       >
@@ -46,8 +46,8 @@ export default function Experience() {
         {siteConfig.experience.map((item: ExperienceItem, index) => (
           <motion.article
             key={`${item.company}-${item.role}`}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ y: 20 }}
+            whileInView={{ y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.06 }}
             className="relative ml-8 premium-card premium-card-hover p-6 md:p-8"
@@ -62,14 +62,14 @@ export default function Experience() {
                   <BriefcaseBusiness size={22} />
                 </div>
 
-                <p className="mb-2 text-[10px] font-black uppercase tracking-[0.24em] text-stone-500 dark:text-stone-400">
+                <p className="mb-2 text-[10px] font-black uppercase tracking-[0.24em] text-[#5b3419] dark:text-stone-400">
                   {item.company}
                 </p>
-                <h3 className="mb-4 text-3xl font-display tracking-tight">
+                <h3 className="mb-4 text-3xl font-display tracking-tight text-[#18110b] dark:text-inherit">
                   {item.role}
                 </h3>
 
-                <div className="space-y-3 text-sm text-stone-500 dark:text-stone-400">
+                <div className="space-y-3 text-sm text-[#5f4632] dark:text-stone-400">
                   <div className="flex items-start gap-2">
                     <CalendarRange size={16} className="mt-0.5 shrink-0" />
                     <span>{item.period}</span>
@@ -86,13 +86,13 @@ export default function Experience() {
 
               <div className="space-y-5">
                 {item.summary && (
-                  <p className="text-base leading-relaxed text-stone-700 dark:text-stone-300">
+                  <p className="text-base leading-relaxed text-[#3b2819] dark:text-stone-300">
                     {item.summary}
                   </p>
                 )}
 
                 {item.highlights && item.highlights.length > 0 && (
-                  <ul className="space-y-3 text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+                  <ul className="space-y-3 text-sm leading-relaxed text-[#4b3524] dark:text-stone-400">
                     {item.highlights.map((highlight) => (
                       <li key={highlight} className="flex gap-3">
                         <span className="mt-2 h-px w-6 bg-brand-400/75 shrink-0" />

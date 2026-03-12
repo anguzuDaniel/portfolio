@@ -31,21 +31,21 @@ export default function ProjectCard({ repo }: { repo: { name: string, descriptio
                     </div>
                 </div>
 
-                <div className="mb-4 text-[10px] font-black uppercase tracking-[0.24em] text-stone-500 dark:text-stone-400">
+                <div className="mb-4 text-[10px] font-black uppercase tracking-[0.24em] text-[#6b4423] dark:text-stone-400">
                     Repository
                 </div>
-                <h3 className="mb-3 text-2xl font-display leading-snug tracking-tight text-stone-900 transition-colors group-hover:text-brand-700 dark:text-stone-50 dark:group-hover:text-brand-300">
+                <h3 className="mb-3 text-2xl font-display leading-snug tracking-tight text-[#140e09] transition-colors group-hover:text-brand-800 dark:text-stone-50 dark:group-hover:text-brand-300">
                     {repo.name.replace(/-/g, ' ')}
                 </h3>
 
-                <p className="mb-8 flex-grow text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+                <p className="mb-8 flex-grow text-sm leading-relaxed text-[#4c3524] dark:text-stone-400">
                     {repo.readmeDescription || repo.description || "Sophisticated technical implementation featuring modular architecture and modern patterns."}
                 </p>
 
                 <div className="flex items-center justify-between border-t border-stone-200/80 pt-5 dark:border-stone-800/70">
                     <div className="flex items-center gap-3">
                         {repo.language && (
-                            <span className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.22em] text-stone-500 dark:text-stone-400">
+                            <span className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.22em] text-[#6b4423] dark:text-stone-400">
                                 <span className="w-2 h-2 rounded-full bg-brand-500" />
                                 {repo.language}
                             </span>

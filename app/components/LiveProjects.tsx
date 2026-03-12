@@ -74,8 +74,8 @@ export default function LiveProjects() {
     return (
         <section id="projects" className="section-padding container-max relative">
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ y: 20 }}
+                whileInView={{ y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
                 className="mb-14 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end"
@@ -99,8 +99,8 @@ export default function LiveProjects() {
                         return (
                             <motion.div
                                 key={project.title}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
+                                initial={{ y: 20 }}
+                                whileInView={{ y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1 }}
                                 className={`group relative ${index === 0 ? "md:col-span-2" : ""}`}
@@ -165,12 +165,12 @@ export default function LiveProjects() {
                                     </div>
 
                                     <div className="flex flex-1 flex-col">
-                                        <p className="mb-6 leading-relaxed text-stone-600 dark:text-stone-300">
+                                        <p className="mb-6 leading-relaxed text-[#4c3524] dark:text-stone-300">
                                             {project.description}
                                         </p>
 
                                         {project.highlight && (
-                                            <div className="mb-6 rounded-[1.4rem] border border-brand-200/30 bg-white/55 px-4 py-4 text-sm leading-relaxed text-stone-600 dark:border-brand-400/10 dark:bg-white/[0.03] dark:text-stone-300">
+                                            <div className="mb-6 rounded-[1.4rem] border border-brand-200/30 bg-[rgba(255,248,240,0.92)] px-4 py-4 text-sm leading-relaxed text-[#4c3524] dark:border-brand-400/10 dark:bg-white/[0.03] dark:text-stone-300">
                                                 {project.highlight}
                                             </div>
                                         )}
@@ -186,7 +186,7 @@ export default function LiveProjects() {
                                         )}
 
                                         <div className="mt-auto flex items-center justify-between border-t border-stone-200/80 pt-5 dark:border-stone-800/70">
-                                            <span className="text-[10px] font-black uppercase tracking-[0.24em] text-stone-500 dark:text-stone-400">
+                                            <span className="text-[10px] font-black uppercase tracking-[0.24em] text-[#6b4423] dark:text-stone-400">
                                                 Live deployment
                                             </span>
                                             <a

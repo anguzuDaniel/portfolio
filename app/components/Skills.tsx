@@ -1,10 +1,10 @@
 "use client";
 
-import { Cpu, Globe, Layers, Smartphone } from "lucide-react";
+import { Cpu, Globe, Layers, Smartphone, Wrench } from "lucide-react";
 import SkillCard from "./SkillCard";
 import { motion } from "framer-motion";
 
-export default function Skills({ siteConfig }: { siteConfig: { skills: { frontend: string[], backend: string[], languages: string[], mobile: string[] } } }) {
+export default function Skills({ siteConfig }: { siteConfig: { skills: { frontend: string[], backend: string[], languages: string[], mobile: string[], tools: string[] } } }) {
   const skillCategories = [
     {
       icon: <Layers className="text-brand-500" />,
@@ -29,7 +29,13 @@ export default function Skills({ siteConfig }: { siteConfig: { skills: { fronten
       title: "Languages & Frameworks",
       list: siteConfig.skills.languages,
       description: "Modern languages and frameworks for cross-platform solutions."
-    }
+    },
+    {
+      icon: <Wrench className="text-brand-500" />,
+      title: "Tooling & Delivery",
+      list: siteConfig.skills.tools,
+      description: "Deployment, automation, and product infrastructure used to ship reliably."
+    },
   ];
 
 
@@ -40,17 +46,20 @@ export default function Skills({ siteConfig }: { siteConfig: { skills: { fronten
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="mb-14 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end"
         >
-          <h2 className="text-4xl md:text-5xl mb-4 tracking-tighter">
-            Core Expertise
-          </h2>
-          <p className="text-zinc-500 dark:text-zinc-400 text-lg max-w-2xl mx-auto font-medium">
-            A comprehensive suite of technical skills developed through years of professional engineering.
+          <div className="space-y-4">
+            <span className="section-kicker">Capabilities / Toolkit</span>
+            <h2 className="section-title">
+              Core expertise shaped by product shipping, not just experimentation.
+            </h2>
+          </div>
+          <p className="section-copy max-w-3xl lg:justify-self-end">
+            A working toolkit across frontend systems, Android, APIs, automation, and the deployment layer that keeps products stable once they reach real users.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
           {skillCategories.map((category, index) => (
             <motion.div
               key={category.title}
@@ -60,6 +69,7 @@ export default function Skills({ siteConfig }: { siteConfig: { skills: { fronten
               transition={{ delay: index * 0.1 }}
             >
               <SkillCard
+                index={index}
                 icon={category.icon}
                 title={category.title}
                 list={category.list}

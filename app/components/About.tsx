@@ -1,29 +1,40 @@
 "use client";
 
+import Image from 'next/image';
 import { siteConfig } from '@/config/profile';
 import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
 
 export default function About() {
+  const featuredSkills = [
+    ...new Set([
+      ...siteConfig.skills.languages,
+      ...siteConfig.skills.frameworks,
+      ...siteConfig.skills.tools,
+    ]),
+  ].slice(0, 12);
+
   return (
     <section id="about" className="section-padding container-max">
-      <div className="grid md:grid-cols-2 gap-16 items-center">
+      <div className="grid gap-10 lg:grid-cols-[1fr_0.95fr] items-start">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
+          className="space-y-8"
         >
-          <h2 className="text-4xl md:text-5xl mb-4 tracking-tighter flex items-center gap-4">
-            <span className="w-12 h-1.5 bg-brand-600 rounded-full" />
-            About Me
-          </h2>
+          <div className="space-y-4">
+            <span className="section-kicker">About / Approach</span>
+            <h2 className="section-title max-w-3xl">
+              Product-minded engineering with mobile roots and full-stack range.
+            </h2>
+            <p className="section-copy max-w-2xl">
+              {siteConfig.about.description}
+            </p>
+          </div>
 
-          <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed mb-8">
-
-            {siteConfig.about.description}
-          </p>
-
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid gap-4 sm:grid-cols-3">
             {siteConfig.about.stats.map((stat, index) => (
               <motion.div
                 key={stat.label}
@@ -31,43 +42,77 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 + 0.3 }}
-                className="p-6 premium-card premium-card-hover"
+                className="premium-card premium-card-hover p-5"
               >
-
-                <div className="text-4xl font-display font-black text-brand-600 dark:text-brand-500 mb-1">{stat.value}</div>
-                <div className="text-[10px] uppercase font-bold tracking-[0.2em] text-zinc-500">{stat.label}</div>
+                <div className="mb-2 text-4xl font-display font-black text-brand-600 dark:text-brand-300">{stat.value}</div>
+                <div className="text-[10px] font-black uppercase tracking-[0.22em] text-stone-500 dark:text-stone-400">{stat.label}</div>
               </motion.div>
             ))}
           </div>
         </motion.div>
 
-        {/* Branch Focus Area */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="relative"
+          className="premium-card p-4 md:p-6"
         >
-          <div className="absolute -inset-1 bg-gradient-to-r from-brand-500 to-blue-600 rounded-[2rem] blur opacity-0 dark:opacity-10" />
-          <div className="relative premium-card p-12 !rounded-[2.5rem]">
-            <h3 className="text-xl text-gradient text-zinc-950 mb-3 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors tracking-tight">Technical Arsenal</h3>
-            <div className="flex flex-wrap gap-3">
-              {[...siteConfig.skills.languages, ...siteConfig.skills.frameworks].slice(0, 10).map((skill) => (
-                <span
-                  key={skill}
-                  className="px-5 py-2.5 bg-zinc-100/50 dark:bg-white/5 text-xs font-bold rounded-xl border border-zinc-200/50 dark:border-zinc-800/50 hover:border-brand-500 dark:hover:border-brand-500 transition-all duration-300 hover:scale-105"
-                >
-                  {skill}
-                </span>
-              ))}
+          <div className="grid gap-6 md:grid-cols-[0.85fr_1.15fr]">
+            <div className="relative min-h-[360px] overflow-hidden rounded-[1.65rem] border border-brand-200/40 bg-brand-950/90">
+              <Image
+                src="/profile.jpg"
+                alt={`${siteConfig.name} portrait`}
+                fill
+                sizes="(max-width: 768px) 100vw, 360px"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-5">
+                <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.24em] text-white/82 backdrop-blur-sm">
+                  Based in {siteConfig.location}
+                </div>
+                <h3 className="mt-4 text-3xl font-display text-white">
+                  {siteConfig.name}
+                </h3>
+                <p className="mt-2 text-sm font-medium text-white/75">
+                  {siteConfig.role}
+                </p>
+              </div>
             </div>
 
-            <div className="mt-12 pt-10 border-t border-zinc-200 dark:border-zinc-800">
-              <p className="text-base text-zinc-500 italic leading-relaxed font-medium">
-                &quot;Clean code is not just a practice; it is a commitment to excellence and scalability.&quot;
+            <div className="flex flex-col">
+              <div className="mb-5 flex items-center justify-between gap-4">
+                <span className="section-kicker">Current Focus</span>
+                <a
+                  href={siteConfig.linkedIn}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-brand-600 transition-colors hover:text-brand-700 dark:text-brand-300 dark:hover:text-brand-200"
+                >
+                  LinkedIn
+                  <ArrowUpRight size={14} />
+                </a>
+              </div>
 
-              </p>
+              <div className="flex flex-wrap gap-2.5">
+                {featuredSkills.map((skill) => (
+                  <span key={skill} className="label-chip">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+
+              <div className="mt-auto pt-8">
+                <div className="rounded-[1.6rem] border border-brand-200/35 bg-white/55 p-5 dark:border-brand-400/10 dark:bg-white/[0.03]">
+                  <div className="mb-3 text-[10px] font-black uppercase tracking-[0.24em] text-brand-600 dark:text-brand-300">
+                    Philosophy
+                  </div>
+                  <p className="text-lg font-display italic leading-relaxed text-stone-700 dark:text-stone-200">
+                    &quot;{siteConfig.about.quote}&quot;
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>

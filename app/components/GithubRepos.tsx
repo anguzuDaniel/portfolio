@@ -7,7 +7,7 @@ interface Repo {
   id: number;
   name: string;
   description: string | null;
-  readmeDescription?: string;
+  readmeDescription?: string | null;
   html_url: string;
   language: string | null;
   stargazers_count: number;
@@ -15,19 +15,26 @@ interface Repo {
 }
 
 export default function GithubRepos({ repos }: { repos: Repo[] }) {
+  if (repos.length === 0) {
+    return null;
+  }
+
   return (
-    <section id="projects" className="section-padding container-max">
+    <section id="github-projects" className="section-padding container-max">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center mb-16"
+        className="mb-14 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end"
       >
-        <h2 className="text-4xl md:text-5xl mb-4 tracking-tighter">
-          Featured Projects
-        </h2>
-        <p className="text-zinc-500 dark:text-zinc-400 text-lg max-w-2xl mx-auto font-medium text-center">
-          A selection of my professional work and open-source contributions.
+        <div className="space-y-4">
+          <span className="section-kicker">Repositories / Public Code</span>
+          <h2 className="section-title">
+            Featured repositories that show structure, range, and implementation taste.
+          </h2>
+        </div>
+        <p className="section-copy max-w-3xl lg:justify-self-end">
+          A smaller set of public work that reflects production thinking, experiments, and how I organize software beyond the UI layer.
         </p>
       </motion.div>
 

@@ -1,26 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./components/theme-provider";
 import Navbar from "./components/Navbar";
 import { Toaster } from "sonner";
-import Scene from "@/components/canvas/Scene";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
-
 
 export const metadata: Metadata = {
   title: "Anguzu Daniel | Full Stack Developer",
@@ -35,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} font-sans antialiased`}
+        className="font-sans antialiased"
       >
 
 
@@ -43,7 +25,6 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="dark"
           enableSystem>
-          <Scene />
           <Navbar />
           {children}
           <Toaster richColors position="top-right" />

@@ -1,16 +1,23 @@
 // lib/github.ts
+const REQUEST_TIMEOUT_MS = 5000;
+
 export async function getGithubRepos() {
   const username = "anguzuDaniel"; // Replace with your actual username
+  try {
+    const res = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=12`, {
+      next: { revalidate: 3600 }, // This refreshes the data every hour
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+    });
 
-  const res = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`, {
-    next: { revalidate: 3600 } // This refreshes the data every hour
-  });
+    if (!res.ok) return [];
 
-  if (!res.ok) throw new Error('Failed to fetch repos');
+    const repos = await res.json();
+    if (!Array.isArray(repos)) return [];
 
-  const repos = await res.json();
-
-  return repos.filter((repo: { fork: boolean }) => !repo.fork);
+    return repos.filter((repo: { fork: boolean }) => !repo.fork);
+  } catch {
+    return [];
+  }
 }
 
 export async function getRepoDescription(repoName: string) {
@@ -18,7 +25,8 @@ export async function getRepoDescription(repoName: string) {
     const response = await fetch(
       `https://api.github.com/repos/anguzuDaniel/${repoName}/readme`,
       {
-        next: { revalidate: 3600 }
+        next: { revalidate: 3600 },
+        signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
       }
     );
 

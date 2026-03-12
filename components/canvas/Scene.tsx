@@ -1,17 +1,16 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Environment } from '@react-three/drei'
 import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing'
 import * as THREE from 'three'
 import { useTheme } from 'next-themes'
 import FloatingParticles from './FloatingParticles'
+import { useHasMounted } from '@/lib/useHasMounted'
 
 function SceneContent() {
   const { theme, resolvedTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
+  const mounted = useHasMounted()
   
   const isLight = mounted && (theme === 'light' || resolvedTheme === 'light')
 

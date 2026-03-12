@@ -3,7 +3,18 @@
 import { FaGithub } from 'react-icons/fa';
 import ProjectCard from './ProjectCard'; // Ensure you import the card we just fixed
 
-export default function GithubProjects({ repos, github }: { repos: any, github: any }) {
+type Repo = {
+  id: number;
+  name: string;
+  description: string | null;
+  readmeDescription?: string | null;
+  html_url: string;
+  language: string | null;
+  stargazers_count: number;
+  forks_count: number;
+};
+
+export default function GithubProjects({ repos, github }: { repos: Repo[], github: string }) {
   return (
     <section id="projects" className="section-padding px-6 max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-4">
@@ -20,6 +31,7 @@ export default function GithubProjects({ repos, github }: { repos: any, github: 
         <a
           href={github}
           target="_blank"
+          rel="noopener noreferrer"
           className="group flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 text-sm font-bold border border-zinc-200 dark:border-zinc-700 hover:border-brand-500 transition-all shadow-sm"
         >
           <FaGithub className="group-hover:rotate-12 transition-transform" />
@@ -29,7 +41,7 @@ export default function GithubProjects({ repos, github }: { repos: any, github: 
 
       {/* MODERN GRID: Staggered Bento-like columns */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {repos.map((repo: any) => (
+        {repos.map((repo) => (
           <ProjectCard key={repo.id} repo={repo} />
         ))}
       </div>

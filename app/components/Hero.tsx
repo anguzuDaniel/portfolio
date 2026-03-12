@@ -1,147 +1,495 @@
 "use client";
 
-import Image from 'next/image';
-import { siteConfig } from '@/config/profile';
-import { Github, ArrowRight, Briefcase, FolderGit2, Rocket } from 'lucide-react';
-import { motion } from 'framer-motion';
+import Link from "next/link";
+import { animate, motion, useInView } from "framer-motion";
+import {
+  ArrowRight,
+  Briefcase,
+  Database,
+  Download,
+  FolderGit2,
+  Gauge,
+  Github,
+  MapPin,
+  Rocket,
+  ShieldCheck,
+  Terminal,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { siteConfig } from "@/config/profile";
 
-const stats = [
-  { icon: Briefcase, value: "5+", label: "Years Experience" },
-  { icon: FolderGit2, value: "50+", label: "Repositories" },
-  { icon: Rocket, value: "4", label: "Live Projects" },
+const terminalLines = [
+  {
+    label: "01",
+    code: `const engine = boot("velocity.execution");`,
+    tone: "text-stone-200",
+  },
+  {
+    label: "02",
+    code: `await engine.sync({ market: "synthetics", mode: "scalp" });`,
+    tone: "text-brand-200",
+  },
+  {
+    label: "03",
+    code: `risk.guard({ maxDrawdown: 2.5, throttleMs: 80 });`,
+    tone: "text-stone-300",
+  },
+  {
+    label: "04",
+    code: `settlement.queue("deriv", { retries: 3, region: "global" });`,
+    tone: "text-stone-300",
+  },
+  {
+    label: "05",
+    code: `observe({ uptime: "99.9%", latency: "42ms", alerts: "clean" });`,
+    tone: "text-brand-100",
+  },
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.12, duration: 0.6, ease: "easeOut" as const },
-  }),
+const statusCards = [
+  {
+    icon: ShieldCheck,
+    label: "Risk Guard",
+    value: "Active",
+    detail: "Execution discipline and drawdown checks stay online.",
+  },
+  {
+    icon: Gauge,
+    label: "Latency",
+    value: "42ms",
+    detail: "Lean request paths for faster fintech feedback loops.",
+  },
+  {
+    icon: Database,
+    label: "Data Flow",
+    value: "Stable",
+    detail: "APIs, persistence, and automation signals stay in sync.",
+  },
+];
+
+type HeroStatProps = {
+  label: string;
+  value: number;
+  suffix: string;
+  icon: LucideIcon;
 };
 
-export default function Hero() {
+function HeroStat({ label, value, suffix, icon: Icon }: HeroStatProps) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    const controls = animate(0, value, {
+      duration: 1.1,
+      delay: 0.9,
+      ease: [0.22, 1, 0.36, 1],
+      onUpdate: (latest) => setDisplayValue(Math.round(latest)),
+    });
+
+    return () => controls.stop();
+  }, [isInView, value]);
+
   return (
-    <section className="relative overflow-hidden min-h-[95vh] flex items-center pt-28 pb-16">
-
-      {/* Background glow */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-brand-500/[0.07] rounded-full blur-[140px]" />
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-indigo-500/[0.05] rounded-full blur-[100px]" />
+    <div ref={ref} className="flex items-center gap-3 whitespace-nowrap">
+      <div className="flex h-9 w-9 items-center justify-center rounded-full border border-brand-300/20 bg-white/[0.03] text-brand-300 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+        <Icon className="h-4 w-4" />
       </div>
+      <div className="flex items-end gap-2">
+        <span className="font-display text-2xl leading-none tracking-[-0.04em] text-white sm:text-[1.75rem]">
+          {displayValue}
+          {suffix}
+        </span>
+        <span className="pb-0.5 text-[10px] font-black uppercase tracking-[0.24em] text-stone-400">
+          {label}
+        </span>
+      </div>
+    </div>
+  );
+}
 
-      <div className="container-max w-full relative z-10">
-        <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
+function ShippingTicker() {
+  const items = [...siteConfig.projects, ...siteConfig.projects];
 
-          {/* Availability badge */}
+  return (
+    <div className="absolute inset-x-0 bottom-0 z-20 border-t border-white/8 bg-[#120f0c]/85 backdrop-blur-xl">
+      <div className="container-max flex h-16 items-center gap-4 overflow-hidden">
+        <div className="shrink-0 rounded-r-full border-l-4 border-brand-400 bg-white/[0.04] px-4 py-2 text-[10px] font-black uppercase tracking-[0.26em] text-brand-100/75 shadow-[0_0_24px_rgba(217,168,102,0.08)]">
+          Currently Shipping
+        </div>
+
+        <div className="relative flex-1 overflow-hidden">
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-[#120f0c] to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-[#120f0c] to-transparent" />
+
           <motion.div
-            custom={0}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/50 text-zinc-600 dark:text-zinc-300 text-[10px] font-black uppercase tracking-[0.2em] mb-8 shadow-sm"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 24, ease: "linear", repeat: Infinity }}
+            className="flex w-max min-w-full items-center gap-8 pr-8"
           >
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500" />
-            </span>
-            Available for New Projects
-          </motion.div>
-
-          {/* Heading */}
-          <motion.h1
-            custom={2}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tighter mb-6 leading-[1.1] md:leading-[0.95] font-black"
-          >
-            Crafting code that{" "}
-            <span className="relative inline-block">
-              <span className="relative z-10 text-brand-600 dark:text-brand-400 italic font-serif px-1">
-                bridges
-              </span>
-              <motion.span
-                initial={{ width: 0 }}
-                whileInView={{ width: "100%" }}
-                transition={{ delay: 0.6, duration: 0.8 }}
-                className="absolute bottom-1 md:bottom-2 left-0 h-2.5 md:h-3 bg-brand-500/20 dark:bg-brand-500/10 -rotate-1"
-              />
-            </span>
-            <br />
-            <span className="text-gradient">
-              innovation and scale.
-            </span>
-          </motion.h1>
-
-          {/* Subtext */}
-          <motion.p
-            custom={3}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="text-base md:text-lg text-zinc-600 dark:text-zinc-400 mb-10 max-w-xl leading-relaxed font-medium"
-          >
-            {siteConfig.hero.subtext}
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            custom={4}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="flex flex-wrap gap-4 justify-center mb-16"
-          >
-            <motion.a
-              whileHover={{ scale: 1.03, y: -3 }}
-              whileTap={{ scale: 0.97 }}
-              href={`mailto:${siteConfig.email}`}
-              className="bg-brand-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-brand-700 transition-all shadow-xl shadow-brand-500/25 flex items-center gap-2.5 text-base"
-            >
-              Start a Project
-              <ArrowRight size={18} />
-            </motion.a>
-
-            <motion.a
-              whileHover={{ scale: 1.03, y: -3 }}
-              whileTap={{ scale: 0.95 }}
-              href={siteConfig.github}
-              target="_blank"
-              className="bg-white dark:bg-zinc-900/60 px-8 py-4 rounded-2xl text-zinc-700 dark:text-zinc-300 hover:text-brand-600 dark:hover:text-brand-400 transition-all border border-zinc-200 dark:border-zinc-800 shadow-sm font-bold flex items-center gap-2.5 text-base"
-            >
-              <Github size={20} />
-              GitHub
-            </motion.a>
-          </motion.div>
-
-          {/* Stats Row */}
-          <motion.div
-            custom={5}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="flex flex-wrap justify-center gap-6 md:gap-0 md:divide-x md:divide-zinc-200 md:dark:divide-zinc-800"
-          >
-            {stats.map((stat) => (
-              <div key={stat.label} className="flex items-center gap-3 px-6 md:px-8">
-                <div className="w-10 h-10 rounded-xl bg-brand-500/10 dark:bg-brand-500/5 flex items-center justify-center text-brand-600 dark:text-brand-400">
-                  <stat.icon size={20} />
-                </div>
-                <div className="text-left">
-                  <div className="font-black text-xl text-zinc-900 dark:text-white leading-none">
-                    {stat.value}
-                  </div>
-                  <div className="text-xs text-zinc-500 dark:text-zinc-400 font-semibold uppercase tracking-wider mt-0.5">
-                    {stat.label}
-                  </div>
-                </div>
+            {items.map((project, index) => (
+              <div
+                key={`${project.title}-${index}`}
+                className="flex items-center gap-3 whitespace-nowrap text-sm text-stone-300"
+              >
+                <span className="h-2 w-2 rounded-full bg-brand-300 shadow-[0_0_12px_rgba(217,168,102,0.65)]" />
+                <span className="font-semibold text-stone-100">{project.title}</span>
+                <span className="rounded-full border border-brand-300/20 bg-brand-400/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-[0.22em] text-brand-100/70">
+                  {project.status}
+                </span>
               </div>
             ))}
           </motion.div>
-
         </div>
       </div>
+    </div>
+  );
+}
+
+function HeroVisual() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 36, scale: 0.97 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      className="relative mx-auto w-full max-w-[34rem]"
+    >
+      <div className="absolute -left-6 top-12 h-36 w-36 rounded-full bg-brand-400/18 blur-3xl" />
+      <div className="absolute -right-2 bottom-10 h-40 w-40 rounded-full bg-brand-700/30 blur-3xl" />
+
+      <motion.div
+        animate={{ y: [0, -8, 0], rotate: [0, 0.45, 0] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        className="relative overflow-hidden rounded-[2rem] border border-brand-200/14 bg-[#17120e]/90 shadow-[0_36px_100px_rgba(0,0,0,0.48)]"
+      >
+        <div
+          className="absolute inset-0 opacity-45"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at top right, rgba(217,168,102,0.16), transparent 32%), linear-gradient(135deg, rgba(202,136,62,0.14), transparent 38%)",
+          }}
+        />
+        <div
+          className="absolute inset-0 opacity-15"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(135deg, rgba(255,255,255,0.08) 0 1px, transparent 1px 16px)",
+          }}
+        />
+
+        <div className="relative flex items-center justify-between border-b border-white/8 px-5 py-4">
+          <div className="flex items-center gap-2">
+            <span className="h-2.5 w-2.5 rounded-full bg-brand-200/90" />
+            <span className="h-2.5 w-2.5 rounded-full bg-brand-400/85" />
+            <span className="h-2.5 w-2.5 rounded-full bg-brand-700/70" />
+            <div className="ml-2 flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.22em] text-brand-100/60">
+              <Terminal className="h-3.5 w-3.5" />
+              fintech-engine.ts
+            </div>
+          </div>
+
+          <div className="rounded-full border border-brand-300/20 bg-white/[0.04] px-3 py-1 text-[10px] font-black uppercase tracking-[0.24em] text-brand-100/70">
+            Live Ops
+          </div>
+        </div>
+
+        <div className="grid gap-5 p-5 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="rounded-[1.6rem] border border-white/8 bg-[#0e0b08]/92 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
+            <div className="mb-4 flex items-center justify-between">
+              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-brand-100/55">
+                Runtime Snapshot
+              </div>
+              <div className="rounded-full border border-emerald-400/15 bg-emerald-500/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.22em] text-emerald-300">
+                Stable
+              </div>
+            </div>
+
+            <div className="space-y-3 font-mono text-[12px] leading-6 sm:text-[13px]">
+              {terminalLines.map((line, index) => (
+                <motion.div
+                  key={line.label}
+                  initial={{ opacity: 0, x: 14 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.55 + index * 0.08 }}
+                  className="flex items-start gap-4"
+                >
+                  <span className="select-none text-brand-700/80">{line.label}</span>
+                  <span className={line.tone}>{line.code}</span>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="mt-5 grid grid-cols-3 gap-3">
+              {["Next.js", "FastAPI", "Supabase"].map((item) => (
+                <div
+                  key={item}
+                  className="rounded-2xl border border-white/7 bg-white/[0.03] px-3 py-3 text-center text-[10px] font-black uppercase tracking-[0.2em] text-stone-300"
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            {statusCards.map(({ icon: Icon, label, value, detail }, index) => (
+              <motion.div
+                key={label}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: 0.75 + index * 0.1 }}
+                className="rounded-[1.5rem] border border-white/8 bg-white/[0.04] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
+              >
+                <div className="mb-3 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-300/20 bg-brand-400/10 text-brand-200">
+                      <Icon className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <div className="text-[10px] font-black uppercase tracking-[0.24em] text-brand-100/55">
+                        {label}
+                      </div>
+                      <div className="font-display text-2xl tracking-[-0.04em] text-white">
+                        {value}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <p className="text-sm leading-relaxed text-stone-400">{detail}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.95 }}
+        className="absolute -left-4 bottom-12 hidden rounded-2xl border border-brand-300/18 bg-[#140f0b]/92 px-4 py-3 shadow-[0_20px_40px_rgba(0,0,0,0.35)] md:block"
+      >
+        <div className="text-[10px] font-black uppercase tracking-[0.22em] text-brand-100/55">
+          Avg Response
+        </div>
+        <div className="font-display text-2xl tracking-[-0.04em] text-white">42ms</div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+export default function Hero() {
+  const nameParts = siteConfig.name.split(" ");
+  const accentName = nameParts.pop() ?? "";
+  const primaryName = nameParts.join(" ") || siteConfig.name;
+  const tagline = `${siteConfig.hero.title} ${siteConfig.hero.titleAccent}`;
+  const taglineWords = tagline.split(" ");
+  const heroStats = [
+    { label: "Years", value: 5, suffix: "+", icon: Briefcase },
+    { label: "Repos", value: 50, suffix: "+", icon: FolderGit2 },
+    {
+      label: "Live Projects",
+      value: siteConfig.projects.length,
+      suffix: "",
+      icon: Rocket,
+    },
+  ];
+
+  return (
+    <section
+      id="home"
+      className="relative isolate overflow-hidden bg-[#120f0c] pt-28 text-theme-foreground md:pt-32"
+    >
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(18,15,12,0.98) 0%, rgba(16,13,10,1) 100%)",
+        }}
+      />
+      <div
+        className="absolute inset-0 opacity-90"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 24% 24%, rgba(202,136,62,0.26), transparent 22%), radial-gradient(circle at 70% 18%, rgba(76,41,20,0.42), transparent 28%)",
+        }}
+      />
+      <div
+        className="absolute inset-0 opacity-[0.09]"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(135deg, rgba(255,241,224,0.12) 0 1px, transparent 1px 22px)",
+        }}
+      />
+      <div
+        className="absolute inset-0 opacity-[0.14] mix-blend-soft-light"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 20% 20%, rgba(255,255,255,0.18) 0.8px, transparent 1px), radial-gradient(circle at 70% 35%, rgba(255,255,255,0.08) 0.6px, transparent 1px)",
+          backgroundSize: "18px 18px, 26px 26px",
+        }}
+      />
+      <div
+        className="absolute inset-0 opacity-[0.08]"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, rgba(255,241,224,0.9) 0.9px, transparent 1px)",
+          backgroundSize: "18px 18px",
+        }}
+      />
+
+      <div className="container-max relative z-10 pb-28 pt-5 sm:pt-14">
+        <div className="grid min-h-[calc(100vh-12rem)] items-center gap-14 lg:grid-cols-[minmax(0,1.02fr)_minmax(360px,0.98fr)] lg:gap-16">
+          <div className="max-w-[40rem]">
+            <motion.div
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-8"
+            >
+              <div className="mb-4 flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.28em] text-brand-100/55">
+                <span className="h-px w-14 bg-gradient-to-r from-brand-300 to-transparent" />
+                <span>{siteConfig.role}</span>
+              </div>
+
+              <h1
+                className="max-w-[14ch] font-display text-[clamp(4rem,11vw,6.8rem)] leading-[0.92] tracking-[-0.065em]"
+                style={{
+                  textShadow: "0 12px 34px rgba(0, 0, 0, 0.32)",
+                }}
+              >
+                <span className="block text-white">{primaryName}</span>
+                {accentName ? (
+                  <span className="block text-brand-300">{accentName}</span>
+                ) : null}
+              </h1>
+            </motion.div>
+
+            <div className="mt-7 max-w-[34rem]">
+              <motion.p
+                initial="hidden"
+                animate="visible"
+                className="text-left text-xl font-semibold leading-snug tracking-[-0.03em] text-stone-100 sm:text-[1.6rem]"
+                aria-label={tagline}
+              >
+                <span className="sr-only">{tagline}</span>
+                <span aria-hidden="true" className="flex flex-wrap gap-x-3 gap-y-2">
+                  {taglineWords.map((word, index) => (
+                    <motion.span
+                      key={`${word}-${index}`}
+                      variants={{
+                        hidden: { opacity: 0, y: 16 },
+                        visible: { opacity: 1, y: 0 },
+                      }}
+                      transition={{
+                        duration: 0.38,
+                        delay: 0.4 + index * 0.07,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
+                      className={
+                        word === "products."
+                          ? "text-brand-200"
+                          : "text-stone-100"
+                      }
+                    >
+                      {word}
+                    </motion.span>
+                  ))}
+                </span>
+              </motion.p>
+
+              <motion.p
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55, delay: 0.84 }}
+                className="mt-6 max-w-[35rem] text-base leading-8 text-stone-400 sm:text-lg"
+              >
+                {siteConfig.hero.subtext}
+              </motion.p>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.98 }}
+              className="mt-7 flex flex-wrap items-center gap-5 text-sm text-stone-400"
+            >
+              <div className="inline-flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-brand-300" />
+                <span>{siteConfig.location}</span>
+              </div>
+              <span className="hidden h-5 w-px bg-white/10 sm:block" />
+              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-brand-100/50">
+                Full-stack systems / mobile / trading tools
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 1.02 }}
+              className="mt-9 flex flex-wrap items-center gap-3"
+            >
+              <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+                <Link
+                  href="#contact"
+                  className="inline-flex items-center gap-2 rounded-full bg-brand-400 px-6 py-3.5 text-sm font-bold text-stone-950 shadow-[0_18px_40px_rgba(202,136,62,0.28)] transition-colors hover:bg-brand-300"
+                >
+                  Start a Project
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </motion.div>
+
+              <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+                <a
+                  href={siteConfig.resumeUrl}
+                  download
+                  className="inline-flex items-center gap-2 rounded-full border border-brand-300/24 bg-white/[0.03] px-5 py-3.5 text-sm font-bold text-stone-100 transition-colors hover:border-brand-300/40 hover:bg-white/[0.06]"
+                >
+                  <Download className="h-4 w-4 text-brand-200" />
+                  Download CV
+                </a>
+              </motion.div>
+
+              <motion.a
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                href={siteConfig.github}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Open GitHub profile"
+                title="GitHub"
+                className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-transparent text-stone-300 transition-colors hover:border-brand-300/35 hover:text-brand-200"
+              >
+                <Github className="h-5 w-5" />
+              </motion.a>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 1.12 }}
+              className="mt-10 flex flex-wrap items-center gap-4 text-sm text-stone-300"
+            >
+              {heroStats.map((stat, index) => (
+                <div key={stat.label} className="flex items-center gap-4">
+                  <HeroStat {...stat} />
+                  {index !== heroStats.length - 1 ? (
+                    <span className="hidden h-8 w-px bg-white/10 sm:block" />
+                  ) : null}
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          <HeroVisual />
+        </div>
+      </div>
+
+      <ShippingTicker />
     </section>
   );
 }

@@ -1,17 +1,11 @@
 "use client"
 import { useTheme } from "next-themes"
 import { Sun, Moon } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useHasMounted } from "@/lib/useHasMounted"
 
 export function ModeToggle() {
   const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
-
-  // Avoid hydration mismatch by waiting for mount
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
+  const mounted = useHasMounted()
 
   if (!mounted) return null;
 

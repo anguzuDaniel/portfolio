@@ -6,6 +6,8 @@ import ContactForm from './components/ContactForm';
 import GithubRepos from './components/GithubRepos';
 import Skills from './components/Skills';
 import LiveProjects from './components/LiveProjects';
+import Experience from './components/Experience';
+import Credentials from './components/Credentials';
 
 export default async function Page() {
   const repos = await getGithubRepos();
@@ -29,6 +31,7 @@ export default async function Page() {
     <main className="min-h-screen bg-background text-foreground transition-colors duration-300">
       <Hero />
       <About />
+      <Experience />
 
       {/* SKILLS SECTION */}
       <Skills siteConfig={siteConfig} />
@@ -38,6 +41,8 @@ export default async function Page() {
 
       {/* GITHUB REPOS SECTION */}
       <GithubRepos repos={reposWithReadme} />
+
+      <Credentials />
 
       {/* CONTACT SECTION */}
       <ContactForm />

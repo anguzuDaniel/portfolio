@@ -25,19 +25,14 @@ export default function ContactForm() {
         }
     }
 
-    // Reusable input style to keep code clean
-    const inputStyles = "w-full px-6 py-4 rounded-2xl transition-all font-bold focus:outline-none focus:ring-2 focus:ring-brand-500/50 border border-zinc-300"
-
     return (
         <section id="contact" className="section-padding container-max">
-            <div className="premium-card overflow-hidden !rounded-[2.5rem] md:!rounded-[3rem] shadow-2xl bg-white dark:bg-transparent">
-                <div className="grid md:grid-cols-2">
-
-                    {/* Left Sidebar: Brand Info */}
-                    <div className="p-6 md:p-16 bg-brand-600 text-white relative overflow-hidden">
-                        {/* Decorative circles */}
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
-                        <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-2xl" />
+            <div className="premium-card overflow-hidden !rounded-[2.6rem] md:!rounded-[3rem]">
+                <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
+                    <div className="relative overflow-hidden bg-[linear-gradient(145deg,rgba(47,28,14,0.98),rgba(21,15,11,0.98))] p-6 text-white md:p-14">
+                        <div className="absolute inset-0 hero-grid opacity-20" />
+                        <div className="absolute -right-12 top-0 h-56 w-56 rounded-full bg-brand-400/20 blur-3xl" />
+                        <div className="absolute -bottom-16 -left-8 h-52 w-52 rounded-full bg-brand-700/30 blur-3xl" />
 
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
@@ -45,14 +40,17 @@ export default function ContactForm() {
                             viewport={{ once: true }}
                             className="relative z-10"
                         >
-                            <h2 className="text-4xl md:text-5xl tracking-tighter mb-6 leading-tight">
-                                Let&apos;s Build Something <span className="text-blue-200">Exceptional</span>
+                            <span className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/8 px-3 py-1 text-[10px] font-black uppercase tracking-[0.24em] text-white/80 backdrop-blur-sm">
+                                Contact / Collaboration
+                            </span>
+                            <h2 className="mt-5 text-5xl font-display leading-[0.95] tracking-tight">
+                                Let&apos;s shape the next product with clarity and range.
                             </h2>
-                            <p className="text-blue-100 text-lg mb-8 font-medium leading-relaxed">
-                                Ready to transform your ideas into robust digital realities? Let&apos;s connect and discuss your next project.
+                            <p className="mt-6 max-w-md text-lg font-medium leading-relaxed text-white/72">
+                                If you need a builder who can move from product interface to backend behavior and deployment detail, we should talk.
                             </p>
 
-                            <div className="space-y-6 mt-10">
+                            <div className="mt-10 space-y-4">
                                 {[
                                     { icon: <Mail className="w-6 h-6" />, label: "Email", value: siteConfig.email, href: `mailto:${siteConfig.email}` },
                                     { icon: <Github className="w-6 h-6" />, label: "GitHub", value: "anguzuDaniel", href: siteConfig.github },
@@ -62,14 +60,15 @@ export default function ContactForm() {
                                         key={idx}
                                         href={item.href}
                                         target={item.label !== "Email" ? "_blank" : undefined}
-                                        className="flex items-center gap-5 group/item transition-all duration-300"
+                                        rel={item.label !== "Email" ? "noopener noreferrer" : undefined}
+                                        className="group/item flex items-center gap-5 rounded-[1.5rem] border border-white/10 bg-white/6 px-4 py-4 transition-all duration-300 hover:border-brand-300/25 hover:bg-white/10"
                                     >
-                                        <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center group-hover/item:bg-white/20 transition-all duration-300 backdrop-blur-sm border border-white/10 text-white">
+                                        <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/10 text-white transition-all duration-300 backdrop-blur-sm group-hover/item:bg-white/20">
                                             {item.icon}
                                         </div>
                                         <div>
-                                            <div className="text-xs font-bold uppercase tracking-[0.2em] text-blue-200 mb-1">{item.label}</div>
-                                            <div className="text-lg font-bold group-hover/item:translate-x-1 transition-transform text-white">{item.value}</div>
+                                            <div className="mb-1 text-[10px] font-black uppercase tracking-[0.22em] text-brand-100/70">{item.label}</div>
+                                            <div className="text-lg font-bold text-white transition-transform group-hover/item:translate-x-1">{item.value}</div>
                                         </div>
                                     </a>
                                 ))}
@@ -77,8 +76,7 @@ export default function ContactForm() {
                         </motion.div>
                     </div>
 
-                    {/* Right Side: Actual Form */}
-                    <div className="p-6 md:p-16">
+                    <div className="bg-white/30 p-6 md:p-14 dark:bg-transparent">
                         <motion.form
                             initial={{ opacity: 0, x: 20 }}
                             whileInView={{ opacity: 1, x: 0 }}
@@ -87,24 +85,34 @@ export default function ContactForm() {
                             action={handleSubmit}
                             id="contact-form"
                         >
-                            <div className="space-y-3">
-                                <label className="text-sm font-bold text-zinc-600 dark:text-zinc-400 uppercase tracking-widest px-1">Your Name</label>
-                                <input type="text" name="name" placeholder="Daniel Anguzu" className={inputStyles} suppressHydrationWarning required />
+                            <div className="mb-8 space-y-3">
+                                <span className="section-kicker">Project Brief</span>
+                                <h3 className="text-4xl font-display tracking-tight">
+                                    Send the details.
+                                </h3>
+                                <p className="section-copy max-w-xl">
+                                    A short overview of the product, problem, or collaboration is enough to start.
+                                </p>
                             </div>
 
                             <div className="space-y-3">
-                                <label className="text-sm font-bold text-zinc-600 dark:text-zinc-400 uppercase tracking-widest px-1">Email Address</label>
-                                <input type="email" name="email" placeholder="daniel@exceptional.com" className={inputStyles} suppressHydrationWarning required />
+                                <label className="px-1 text-[10px] font-black uppercase tracking-[0.22em] text-stone-500 dark:text-stone-400">Your Name</label>
+                                <input type="text" name="name" placeholder="Daniel Anguzu" className="field-input" suppressHydrationWarning required />
                             </div>
 
                             <div className="space-y-3">
-                                <label className="text-sm font-bold text-zinc-600 dark:text-zinc-400 uppercase tracking-widest px-1">Subject</label>
-                                <input type="text" name="subject" placeholder="Project Collaboration" className={inputStyles} suppressHydrationWarning required />
+                                <label className="px-1 text-[10px] font-black uppercase tracking-[0.22em] text-stone-500 dark:text-stone-400">Email Address</label>
+                                <input type="email" name="email" placeholder="daniel@exceptional.com" className="field-input" suppressHydrationWarning required />
                             </div>
 
                             <div className="space-y-3">
-                                <label className="text-sm font-bold text-zinc-600 dark:text-zinc-400 uppercase tracking-widest px-1">Your Message</label>
-                                <textarea name="message" rows={4} placeholder="Hello Daniel, I'd like to talk about..." className={`${inputStyles} resize-none`} suppressHydrationWarning required />
+                                <label className="px-1 text-[10px] font-black uppercase tracking-[0.22em] text-stone-500 dark:text-stone-400">Subject</label>
+                                <input type="text" name="subject" placeholder="Project Collaboration" className="field-input" suppressHydrationWarning required />
+                            </div>
+
+                            <div className="space-y-3">
+                                <label className="px-1 text-[10px] font-black uppercase tracking-[0.22em] text-stone-500 dark:text-stone-400">Your Message</label>
+                                <textarea name="message" rows={5} placeholder="Hello Daniel, I'd like to talk about..." className="field-input resize-none" suppressHydrationWarning required />
                             </div>
 
                             <motion.button
@@ -113,14 +121,13 @@ export default function ContactForm() {
                                 type="submit"
                                 disabled={isSubmitting}
                                 suppressHydrationWarning
-                                className="w-full bg-brand-600 text-white py-5 rounded-2xl font-bold hover:bg-brand-700 transition-all shadow-xl shadow-brand-500/25 flex items-center justify-center gap-3 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="flex w-full items-center justify-center gap-3 rounded-[1.5rem] bg-brand-600 py-5 text-lg font-bold text-white shadow-xl shadow-brand-500/25 transition-all hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-50"
                             >
                                 {isSubmitting ? "Sending..." : "Send Message"}
                                 {!isSubmitting && <ArrowRight size={22} />}
                             </motion.button>
                         </motion.form>
                     </div>
-
                 </div>
             </div>
         </section>

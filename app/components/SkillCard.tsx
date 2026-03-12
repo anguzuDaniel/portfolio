@@ -15,7 +15,7 @@ export default function SkillCard({ icon, title, list, description, index }: { i
       </h3>
 
       {description && (
-        <p className="mb-6 text-sm font-medium leading-relaxed text-[#4c3524] dark:text-stone-400">
+        <p className="mb-6 text-[15px] font-medium leading-relaxed text-[#4c3524] dark:text-stone-400">
           {description}
         </p>
       )}
@@ -24,7 +24,7 @@ export default function SkillCard({ icon, title, list, description, index }: { i
         {list.map((item) => (
           <div
             key={item}
-            className="flex items-center gap-3 text-sm font-semibold text-[#2f2117] dark:text-stone-300"
+            className="flex items-center gap-3 text-[15px] font-semibold text-[#2f2117] dark:text-stone-300"
           >
             <span className="h-px w-6 bg-brand-400/70 dark:bg-brand-300/60" />
             <span>{item}</span>

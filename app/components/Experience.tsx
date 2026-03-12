@@ -62,14 +62,14 @@ export default function Experience() {
                   <BriefcaseBusiness size={22} />
                 </div>
 
-                <p className="mb-2 text-[10px] font-black uppercase tracking-[0.24em] text-[#5b3419] dark:text-stone-400">
+                <p className="mb-2 text-[11px] font-black uppercase tracking-[0.2em] text-[#5b3419] dark:text-stone-400">
                   {item.company}
                 </p>
                 <h3 className="mb-4 text-3xl font-display tracking-tight text-[#18110b] dark:text-inherit">
                   {item.role}
                 </h3>
 
-                <div className="space-y-3 text-sm text-[#5f4632] dark:text-stone-400">
+                <div className="space-y-3 text-[15px] text-[#5f4632] dark:text-stone-400">
                   <div className="flex items-start gap-2">
                     <CalendarRange size={16} className="mt-0.5 shrink-0" />
                     <span>{item.period}</span>
@@ -92,7 +92,7 @@ export default function Experience() {
                 )}
 
                 {item.highlights && item.highlights.length > 0 && (
-                  <ul className="space-y-3 text-sm leading-relaxed text-[#4b3524] dark:text-stone-400">
+                  <ul className="space-y-3 text-[15px] leading-relaxed text-[#4b3524] dark:text-stone-400">
                     {item.highlights.map((highlight) => (
                       <li key={highlight} className="flex gap-3">
                         <span className="mt-2 h-px w-6 bg-brand-400/75 shrink-0" />

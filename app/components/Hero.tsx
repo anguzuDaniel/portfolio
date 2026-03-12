@@ -13,39 +13,10 @@ import {
   MapPin,
   Rocket,
   ShieldCheck,
-  Terminal,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { siteConfig } from "@/config/profile";
-
-const terminalLines = [
-  {
-    label: "01",
-    code: `const engine = boot("velocity.execution");`,
-    tone: "text-stone-200",
-  },
-  {
-    label: "02",
-    code: `await engine.sync({ market: "synthetics", mode: "scalp" });`,
-    tone: "text-brand-200",
-  },
-  {
-    label: "03",
-    code: `risk.guard({ maxDrawdown: 2.5, throttleMs: 80 });`,
-    tone: "text-stone-300",
-  },
-  {
-    label: "04",
-    code: `settlement.queue("deriv", { retries: 3, region: "global" });`,
-    tone: "text-stone-300",
-  },
-  {
-    label: "05",
-    code: `observe({ uptime: "99.9%", latency: "42ms", alerts: "clean" });`,
-    tone: "text-brand-100",
-  },
-];
 
 const statusCards = [
   {
@@ -186,8 +157,7 @@ function HeroVisual() {
             <span className="h-2.5 w-2.5 rounded-full bg-brand-400/85" />
             <span className="h-2.5 w-2.5 rounded-full bg-brand-700/70" />
             <div className="ml-2 flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.22em] text-brand-100/60">
-              <Terminal className="h-3.5 w-3.5" />
-              fintech-engine.ts
+              Live systems overview
             </div>
           </div>
 
@@ -196,73 +166,50 @@ function HeroVisual() {
           </div>
         </div>
 
-        <div className="grid gap-5 p-5 lg:grid-cols-[1.15fr_0.85fr]">
-          <div className="rounded-[1.6rem] border border-white/8 bg-[#0e0b08]/92 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
-            <div className="mb-4 flex items-center justify-between">
+        <div className="grid gap-3 p-5 sm:grid-cols-2">
+          {["Next.js", "FastAPI", "Supabase", "Automation"].map((item, index) => (
+            <motion.div
+              key={item}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: 0.6 + index * 0.08 }}
+              className="rounded-[1.5rem] border border-white/8 bg-white/[0.04] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
+            >
               <div className="text-[10px] font-black uppercase tracking-[0.24em] text-brand-100/55">
-                Runtime Snapshot
+                Stack
               </div>
-              <div className="rounded-full border border-emerald-400/15 bg-emerald-500/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.22em] text-emerald-300">
-                Stable
+              <div className="mt-3 font-display text-2xl tracking-[-0.04em] text-white">
+                {item}
               </div>
-            </div>
-
-            <div className="space-y-3 font-mono text-[12px] leading-6 sm:text-[13px]">
-              {terminalLines.map((line, index) => (
-                <motion.div
-                  key={line.label}
-                  initial={{ opacity: 0, x: 14 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.55 + index * 0.08 }}
-                  className="flex items-start gap-4"
-                >
-                  <span className="select-none text-brand-700/80">{line.label}</span>
-                  <span className={line.tone}>{line.code}</span>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="mt-5 grid grid-cols-3 gap-3">
-              {["Next.js", "FastAPI", "Supabase"].map((item) => (
-                <div
-                  key={item}
-                  className="rounded-2xl border border-white/7 bg-white/[0.03] px-3 py-3 text-center text-[10px] font-black uppercase tracking-[0.2em] text-stone-300"
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-3">
-            {statusCards.map(({ icon: Icon, label, value, detail }, index) => (
-              <motion.div
-                key={label}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, delay: 0.75 + index * 0.1 }}
-                className="rounded-[1.5rem] border border-white/8 bg-white/[0.04] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
-              >
-                <div className="mb-3 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-300/20 bg-brand-400/10 text-brand-200">
-                      <Icon className="h-4 w-4" />
+            </motion.div>
+          ))}
+          {statusCards.map(({ icon: Icon, label, value, detail }, index) => (
+            <motion.div
+              key={label}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: 0.92 + index * 0.1 }}
+              className="rounded-[1.5rem] border border-white/8 bg-white/[0.04] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
+            >
+              <div className="mb-3 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-300/20 bg-brand-400/10 text-brand-200">
+                    <Icon className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <div className="text-[10px] font-black uppercase tracking-[0.24em] text-brand-100/55">
+                      {label}
                     </div>
-                    <div>
-                      <div className="text-[10px] font-black uppercase tracking-[0.24em] text-brand-100/55">
-                        {label}
-                      </div>
-                      <div className="font-display text-2xl tracking-[-0.04em] text-white">
-                        {value}
-                      </div>
+                    <div className="font-display text-2xl tracking-[-0.04em] text-white">
+                      {value}
                     </div>
                   </div>
                 </div>
+              </div>
 
-                <p className="text-sm leading-relaxed text-stone-400">{detail}</p>
-              </motion.div>
-            ))}
-          </div>
+              <p className="text-sm leading-relaxed text-stone-400">{detail}</p>
+            </motion.div>
+          ))}
         </div>
       </motion.div>
 

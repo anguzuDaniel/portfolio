@@ -44,7 +44,7 @@ export default function Credentials() {
             </div>
             <div>
               <h3 className="text-3xl font-display tracking-tight text-[#140e09] dark:text-inherit">Education</h3>
-              <p className="text-sm text-[#4c3524] dark:text-stone-400">Academic grounding across software and business.</p>
+              <p className="text-[15px] text-[#4c3524] dark:text-stone-400">Academic grounding across software and business.</p>
             </div>
           </div>
 
@@ -54,11 +54,11 @@ export default function Credentials() {
                 key={`${item.school}-${item.period}`}
                 className="rounded-[1.5rem] border border-brand-200/30 bg-[rgba(255,248,240,0.9)] p-5 dark:border-brand-400/10 dark:bg-white/[0.03]"
               >
-                <p className="mb-2 text-[10px] font-black uppercase tracking-[0.22em] text-[#6b4423] dark:text-stone-400">
+                <p className="mb-2 text-[11px] font-black uppercase tracking-[0.2em] text-[#6b4423] dark:text-stone-400">
                   {item.period}
                 </p>
                 <h4 className="mb-1 text-xl font-display text-[#140e09] dark:text-inherit">{item.school}</h4>
-                <p className="text-sm text-[#4c3524] dark:text-stone-300">
+                <p className="text-[15px] text-[#4c3524] dark:text-stone-300">
                   {item.award} in {item.focus}
                 </p>
               </div>
@@ -79,7 +79,7 @@ export default function Credentials() {
             </div>
             <div>
               <h3 className="text-3xl font-display tracking-tight text-[#140e09] dark:text-inherit">Certifications</h3>
-              <p className="text-sm text-[#4c3524] dark:text-stone-400">Courses and recognition that reinforce current practice.</p>
+              <p className="text-[15px] text-[#4c3524] dark:text-stone-400">Courses and recognition that reinforce current practice.</p>
             </div>
           </div>
 
@@ -87,7 +87,7 @@ export default function Credentials() {
             {siteConfig.certifications.map((item) => (
               <div
                 key={item}
-                className="flex gap-3 rounded-[1.25rem] border border-brand-200/30 bg-[rgba(255,248,240,0.92)] px-4 py-4 text-sm text-[#4c3524] dark:border-brand-400/10 dark:bg-white/[0.03] dark:text-stone-300"
+                className="flex gap-3 rounded-[1.25rem] border border-brand-200/30 bg-[rgba(255,248,240,0.92)] px-4 py-4 text-[15px] text-[#4c3524] dark:border-brand-400/10 dark:bg-white/[0.03] dark:text-stone-300"
               >
                 <span className="mt-2 h-px w-6 bg-brand-400/75 shrink-0" />
                 <span>{item}</span>

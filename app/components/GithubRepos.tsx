@@ -29,7 +29,7 @@ export default function GithubRepos({ repos }: { repos: Repo[] }) {
       >
         <div className="space-y-4">
           <span className="section-kicker">Repositories / Public Code</span>
-          <h2 className="section-title">
+          <h2 className="section-title dark:text-stone-400">
             Featured repositories that show structure, range, and implementation taste.
           </h2>
         </div>

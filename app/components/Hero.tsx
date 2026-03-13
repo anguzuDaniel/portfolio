@@ -248,7 +248,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative isolate overflow-hidden bg-[#120f0c] pt-28 text-theme-foreground md:pt-32"
+      className="relative isolate overflow-hidden bg-[#120f0c] pt-10 text-theme-foreground md:pt-32"
     >
       <div
         className="absolute inset-0"

@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { siteConfig } from '@/config/profile';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { ExternalLink, Rocket, ArrowUpRight } from 'lucide-react';
 
 type LiveProject = {
@@ -76,7 +76,7 @@ const containerVariants = {
     },
 };
 
-const cardVariants = {
+const cardVariants: Variants = {
     hidden: { opacity: 0, y: 28 },
     show: {
         opacity: 1,

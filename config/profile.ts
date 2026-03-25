@@ -120,7 +120,7 @@ export const siteConfig = {
       liveUrl: "https://adik.stoicpips.com",
     },
     {
-      title: "Excel International Schools",
+      title: "Excel Schools",
       company: "Excel SDA International School",
       status: "Live",
       description:
@@ -133,6 +133,22 @@ export const siteConfig = {
   ],
 
   experience: [
+    {
+      company: "Nooaenergies",
+      role: "Full-Stack Developer",
+      period: "January 2026 - Present",
+      summary:
+        "Building and Maintaining Payment system for Nooaenergies.",
+      highlights: [
+        "Designed the product around total execution rather than manual chart monitoring.",
+        "Shaped beta workflows for automated scalping and AI-assisted trade handling.",
+      ],
+      stack: ["AI", "Automation", "Trading Systems", "TypeScript"],
+      link: {
+        label: "Open Beta",
+        url: "https://dunam.stoicpips.com/login",
+      },
+    },
     {
       company: "Dunam AI",
       role: "Founder & Full-Stack Developer",

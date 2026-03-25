@@ -21,6 +21,12 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
+  const navbarAppearance = `relative overflow-hidden border transition-all duration-300 ${
+    isScrolled
+      ? "border-[rgba(217,168,102,0.14)] bg-[rgba(20,15,11,0.86)] shadow-[0_18px_42px_rgba(0,0,0,0.22)] backdrop-blur-xl"
+      : "border-transparent bg-transparent shadow-none"
+  }`;
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 24);
@@ -60,23 +66,14 @@ export default function Navbar() {
 
   return (
     <nav className="fixed inset-x-0 top-0 z-[100]">
-      <div className="container-max pt-4 md:pt-5">
+      <div className="">
         <motion.div
           animate={{
             opacity: 1,
             y: isScrolled ? 0 : 4,
           }}
-          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className={`relative overflow-hidden rounded-[1.4rem] border transition-all duration-300 ${
-            isScrolled
-              ? "border-[rgba(217,168,102,0.14)] bg-[rgba(20,15,11,0.86)] shadow-[0_18px_42px_rgba(0,0,0,0.22)] backdrop-blur-xl"
-              : "border-[rgba(217,168,102,0.1)] bg-[linear-gradient(90deg,rgba(24,17,13,0.88),rgba(17,13,10,0.8))] shadow-[0_16px_36px_rgba(0,0,0,0.16)] backdrop-blur-lg"
-          }`}
+          className={navbarAppearance}
         >
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-300/60 to-transparent" />
-          <div className="absolute inset-y-0 left-0 w-40 bg-[radial-gradient(circle_at_left,rgba(184,109,40,0.18),transparent_68%)]" />
-          <div className="absolute inset-y-0 right-0 w-40 bg-[radial-gradient(circle_at_right,rgba(217,168,102,0.12),transparent_68%)]" />
-
           <div className="relative flex items-center justify-between gap-4 px-4 py-3 md:px-5">
             <Link
               href="/"
@@ -152,6 +149,7 @@ export default function Navbar() {
           </div>
         </motion.div>
 
+        {/* Mobile Menu | Dropdown */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
@@ -159,7 +157,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.22 }}
-              className="mt-3 md:hidden"
+              className="mt-3 md:hidden mx-4"
             >
               <div className="overflow-hidden rounded-[1.4rem] border border-[rgba(217,168,102,0.14)] bg-[linear-gradient(180deg,rgba(24,17,13,0.96),rgba(16,12,9,0.98))] shadow-[0_18px_40px_rgba(0,0,0,0.26)] backdrop-blur-xl">
                 <div className="border-b border-white/6 px-4 py-4">

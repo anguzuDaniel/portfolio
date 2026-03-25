@@ -177,21 +177,6 @@ export default function Hero() {
           {/* ── LEFT col ──────────────────────────────────────────────────── */}
           <div className="flex flex-col xl:pr-20">
 
-            {/* Edition badge */}
-            <motion.div
-              initial={{ opacity: 0, x: -16 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.55, delay: 0.1 }}
-              className="mb-9 flex items-center gap-3"
-            >
-              <span className="h-px w-8" style={{ background: gold }} />
-              <span
-                className="font-mono text-[10px] uppercase tracking-[0.32em]"
-                style={{ color: gold }}
-              >
-                Portfolio · {new Date().getFullYear()}
-              </span>
-            </motion.div>
 
             {/* Name */}
             <motion.h1

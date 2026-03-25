@@ -204,8 +204,8 @@ export default function LiveProjects() {
                         />
                       </a>
                     </div>
+                    </div>
                   </div>
-                </div>
             </motion.article>
           );
         })}

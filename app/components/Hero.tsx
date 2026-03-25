@@ -120,18 +120,6 @@ function ShippingTicker() {
   );
 }
 
-function HeroVisual() {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 36, scale: 0.97 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-      className="relative mx-auto w-full max-w-[34rem]"
-    >
-    </motion.div>
-  );
-}
-
 export default function Hero() {
   const nameParts = siteConfig.name.split(" ");
   const accentName = nameParts.pop() ?? "";
@@ -152,7 +140,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative isolate overflow-hidden bg-[#120f0c] pt-10 text-theme-foreground md:pt-32"
+      className="relative isolate overflow-hidden bg-[#120f0c] pt-10 text-theme-foreground md:pt-28"
     >
       <div
         className="absolute inset-0"
@@ -162,21 +150,21 @@ export default function Hero() {
         }}
       />
       <div
-        className="absolute inset-0 opacity-90"
+        className="absolute inset-0 opacity-75"
         style={{
           backgroundImage:
             "radial-gradient(circle at 24% 24%, rgba(202,136,62,0.26), transparent 22%), radial-gradient(circle at 70% 18%, rgba(76,41,20,0.42), transparent 28%)",
         }}
       />
       <div
-        className="absolute inset-0 opacity-[0.09]"
+        className="absolute inset-0 opacity-[0.06]"
         style={{
           backgroundImage:
             "repeating-linear-gradient(135deg, rgba(255,241,224,0.12) 0 1px, transparent 1px 22px)",
         }}
       />
       <div
-        className="absolute inset-0 opacity-[0.14] mix-blend-soft-light"
+        className="absolute inset-0 opacity-[0.1] mix-blend-soft-light"
         style={{
           backgroundImage:
             "radial-gradient(circle at 20% 20%, rgba(255,255,255,0.18) 0.8px, transparent 1px), radial-gradient(circle at 70% 35%, rgba(255,255,255,0.08) 0.6px, transparent 1px)",
@@ -184,7 +172,7 @@ export default function Hero() {
         }}
       />
       <div
-        className="absolute inset-0 opacity-[0.08]"
+        className="absolute inset-0 opacity-[0.05]"
         style={{
           backgroundImage:
             "radial-gradient(circle, rgba(255,241,224,0.9) 0.9px, transparent 1px)",
@@ -192,9 +180,9 @@ export default function Hero() {
         }}
       />
 
-      <div className="container-max relative z-10 pb-28 pt-5 sm:pt-14">
-        <div className="grid min-h-[calc(100vh-12rem)] items-center gap-14 lg:grid-cols-[minmax(0,1.02fr)_minmax(360px,0.98fr)] lg:gap-16">
-          <div className="max-w-[40rem]">
+      <div className="container-max relative z-10 pb-28 pt-8 sm:pt-14">
+        <div className="min-h-[calc(100vh-12rem)] max-w-[46rem] items-center">
+          <div className="max-w-[42rem]">
             <motion.div
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
@@ -256,7 +244,7 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, delay: 0.84 }}
-                className="mt-6 max-w-[35rem] text-base leading-8 text-stone-400 sm:text-lg"
+                className="mt-6 max-w-[35rem] text-base leading-8 text-stone-300 sm:text-lg"
               >
                 {siteConfig.hero.subtext}
               </motion.p>
@@ -323,7 +311,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 1.12 }}
-              className="mt-10 flex flex-wrap items-center gap-4 text-sm text-stone-300"
+              className="mt-10 flex flex-wrap items-center gap-4 rounded-[1.5rem] border border-white/8 bg-white/[0.03] px-5 py-4 text-sm text-stone-300 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
             >
               {heroStats.map((stat, index) => (
                 <div key={stat.label} className="flex items-center gap-4">
@@ -335,8 +323,6 @@ export default function Hero() {
               ))}
             </motion.div>
           </div>
-
-          <HeroVisual />
         </div>
       </div>
 

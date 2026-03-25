@@ -58,7 +58,7 @@ export default function Credentials() {
                   {item.period}
                 </p>
                 <h4 className="mb-1 text-xl font-display text-[#140e09] dark:text-inherit">{item.school}</h4>
-                <p className="text-[15px] text-[#4c3524] dark:text-stone-300">
+                <p className="text-[15px] text-[#4c3524] dark:text-inherit">
                   {item.award} in {item.focus}
                 </p>
               </div>

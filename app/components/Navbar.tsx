@@ -1,202 +1,327 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import { Download, Menu, X } from "lucide-react";
-import { ModeToggle } from "./ModeToggle";
 import { siteConfig } from "@/config/profile";
+import { useHasMounted } from "@/lib/useHasMounted";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowUpRight, Download, Menu, X } from "lucide-react";
+import { useTheme } from "next-themes";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { ModeToggle } from "./ModeToggle";
 
 const navLinks = [
-    { name: "About", href: "#about" },
-    { name: "Experience", href: "#experience" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
+  { name: "About",      href: "#about"      },
+  { name: "Experience", href: "#experience" },
+  { name: "Skills",     href: "#skills"     },
+  { name: "Projects",   href: "#projects"   },
+  { name: "Contact",    href: "#contact"    },
 ];
 
 export default function Navbar() {
-    const [isScrolled, setIsScrolled] = useState(false);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [activeSection, setActiveSection] = useState("");
+  const [isScrolled,       setIsScrolled]       = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection,    setActiveSection]    = useState("");
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20);
-        };
+  const { resolvedTheme } = useTheme();
+  const hasMounted         = useHasMounted();
+  const isDark             = hasMounted ? (resolvedTheme ?? "light") === "dark" : false;
 
-        handleScroll();
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+  // ── Design tokens (mirrors Hero) ─────────────────────────────────────────
+  const bg       = isDark ? "#110e09"                      : "#faf8f4";
+  const ink      = isDark ? "#ede0c8"                      : "#1a1208";
+  const inkMuted = isDark ? "#8a7a64"                      : "#7a6a58";
+  const gold     = isDark ? "#c8923a"                      : "#a8721e";
+  const ruleLine = isDark ? "rgba(200,146,58,0.14)"        : "rgba(168,114,30,0.16)";
 
-    useEffect(() => {
-        const sections = navLinks
-            .map((link) => document.querySelector(link.href))
-            .filter((section): section is HTMLElement => section instanceof HTMLElement);
+  // Scrolled pill background
+  const scrolledBg     = isDark
+    ? "rgba(17,14,9,0.88)"
+    : "rgba(250,248,244,0.88)";
+  const scrolledBorder = isDark
+    ? "rgba(200,146,58,0.16)"
+    : "rgba(168,114,30,0.18)";
+  const scrolledShadow = isDark
+    ? "0 16px 40px rgba(0,0,0,0.28)"
+    : "0 8px 32px rgba(0,0,0,0.08)";
 
-        if (sections.length === 0) return;
+  // Active pill
+  const activePillBg     = isDark ? "rgba(200,146,58,0.10)" : "rgba(168,114,30,0.08)";
+  const activePillBorder = isDark ? "rgba(200,146,58,0.22)" : "rgba(168,114,30,0.24)";
 
-        const observer = new IntersectionObserver(
-            (entries) => {
-                const visibleEntries = entries
-                    .filter((entry) => entry.isIntersecting)
-                    .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+  // Mobile menu
+  const menuBg     = isDark
+    ? "linear-gradient(180deg,rgba(22,16,10,0.97),rgba(14,10,6,0.99))"
+    : "linear-gradient(180deg,rgba(250,248,244,0.97),rgba(240,232,220,0.99))";
+  const menuBorder = isDark ? "rgba(200,146,58,0.14)" : "rgba(168,114,30,0.16)";
+  const menuRule   = isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.06)";
 
-                if (visibleEntries[0]) {
-                    setActiveSection(`#${visibleEntries[0].target.id}`);
-                }
-            },
-            {
-                rootMargin: "-42% 0px -42% 0px",
-                threshold: [0.2, 0.35, 0.5, 0.7],
-            }
-        );
+  // ── Scroll listener ──────────────────────────────────────────────────────
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 24);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-        sections.forEach((section) => observer.observe(section));
+  // ── Section observer ─────────────────────────────────────────────────────
+  useEffect(() => {
+    const sections = navLinks
+      .map((link) => document.querySelector(link.href))
+      .filter((s): s is HTMLElement => s instanceof HTMLElement);
 
-        return () => observer.disconnect();
-    }, []);
+    if (!sections.length) return;
 
-    return (
-        <nav
-            className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${isScrolled ? "py-3" : "py-5"
-                }`}
-        >
-            <div className="container-max">
-                <motion.div
-                    animate={{
-                        y: isScrolled ? 0 : 6,
-                        scale: isScrolled ? 1 : 0.985,
-                    }}
-                    className={`relative flex items-center justify-between rounded-[1.75rem] border px-4 py-3 transition-all duration-500 md:px-6 ${isScrolled
-                        ? "glass shadow-2xl shadow-zinc-950/10 ring-1 ring-white/40 dark:ring-white/8"
-                        : "border-transparent bg-white/10 backdrop-blur-md dark:bg-zinc-950/15"
-                        }`}
-                >
-                    <div className="pointer-events-none absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-brand-400/60 to-transparent" />
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]) setActiveSection(`#${visible[0].target.id}`);
+      },
+      { rootMargin: "-40% 0px -44% 0px", threshold: [0.2, 0.35, 0.55] }
+    );
 
-                    <Link href="/" className="group flex items-center gap-3">
-                        <div className="relative w-10 h-10 overflow-hidden rounded-xl">
-                            <Image
-                                src="/logo.svg"
-                                alt="Logo"
-                                fill
-                                sizes="40px"
-                                className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-300"
-                            />
-                        </div>
-                        <div className="hidden sm:block">
-                            <div className="font-bold text-xl tracking-tighter">
-                                Anguzu<span className="text-brand-500">.</span>
-                            </div>
-                            <div className="text-[10px] font-black uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400">
-                                Full-Stack Software Developer
-                            </div>
-                        </div>
-                    </Link>
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
 
-                    <div className="hidden md:flex items-center gap-2 rounded-full border border-zinc-200/80 bg-white/70 px-2 py-2 shadow-sm backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-950/35">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                href={link.href}
-                                onClick={() => setActiveSection(link.href)}
-                                aria-current={activeSection === link.href ? "page" : undefined}
-                                className={`relative rounded-full px-4 py-2 text-sm font-semibold transition-colors ${activeSection === link.href
-                                    ? "text-zinc-950 dark:text-white"
-                                    : "text-zinc-500 hover:text-brand-600 dark:text-zinc-400 dark:hover:text-brand-400"
-                                    }`}
-                            >
-                                {activeSection === link.href && (
-                                    <motion.span
-                                        layoutId="active-section-pill"
-                                        className="absolute inset-0 rounded-full border border-brand-400/20 bg-brand-500/10 shadow-[0_0_0_1px_rgba(59,130,246,0.08)] dark:bg-brand-500/15"
-                                        transition={{ type: "spring", stiffness: 420, damping: 34 }}
-                                    />
-                                )}
-                                <span className="relative z-10">{link.name}</span>
-                            </Link>
-                        ))}
-                    </div>
+  return (
+    <nav className="fixed inset-x-0 top-0 z-[100]">
+      {/* ── Pill bar ──────────────────────────────────────────────────────── */}
+      <motion.div
+        animate={{ y: isScrolled ? 0 : 4 }}
+        transition={{ duration: 0.3 }}
+        className="relative overflow-hidden transition-all duration-300"
+        style={{
+          background:   isScrolled ? scrolledBg     : "transparent",
+          border:       isScrolled ? `1px solid ${scrolledBorder}` : "1px solid transparent",
+          boxShadow:    isScrolled ? scrolledShadow  : "none",
+          backdropFilter: isScrolled ? "blur(20px) saturate(1.4)" : "none",
+        }}
+      >
+        <div className="flex items-center justify-between gap-4 px-4 py-3 md:px-6">
 
-                    <div className="hidden md:flex items-center gap-3">
-                        <a
-                            href={siteConfig.resumeUrl}
-                            download
-                            className="inline-flex items-center gap-2 rounded-full border border-zinc-200/80 bg-white/75 px-4 py-2 text-sm font-bold text-zinc-700 shadow-sm backdrop-blur-xl transition-colors hover:border-brand-400 hover:text-brand-600 dark:border-zinc-800 dark:bg-zinc-950/35 dark:text-zinc-300 dark:hover:text-brand-400"
-                        >
-                            <Download size={16} />
-                            Download CV
-                        </a>
-                        <ModeToggle />
-                    </div>
-
-                    <div className="flex items-center gap-4 md:hidden">
-                        <ModeToggle />
-                        <button
-                            suppressHydrationWarning
-                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className="rounded-xl border border-zinc-200/80 bg-white/75 p-2 text-zinc-700 shadow-sm backdrop-blur-xl transition-colors dark:border-zinc-800 dark:bg-zinc-950/35 dark:text-zinc-300"
-                        >
-                            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                        </button>
-                    </div>
-                </motion.div>
+          {/* Logo + name ───────────────────────────────────────────────── */}
+          <Link
+            href="/"
+            className="flex min-w-0 items-center gap-3"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            <div
+              className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-[1rem]"
+              style={{
+                border:     `1px solid ${ruleLine}`,
+                background: isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)",
+                boxShadow:  isDark
+                  ? "inset 0 1px 0 rgba(255,255,255,0.06)"
+                  : "inset 0 1px 0 rgba(255,255,255,0.8)",
+              }}
+            >
+              <Image src="/logo.svg" alt="Logo" fill sizes="44px" className="object-cover" />
             </div>
 
-            <AnimatePresence>
-                {isMobileMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        className="absolute left-0 right-0 top-full px-4 pt-2 md:hidden"
-                    >
-                        <div className="glass rounded-[1.75rem] border border-zinc-200/50 p-5 shadow-2xl">
-                            <div className="flex flex-col gap-2">
-                                {navLinks.map((link) => (
-                                    <Link
-                                        key={link.name}
-                                        href={link.href}
-                                        onClick={() => {
-                                            setActiveSection(link.href);
-                                            setIsMobileMenuOpen(false);
-                                        }}
-                                        className={`rounded-2xl px-4 py-3 text-base font-bold transition-colors ${activeSection === link.href
-                                            ? "bg-brand-500/10 text-brand-600 dark:text-brand-400"
-                                            : "text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900/70"
-                                            }`}
-                                    >
-                                        {link.name}
-                                    </Link>
-                                ))}
-                            </div>
+            <div className="min-w-0">
+              <div
+                className="truncate font-display text-[1.1rem] leading-none tracking-[-0.04em]"
+                style={{ color: ink, fontFamily: "'DM Serif Display', Georgia, serif" }}
+              >
+                Anguzu Daniel
+              </div>
+              <div
+                className="mt-1 hidden font-mono text-[9px] uppercase tracking-[0.24em] sm:block"
+                style={{ color: gold, opacity: 0.75 }}
+              >
+                Full-Stack Product Engineer
+              </div>
+            </div>
+          </Link>
 
-                            <div className="mt-4 flex items-center justify-between rounded-2xl border border-zinc-200/70 bg-white/60 px-4 py-3 backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-950/30">
-                                <div>
-                                    <div className="text-[10px] font-black uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400">
-                                        Resume
-                                    </div>
-                                    <div className="text-sm font-bold text-zinc-900 dark:text-white">
-                                        Download CV
-                                    </div>
-                                </div>
-                                <a
-                                    href={siteConfig.resumeUrl}
-                                    download
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                    className="inline-flex items-center gap-2 rounded-full bg-brand-600 px-4 py-2 text-sm font-bold text-white shadow-lg shadow-brand-500/20 transition-colors hover:bg-brand-700"
-                                >
-                                    <Download size={16} />
-                                    Get It
-                                </a>
-                            </div>
-                        </div>
+          {/* Desktop nav links ─────────────────────────────────────────── */}
+          <div className="hidden items-center gap-0.5 lg:flex">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href;
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setActiveSection(link.href)}
+                  aria-current={isActive ? "page" : undefined}
+                  className="relative rounded-full px-4 py-2.5 text-[13px] font-semibold tracking-[0.02em] transition-colors"
+                  style={{
+                    color: isActive ? (isDark ? "#ede0c8" : "#1a1208") : inkMuted,
+                    fontFamily: "'Instrument Sans', sans-serif",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isActive) (e.currentTarget as HTMLAnchorElement).style.color = ink;
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive) (e.currentTarget as HTMLAnchorElement).style.color = inkMuted;
+                  }}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="navbar-active-link"
+                      className="absolute inset-0 rounded-full"
+                      style={{
+                        background: activePillBg,
+                        border: `1px solid ${activePillBorder}`,
+                      }}
+                      transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                    />
+                  )}
+                  <span className="relative z-10">{link.name}</span>
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Desktop actions ───────────────────────────────────────────── */}
+          <div className="hidden items-center gap-2 md:flex">
+            <a
+              href={siteConfig.resumeUrl}
+              download
+              className="inline-flex items-center gap-2 px-4 py-2.5 text-[12px] font-semibold uppercase tracking-[0.16em] transition-all"
+              style={{
+                color:  gold,
+                border: `1px solid ${ruleLine}`,
+                background: isDark ? "rgba(200,146,58,0.07)" : "rgba(168,114,30,0.06)",
+                fontFamily: "'DM Mono', monospace",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.background = isDark
+                  ? "rgba(200,146,58,0.14)"
+                  : "rgba(168,114,30,0.12)";
+                (e.currentTarget as HTMLAnchorElement).style.borderColor = `${gold}55`;
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.background = isDark
+                  ? "rgba(200,146,58,0.07)"
+                  : "rgba(168,114,30,0.06)";
+                (e.currentTarget as HTMLAnchorElement).style.borderColor = ruleLine;
+              }}
+            >
+              <Download size={13} />
+              Resume
+            </a>
+            <ModeToggle />
+          </div>
+
+          {/* Mobile toggle ─────────────────────────────────────────────── */}
+          <div className="flex items-center gap-3 md:hidden">
+            <ModeToggle />
+            <button
+              suppressHydrationWarning
+              onClick={() => setIsMobileMenuOpen((v) => !v)}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-[1rem] transition-colors"
+              style={{
+                border:     `1px solid ${ruleLine}`,
+                background: isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)",
+                color:      ink,
+              }}
+              aria-label="Toggle navigation menu"
+            >
+              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* ── Mobile dropdown ─────────────────────────────────────────────────── */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            className="mx-4 mt-2 md:hidden"
+          >
+            <div
+              className="overflow-hidden rounded-[1.4rem]"
+              style={{
+                background:    menuBg,
+                border:        `1px solid ${menuBorder}`,
+                boxShadow:     isDark
+                  ? "0 20px 48px rgba(0,0,0,0.32)"
+                  : "0 12px 40px rgba(0,0,0,0.10)",
+                backdropFilter: "blur(24px) saturate(1.4)",
+              }}
+            >
+              {/* Section label */}
+              <div
+                className="border-b px-4 py-3"
+                style={{ borderColor: menuRule }}
+              >
+                <span
+                  className="font-mono text-[9px] uppercase tracking-[0.3em]"
+                  style={{ color: gold, opacity: 0.7 }}
+                >
+                  Navigate
+                </span>
+              </div>
+
+              {/* Links */}
+              <div className="grid gap-1 p-2">
+                {navLinks.map((link, index) => {
+                  const isActive = activeSection === link.href;
+                  return (
+                    <motion.div
+                      key={link.name}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.04 }}
+                    >
+                      <Link
+                        href={link.href}
+                        onClick={() => {
+                          setActiveSection(link.href);
+                          setIsMobileMenuOpen(false);
+                        }}
+                        className="flex items-center justify-between rounded-[1rem] px-4 py-3 text-sm font-semibold transition-colors"
+                        style={{
+                          background: isActive ? activePillBg : "transparent",
+                          color:      isActive ? (isDark ? "#ede0c8" : "#1a1208") : inkMuted,
+                          border:     isActive ? `1px solid ${activePillBorder}` : "1px solid transparent",
+                          fontFamily: "'Instrument Sans', sans-serif",
+                        }}
+                      >
+                        <span>{link.name}</span>
+                        <ArrowUpRight
+                          size={14}
+                          style={{ color: isActive ? gold : inkMuted, opacity: isActive ? 1 : 0.5 }}
+                        />
+                      </Link>
                     </motion.div>
-                )}
-            </AnimatePresence>
-        </nav>
-    );
+                  );
+                })}
+              </div>
+
+              {/* Resume CTA */}
+              <div
+                className="border-t p-2"
+                style={{ borderColor: menuRule }}
+              >
+                <a
+                  href={siteConfig.resumeUrl}
+                  download
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center justify-between rounded-[1rem] px-4 py-3 text-sm font-semibold transition-colors"
+                  style={{
+                    background: isDark ? "rgba(200,146,58,0.08)" : "rgba(168,114,30,0.07)",
+                    border:     `1px solid ${ruleLine}`,
+                    color:      gold,
+                    fontFamily: "'Instrument Sans', sans-serif",
+                  }}
+                >
+                  <span>Download Resume</span>
+                  <Download size={14} style={{ color: gold }} />
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
+  );
 }

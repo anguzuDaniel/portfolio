@@ -1,8 +1,10 @@
 "use client";
 
-import { siteConfig } from '@/config/profile';
-import { motion } from 'framer-motion';
-import { Award, GraduationCap } from 'lucide-react';
+import { siteConfig } from "@/config/profile";
+import { useHasMounted } from "@/lib/useHasMounted";
+import { motion } from "framer-motion";
+import { Award, GraduationCap } from "lucide-react";
+import { useTheme } from "next-themes";
 
 type EducationItem = {
   school: string;
@@ -12,53 +14,140 @@ type EducationItem = {
 };
 
 export default function Credentials() {
+  const { resolvedTheme } = useTheme();
+  const hasMounted        = useHasMounted();
+  const isDark            = hasMounted ? (resolvedTheme ?? "light") === "dark" : false;
+
+  // ── Design tokens ──────────────────────────────────────────────────────────
+  const ink      = isDark ? "#ede0c8" : "#1a1208";
+  const inkMuted = isDark ? "#8a7a64" : "#7a6a58";
+  const gold     = isDark ? "#c8923a" : "#a8721e";
+  const ruleLine = isDark ? "rgba(200,146,58,0.13)" : "rgba(168,114,30,0.15)";
+
+  // Panel (outer card)
+  const panelBg     = isDark ? "rgba(255,255,255,0.025)" : "rgba(255,255,255,0.70)";
+  const panelBorder = isDark ? "rgba(200,146,58,0.10)"   : "rgba(168,114,30,0.14)";
+  const panelShadow = isDark
+    ? "0 4px 28px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.04)"
+    : "0 4px 20px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.90)";
+
+  // Inner item card
+  const itemBg     = isDark ? "rgba(255,255,255,0.03)"  : "rgba(255,250,244,0.88)";
+  const itemBorder = isDark ? "rgba(200,146,58,0.09)"   : "rgba(168,114,30,0.16)";
+
+  // Icon container
+  const iconBg     = isDark ? "rgba(200,146,58,0.08)" : "rgba(168,114,30,0.07)";
+  const iconBorder = isDark ? "rgba(200,146,58,0.20)" : "rgba(168,114,30,0.24)";
+
   return (
     <section id="credentials" className="section-padding container-max">
+
+      {/* ── Section header ──────────────────────────────────────────────────── */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className="mb-14 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end"
       >
         <div className="space-y-4">
-          <span className="section-kicker">Foundations / Continuous Learning</span>
-          <h2 className="section-title">
+          <div className="flex items-center gap-3">
+            <span className="h-px w-6" style={{ background: gold }} />
+            <span
+              className="font-mono text-[10px] uppercase tracking-[0.3em]"
+              style={{ color: gold }}
+            >
+              Foundations · Continuous Learning
+            </span>
+          </div>
+
+          <h2
+            className="text-4xl leading-tight tracking-[-0.04em] sm:text-5xl"
+            style={{ color: ink, fontFamily: "'DM Serif Display', Georgia, serif" }}
+          >
             Education and certifications that reinforce the practice.
           </h2>
         </div>
-        <p className="section-copy max-w-3xl lg:justify-self-end">
+
+        <p
+          className="max-w-prose text-base leading-[1.85] lg:justify-self-end"
+          style={{ color: inkMuted }}
+        >
           Formal study plus practical upskilling across Android, developer tooling, automation, and teaching.
         </p>
       </motion.div>
 
-      <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+      {/* ── Two-column grid ─────────────────────────────────────────────────── */}
+      <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+
+        {/* ── Education panel ─────────────────────────────────────────────── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="premium-card p-8 md:p-10"
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          className="rounded-[1.35rem] p-7 backdrop-blur-sm md:p-9"
+          style={{
+            background: panelBg,
+            border:     `1px solid ${panelBorder}`,
+            boxShadow:  panelShadow,
+          }}
         >
-          <div className="flex items-center gap-3 mb-8">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand-200/45 bg-brand-50 text-brand-700 dark:border-brand-400/15 dark:bg-brand-950/60 dark:text-brand-300">
-              <GraduationCap size={22} />
+          {/* Panel header */}
+          <div className="mb-7 flex items-center gap-4">
+            <div
+              className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[0.9rem]"
+              style={{
+                background: iconBg,
+                border:     `1px solid ${iconBorder}`,
+                color:      gold,
+              }}
+            >
+              <GraduationCap size={21} />
             </div>
             <div>
-              <h3 className="text-3xl font-display tracking-tight">Education</h3>
-              <p className="text-sm text-stone-500 dark:text-stone-400">Academic grounding across software and business.</p>
+              <h3
+                className="text-2xl leading-tight tracking-[-0.03em]"
+                style={{ color: ink, fontFamily: "'DM Serif Display', Georgia, serif" }}
+              >
+                Education
+              </h3>
+              <p
+                className="mt-0.5 text-sm"
+                style={{ color: inkMuted }}
+              >
+                Academic grounding across software and business.
+              </p>
             </div>
           </div>
 
-          <div className="space-y-5">
+          {/* Rule */}
+          <div className="mb-6 h-px w-full" style={{ background: ruleLine }} />
+
+          {/* Education items */}
+          <div className="space-y-4">
             {siteConfig.education.map((item: EducationItem) => (
               <div
                 key={`${item.school}-${item.period}`}
-                className="rounded-[1.5rem] border border-brand-200/30 bg-white/55 p-5 dark:border-brand-400/10 dark:bg-white/[0.03]"
+                className="rounded-[1rem] p-5"
+                style={{
+                  background: itemBg,
+                  border:     `1px solid ${itemBorder}`,
+                }}
               >
-                <p className="mb-2 text-[10px] font-black uppercase tracking-[0.22em] text-stone-500 dark:text-stone-400">
+                <p
+                  className="mb-2 font-mono text-[9px] uppercase tracking-[0.24em]"
+                  style={{ color: gold, opacity: 0.8 }}
+                >
                   {item.period}
                 </p>
-                <h4 className="mb-1 text-xl font-display">{item.school}</h4>
-                <p className="text-sm text-stone-600 dark:text-stone-300">
+                <h4
+                  className="mb-1 text-lg leading-snug tracking-[-0.02em]"
+                  style={{ color: ink, fontFamily: "'DM Serif Display', Georgia, serif" }}
+                >
+                  {item.school}
+                </h4>
+                <p className="text-[14px] leading-relaxed" style={{ color: inkMuted }}>
                   {item.award} in {item.focus}
                 </p>
               </div>
@@ -66,31 +155,76 @@ export default function Credentials() {
           </div>
         </motion.div>
 
+        {/* ── Certifications panel ────────────────────────────────────────── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="premium-card p-8 md:p-10"
+          transition={{ delay: 0.1, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          className="rounded-[1.35rem] p-7 backdrop-blur-sm md:p-9"
+          style={{
+            background: panelBg,
+            border:     `1px solid ${panelBorder}`,
+            boxShadow:  panelShadow,
+          }}
         >
-          <div className="flex items-center gap-3 mb-8">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand-200/45 bg-brand-50 text-brand-700 dark:border-brand-400/15 dark:bg-brand-950/60 dark:text-brand-300">
-              <Award size={22} />
+          {/* Panel header */}
+          <div className="mb-7 flex items-center gap-4">
+            <div
+              className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[0.9rem]"
+              style={{
+                background: iconBg,
+                border:     `1px solid ${iconBorder}`,
+                color:      gold,
+              }}
+            >
+              <Award size={21} />
             </div>
             <div>
-              <h3 className="text-3xl font-display tracking-tight">Certifications</h3>
-              <p className="text-sm text-stone-500 dark:text-stone-400">Courses and recognition that reinforce current practice.</p>
+              <h3
+                className="text-2xl leading-tight tracking-[-0.03em]"
+                style={{ color: ink, fontFamily: "'DM Serif Display', Georgia, serif" }}
+              >
+                Certifications
+              </h3>
+              <p
+                className="mt-0.5 text-sm"
+                style={{ color: inkMuted }}
+              >
+                Courses and recognition that reinforce current practice.
+              </p>
             </div>
           </div>
 
-          <div className="space-y-3">
+          {/* Rule */}
+          <div className="mb-6 h-px w-full" style={{ background: ruleLine }} />
+
+          {/* Certification items */}
+          <div className="space-y-2.5">
             {siteConfig.certifications.map((item) => (
               <div
                 key={item}
-                className="flex gap-3 rounded-[1.25rem] border border-brand-200/30 bg-white/55 px-4 py-4 text-sm text-stone-600 dark:border-brand-400/10 dark:bg-white/[0.03] dark:text-stone-300"
+                className="flex items-start gap-3 rounded-[1rem] px-4 py-3.5"
+                style={{
+                  background: itemBg,
+                  border:     `1px solid ${itemBorder}`,
+                }}
               >
-                <span className="mt-2 h-px w-6 bg-brand-400/75 shrink-0" />
-                <span>{item}</span>
+                {/* Dash accent */}
+                <span
+                  className="mt-[0.6em] h-px w-5 shrink-0"
+                  style={{
+                    background: `linear-gradient(90deg, ${gold}, ${
+                      isDark ? "rgba(200,146,58,0.2)" : "rgba(168,114,30,0.15)"
+                    })`,
+                  }}
+                />
+                <span
+                  className="text-[14px] leading-[1.7]"
+                  style={{ color: inkMuted }}
+                >
+                  {item}
+                </span>
               </div>
             ))}
           </div>

@@ -1,7 +1,7 @@
 "use client"
-import { useTheme } from "next-themes"
-import { Sun, Moon } from "lucide-react"
 import { useHasMounted } from "@/lib/useHasMounted"
+import { Moon, Sun } from "lucide-react"
+import { useTheme } from "next-themes"
 
 export function ModeToggle() {
   const { theme, setTheme } = useTheme()

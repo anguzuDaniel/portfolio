@@ -31,10 +31,10 @@
 }
 
 :root {
-  --background: #f6efe6;
-  --foreground: #18130f;
-  --border: #dccab4;
-  --ring: #ca883e;
+  --background: #fbf6ef;
+  --foreground: #120d09;
+  --border: #d3b79a;
+  --ring: #b86d28;
 }
 
 .dark {
@@ -104,8 +104,8 @@ body::before {
 
   .glass {
     @apply border backdrop-blur-xl shadow-sm;
-    background-color: rgba(251, 247, 240, 0.72);
-    border-color: rgba(184, 109, 40, 0.18);
+    background-color: rgba(255, 251, 245, 0.88);
+    border-color: rgba(122, 65, 23, 0.18);
   }
 
   .dark .glass {
@@ -115,12 +115,12 @@ body::before {
 
   .premium-card {
     background:
-      linear-gradient(180deg, rgba(255, 251, 245, 0.92), rgba(245, 236, 224, 0.82));
+      linear-gradient(180deg, rgba(255, 252, 247, 0.98), rgba(242, 233, 221, 0.94));
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     color: var(--foreground);
     border-radius: 1.75rem;
-    border: 1px solid rgba(184, 109, 40, 0.18);
+    border: 1px solid rgba(122, 65, 23, 0.16);
     transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     box-shadow:
       0 24px 60px rgba(61, 43, 24, 0.08),
@@ -143,10 +143,10 @@ body::before {
   }
 
   .premium-card-hover:hover {
-    @apply -translate-y-1.5;
+    @apply -translate-y-1;
     border-color: rgba(184, 109, 40, 0.34);
     box-shadow:
-      0 28px 64px rgba(61, 43, 24, 0.12),
+      0 24px 52px rgba(61, 43, 24, 0.1),
       0 0 0 1px rgba(202, 136, 62, 0.08);
   }
 
@@ -169,7 +169,7 @@ body::before {
   }
 
   .section-padding {
-    @apply py-24 md:py-32;
+    @apply py-20 md:py-24;
   }
 
   .container-max {
@@ -231,10 +231,10 @@ body::before {
   }
 
   .section-kicker {
-    @apply inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[10px] font-black uppercase tracking-[0.24em];
-    background-color: rgba(251, 247, 240, 0.68);
-    border-color: rgba(184, 109, 40, 0.18);
-    color: rgba(122, 65, 23, 0.88);
+    @apply inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.22em];
+    background-color: rgba(255, 250, 244, 0.92);
+    border-color: rgba(122, 65, 23, 0.18);
+    color: rgba(97, 52, 21, 0.94);
   }
 
   .dark .section-kicker {
@@ -244,18 +244,28 @@ body::before {
   }
 
   .section-title {
-    @apply text-4xl md:text-6xl leading-[0.98] tracking-[-0.05em];
+    @apply text-[2.25rem] md:text-[4.5rem] leading-[0.98] tracking-[-0.05em];
+    color: #120d09;
+
+  }
+  .dark .section-title {
+    color: rgba(244, 226, 198, 0.82);
   }
 
   .section-copy {
-    @apply text-base md:text-lg leading-relaxed text-stone-600 dark:text-stone-400;
+    @apply text-[1rem] md:text-[1.05rem] leading-relaxed text-stone-800 dark:text-stone-400;
+    color: #3b2819;
+  }
+
+  .dark .section-copy {
+    color: rgba(247, 239, 227, 0.88);
   }
 
   .label-chip {
-    @apply rounded-full border px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.2em];
-    background-color: rgba(244, 226, 198, 0.55);
-    border-color: rgba(184, 109, 40, 0.16);
-    color: rgba(122, 65, 23, 0.88);
+    @apply rounded-full border px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.18em];
+    background-color: rgba(244, 226, 198, 0.82);
+    border-color: rgba(122, 65, 23, 0.14);
+    color: rgba(97, 52, 21, 0.94);
   }
 
   .dark .label-chip {
@@ -267,20 +277,22 @@ body::before {
   .field-input {
     @apply w-full rounded-[1.4rem] border px-5 py-4 font-semibold transition-all focus:outline-none focus:ring-2;
     border-color: rgba(184, 109, 40, 0.2);
-    background-color: rgba(255, 251, 245, 0.8);
+    background-color: rgba(255, 252, 247, 0.96);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+    color: #22150d;
   }
 
   .field-input:focus {
     border-color: rgba(202, 136, 62, 0.42);
     --tw-ring-color: rgba(202, 136, 62, 0.18);
-    background-color: rgba(255, 251, 245, 0.98);
+    background-color: rgba(255, 252, 247, 1);
   }
 
   .dark .field-input {
     border-color: rgba(217, 168, 102, 0.14);
     background-color: rgba(24, 18, 13, 0.84);
     box-shadow: inset 0 1px 0 rgba(255, 241, 224, 0.05);
+    color: #f7efe3;
   }
 
   .dark .field-input:focus {
@@ -288,6 +300,14 @@ body::before {
     --tw-ring-color: rgba(217, 168, 102, 0.16);
     background-color: rgba(29, 22, 16, 0.96);
   }
+}
+
+.field-input::placeholder {
+  color: rgba(68, 46, 29, 0.58);
+}
+
+.dark .field-input::placeholder {
+  color: rgba(247, 239, 227, 0.42);
 }
 
 

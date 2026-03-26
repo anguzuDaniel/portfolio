@@ -1,13 +1,11 @@
-import { getGithubRepos, getRepoDescription } from '@/lib/github';
-import Hero from './components/Hero';
-import About from './components/About';
 import { siteConfig } from '@/config/profile';
+import { getGithubRepos, getRepoDescription } from '@/lib/github';
 import ContactForm from './components/ContactForm';
-import GithubRepos from './components/GithubRepos';
-import Skills from './components/Skills';
-import LiveProjects from './components/LiveProjects';
-import Experience from './components/Experience';
 import Credentials from './components/Credentials';
+import Experience from './components/Experience';
+import GithubRepos from './components/GithubRepos';
+import Hero from './components/Hero';
+import LiveProjects from './components/LiveProjects';
 
 export default async function Page() {
   const repos = await getGithubRepos();
@@ -30,24 +28,13 @@ export default async function Page() {
   return (
     <main className="min-h-screen bg-background text-foreground transition-colors duration-300">
       <Hero />
-      <About />
       <Experience />
-
-      {/* SKILLS SECTION */}
-      <Skills siteConfig={siteConfig} />
-
-      {/* LIVE PROJECTS SECTION */}
       <LiveProjects />
-
-      {/* GITHUB REPOS SECTION */}
       <GithubRepos repos={reposWithReadme} />
-
       <Credentials />
-
-      {/* CONTACT SECTION */}
       <ContactForm />
 
-      <footer className="py-10 text-center text-slate-500 text-xs">
+      <footer className="border-t border-[rgba(122,65,23,0.12)] py-10 text-center text-slate-500 text-xs dark:border-white/6">
         © 2026 {siteConfig.name}
       </footer>
     </main>

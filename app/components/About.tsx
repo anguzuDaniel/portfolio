@@ -1,9 +1,9 @@
 "use client";
 
-import Image from 'next/image';
 import { siteConfig } from '@/config/profile';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
 
 export default function About() {
   const featuredSkills = [
@@ -18,8 +18,8 @@ export default function About() {
     <section id="about" className="section-padding container-max">
       <div className="grid gap-10 lg:grid-cols-[1fr_0.95fr] items-start">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ y: 20 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="space-y-8"
@@ -38,22 +38,22 @@ export default function About() {
             {siteConfig.about.stats.map((stat, index) => (
               <motion.div
                 key={stat.label}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ y: 10 }}
+                whileInView={{ y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 + 0.3 }}
                 className="premium-card premium-card-hover p-5"
               >
                 <div className="mb-2 text-4xl font-display font-black text-brand-600 dark:text-brand-300">{stat.value}</div>
-                <div className="text-[10px] font-black uppercase tracking-[0.22em] text-stone-500 dark:text-stone-400">{stat.label}</div>
+                <div className="text-[10px] font-black uppercase tracking-[0.22em] text-stone-700 dark:text-stone-400">{stat.label}</div>
               </motion.div>
             ))}
           </div>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ scale: 0.95 }}
+          whileInView={{ scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
           className="premium-card p-4 md:p-6"
@@ -108,7 +108,7 @@ export default function About() {
                   <div className="mb-3 text-[10px] font-black uppercase tracking-[0.24em] text-brand-600 dark:text-brand-300">
                     Philosophy
                   </div>
-                  <p className="text-lg font-display italic leading-relaxed text-stone-700 dark:text-stone-200">
+                  <p className="text-lg font-display italic leading-relaxed text-[#2f2117] dark:text-stone-200">
                     &quot;{siteConfig.about.quote}&quot;
                   </p>
                 </div>

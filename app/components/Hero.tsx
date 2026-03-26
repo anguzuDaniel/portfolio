@@ -1,109 +1,68 @@
 "use client";
 
-import Link from "next/link";
-import { animate, motion, useInView } from "framer-motion";
-import {
-  ArrowRight,
-  Briefcase,
-  Database,
-  Download,
-  FolderGit2,
-  Gauge,
-  Github,
-  MapPin,
-  Rocket,
-  ShieldCheck,
-  Terminal,
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
 import { siteConfig } from "@/config/profile";
-
-const terminalLines = [
-  {
-    label: "01",
-    code: `const engine = boot("velocity.execution");`,
-    tone: "text-stone-200",
-  },
-  {
-    label: "02",
-    code: `await engine.sync({ market: "synthetics", mode: "scalp" });`,
-    tone: "text-brand-200",
-  },
-  {
-    label: "03",
-    code: `risk.guard({ maxDrawdown: 2.5, throttleMs: 80 });`,
-    tone: "text-stone-300",
-  },
-  {
-    label: "04",
-    code: `settlement.queue("deriv", { retries: 3, region: "global" });`,
-    tone: "text-stone-300",
-  },
-  {
-    label: "05",
-    code: `observe({ uptime: "99.9%", latency: "42ms", alerts: "clean" });`,
-    tone: "text-brand-100",
-  },
-];
-
-const statusCards = [
-  {
-    icon: ShieldCheck,
-    label: "Risk Guard",
-    value: "Active",
-    detail: "Execution discipline and drawdown checks stay online.",
-  },
-  {
-    icon: Gauge,
-    label: "Latency",
-    value: "42ms",
-    detail: "Lean request paths for faster fintech feedback loops.",
-  },
-  {
-    icon: Database,
-    label: "Data Flow",
-    value: "Stable",
-    detail: "APIs, persistence, and automation signals stay in sync.",
-  },
-];
+import { useHasMounted } from "@/lib/useHasMounted";
+import { animate, motion, useInView } from "framer-motion";
+import type { LucideIcon } from "lucide-react";
+import {
+    ArrowRight,
+    Briefcase,
+    Download,
+    FolderGit2,
+    Github,
+    MapPin,
+    Rocket
+} from "lucide-react";
+import { useTheme } from "next-themes";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 type HeroStatProps = {
   label: string;
   value: number;
   suffix: string;
   icon: LucideIcon;
+  isDarkMode: boolean;
+  ink: string;
+  inkMuted: string;
+  gold: string;
 };
 
-function HeroStat({ label, value, suffix, icon: Icon }: HeroStatProps) {
+function HeroStat({ label, value, suffix, icon: Icon, ink, inkMuted, gold }: HeroStatProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [displayValue, setDisplayValue] = useState(0);
 
   useEffect(() => {
     if (!isInView) return;
-
     const controls = animate(0, value, {
-      duration: 1.1,
-      delay: 0.9,
+      duration: 1.4,
+      delay: 0.6,
       ease: [0.22, 1, 0.36, 1],
       onUpdate: (latest) => setDisplayValue(Math.round(latest)),
     });
-
     return () => controls.stop();
   }, [isInView, value]);
 
   return (
-    <div ref={ref} className="flex items-center gap-3 whitespace-nowrap">
-      <div className="flex h-9 w-9 items-center justify-center rounded-full border border-brand-300/20 bg-white/[0.03] text-brand-300 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
-        <Icon className="h-4 w-4" />
-      </div>
-      <div className="flex items-end gap-2">
-        <span className="font-display text-2xl leading-none tracking-[-0.04em] text-white sm:text-[1.75rem]">
-          {displayValue}
-          {suffix}
-        </span>
-        <span className="pb-0.5 text-[10px] font-black uppercase tracking-[0.24em] text-stone-400">
+    <div ref={ref} className="flex flex-col gap-1.5">
+      <span
+        style={{
+          color: ink,
+          fontFamily: "'DM Serif Display', Georgia, serif",
+          fontSize: "2.4rem",
+          lineHeight: 1,
+          letterSpacing: "-0.03em",
+        }}
+      >
+        {displayValue}{suffix}
+      </span>
+      <div className="flex items-center gap-1.5">
+        <Icon className="h-3 w-3 shrink-0" style={{ color: gold }} />
+        <span
+          className="font-mono text-[9px] uppercase tracking-[0.22em]"
+          style={{ color: inkMuted }}
+        >
           {label}
         </span>
       </div>
@@ -111,33 +70,41 @@ function HeroStat({ label, value, suffix, icon: Icon }: HeroStatProps) {
   );
 }
 
-function ShippingTicker() {
+function ShippingTicker({ isDarkMode, bg, ruleLine, gold, ink, inkMuted }: {
+  isDarkMode: boolean;
+  bg: string;
+  ruleLine: string;
+  gold: string;
+  ink: string;
+  inkMuted: string;
+}) {
   const items = [...siteConfig.projects, ...siteConfig.projects];
 
   return (
-    <div className="absolute inset-x-0 bottom-0 z-20 border-t border-white/8 bg-[#120f0c]/85 backdrop-blur-xl">
-      <div className="container-max flex h-16 items-center gap-4 overflow-hidden">
-        <div className="shrink-0 rounded-r-full border-l-4 border-brand-400 bg-white/[0.04] px-4 py-2 text-[10px] font-black uppercase tracking-[0.26em] text-brand-100/75 shadow-[0_0_24px_rgba(217,168,102,0.08)]">
-          Currently Shipping
+    <div
+      className="absolute inset-x-0 bottom-0 z-20 overflow-hidden"
+      style={{ background: bg, borderTop: `1px solid ${ruleLine}` }}
+    >
+      <div className="flex h-14 items-center gap-6 overflow-hidden">
+        <div
+          className="shrink-0 pl-8 font-mono text-[9px] uppercase tracking-[0.32em]"
+          style={{ color: gold }}
+        >
+          Live ●
         </div>
-
         <div className="relative flex-1 overflow-hidden">
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-[#120f0c] to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-[#120f0c] to-transparent" />
-
           <motion.div
             animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 24, ease: "linear", repeat: Infinity }}
-            className="flex w-max min-w-full items-center gap-8 pr-8"
+            transition={{ duration: 30, ease: "linear", repeat: Infinity }}
+            className="flex w-max items-center gap-12"
           >
-            {items.map((project, index) => (
-              <div
-                key={`${project.title}-${index}`}
-                className="flex items-center gap-3 whitespace-nowrap text-sm text-stone-300"
-              >
-                <span className="h-2 w-2 rounded-full bg-brand-300 shadow-[0_0_12px_rgba(217,168,102,0.65)]" />
-                <span className="font-semibold text-stone-100">{project.title}</span>
-                <span className="rounded-full border border-brand-300/20 bg-brand-400/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-[0.22em] text-brand-100/70">
+            {items.map((project, i) => (
+              <div key={`${project.title}-${i}`} className="flex items-center gap-3 whitespace-nowrap">
+                <span className="h-px w-5" style={{ background: gold, opacity: 0.5 }} />
+                <span className="text-sm font-semibold" style={{ color: ink, fontFamily: "'Instrument Sans', sans-serif" }}>
+                  {project.title}
+                </span>
+                <span className="font-mono text-[9px] uppercase tracking-[0.18em]" style={{ color: inkMuted }}>
                   {project.status}
                 </span>
               </div>
@@ -149,347 +116,303 @@ function ShippingTicker() {
   );
 }
 
-function HeroVisual() {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 36, scale: 0.97 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-      className="relative mx-auto w-full max-w-[34rem]"
-    >
-      <div className="absolute -left-6 top-12 h-36 w-36 rounded-full bg-brand-400/18 blur-3xl" />
-      <div className="absolute -right-2 bottom-10 h-40 w-40 rounded-full bg-brand-700/30 blur-3xl" />
-
-      <motion.div
-        animate={{ y: [0, -8, 0], rotate: [0, 0.45, 0] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        className="relative overflow-hidden rounded-[2rem] border border-brand-200/14 bg-[#17120e]/90 shadow-[0_36px_100px_rgba(0,0,0,0.48)]"
-      >
-        <div
-          className="absolute inset-0 opacity-45"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at top right, rgba(217,168,102,0.16), transparent 32%), linear-gradient(135deg, rgba(202,136,62,0.14), transparent 38%)",
-          }}
-        />
-        <div
-          className="absolute inset-0 opacity-15"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(135deg, rgba(255,255,255,0.08) 0 1px, transparent 1px 16px)",
-          }}
-        />
-
-        <div className="relative flex items-center justify-between border-b border-white/8 px-5 py-4">
-          <div className="flex items-center gap-2">
-            <span className="h-2.5 w-2.5 rounded-full bg-brand-200/90" />
-            <span className="h-2.5 w-2.5 rounded-full bg-brand-400/85" />
-            <span className="h-2.5 w-2.5 rounded-full bg-brand-700/70" />
-            <div className="ml-2 flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.22em] text-brand-100/60">
-              <Terminal className="h-3.5 w-3.5" />
-              fintech-engine.ts
-            </div>
-          </div>
-
-          <div className="rounded-full border border-brand-300/20 bg-white/[0.04] px-3 py-1 text-[10px] font-black uppercase tracking-[0.24em] text-brand-100/70">
-            Live Ops
-          </div>
-        </div>
-
-        <div className="grid gap-5 p-5 lg:grid-cols-[1.15fr_0.85fr]">
-          <div className="rounded-[1.6rem] border border-white/8 bg-[#0e0b08]/92 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
-            <div className="mb-4 flex items-center justify-between">
-              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-brand-100/55">
-                Runtime Snapshot
-              </div>
-              <div className="rounded-full border border-emerald-400/15 bg-emerald-500/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.22em] text-emerald-300">
-                Stable
-              </div>
-            </div>
-
-            <div className="space-y-3 font-mono text-[12px] leading-6 sm:text-[13px]">
-              {terminalLines.map((line, index) => (
-                <motion.div
-                  key={line.label}
-                  initial={{ opacity: 0, x: 14 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.55 + index * 0.08 }}
-                  className="flex items-start gap-4"
-                >
-                  <span className="select-none text-brand-700/80">{line.label}</span>
-                  <span className={line.tone}>{line.code}</span>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="mt-5 grid grid-cols-3 gap-3">
-              {["Next.js", "FastAPI", "Supabase"].map((item) => (
-                <div
-                  key={item}
-                  className="rounded-2xl border border-white/7 bg-white/[0.03] px-3 py-3 text-center text-[10px] font-black uppercase tracking-[0.2em] text-stone-300"
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-3">
-            {statusCards.map(({ icon: Icon, label, value, detail }, index) => (
-              <motion.div
-                key={label}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, delay: 0.75 + index * 0.1 }}
-                className="rounded-[1.5rem] border border-white/8 bg-white/[0.04] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
-              >
-                <div className="mb-3 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-300/20 bg-brand-400/10 text-brand-200">
-                      <Icon className="h-4 w-4" />
-                    </div>
-                    <div>
-                      <div className="text-[10px] font-black uppercase tracking-[0.24em] text-brand-100/55">
-                        {label}
-                      </div>
-                      <div className="font-display text-2xl tracking-[-0.04em] text-white">
-                        {value}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <p className="text-sm leading-relaxed text-stone-400">{detail}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.95 }}
-        className="absolute -left-4 bottom-12 hidden rounded-2xl border border-brand-300/18 bg-[#140f0b]/92 px-4 py-3 shadow-[0_20px_40px_rgba(0,0,0,0.35)] md:block"
-      >
-        <div className="text-[10px] font-black uppercase tracking-[0.22em] text-brand-100/55">
-          Avg Response
-        </div>
-        <div className="font-display text-2xl tracking-[-0.04em] text-white">42ms</div>
-      </motion.div>
-    </motion.div>
-  );
-}
-
 export default function Hero() {
   const nameParts = siteConfig.name.split(" ");
-  const accentName = nameParts.pop() ?? "";
-  const primaryName = nameParts.join(" ") || siteConfig.name;
-  const tagline = `${siteConfig.hero.title} ${siteConfig.hero.titleAccent}`;
-  const taglineWords = tagline.split(" ");
+  const lastName  = nameParts.pop() ?? "";
+  const firstName = nameParts.join(" ") || siteConfig.name;
+
+  const { resolvedTheme } = useTheme();
+  const hasMounted  = useHasMounted();
+  const isDarkMode  = hasMounted ? (resolvedTheme ?? "light") === "dark" : false;
+
+  const bg       = isDarkMode ? "#110e09" : "#faf8f4";
+  const ink      = isDarkMode ? "#ede0c8" : "#1a1208";
+  const inkMuted = isDarkMode ? "#8a7a64" : "#7a6a58";
+  const inkFaint = isDarkMode ? "#3a3020" : "#c8b8a8";
+  const gold     = isDarkMode ? "#c8923a" : "#a8721e";
+  const ruleLine = isDarkMode ? "rgba(200,146,58,0.14)" : "rgba(168,114,30,0.16)";
+  const surface  = isDarkMode ? "#191208" : "#f0e8dc";
+
   const heroStats = [
-    { label: "Years", value: 5, suffix: "+", icon: Briefcase },
-    { label: "Repos", value: 50, suffix: "+", icon: FolderGit2 },
-    {
-      label: "Live Projects",
-      value: siteConfig.projects.length,
-      suffix: "",
-      icon: Rocket,
-    },
+    { label: "Years Exp.", value: 5,                          suffix: "+", icon: Briefcase  },
+    { label: "Repos",      value: 50,                         suffix: "+", icon: FolderGit2 },
+    { label: "Products",   value: siteConfig.projects.length, suffix: "",  icon: Rocket     },
   ];
 
   return (
     <section
       id="home"
-      className="relative isolate overflow-hidden bg-[#120f0c] pt-28 text-theme-foreground md:pt-32"
+      className="relative isolate overflow-hidden min-h-screen flex flex-col"
+      style={{ background: bg, fontFamily: "'Instrument Sans', sans-serif" }}
     >
+      {/* Grain */}
       <div
-        className="absolute inset-0"
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.028]"
         style={{
-          background:
-            "linear-gradient(180deg, rgba(18,15,12,0.98) 0%, rgba(16,13,10,1) 100%)",
-        }}
-      />
-      <div
-        className="absolute inset-0 opacity-90"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 24% 24%, rgba(202,136,62,0.26), transparent 22%), radial-gradient(circle at 70% 18%, rgba(76,41,20,0.42), transparent 28%)",
-        }}
-      />
-      <div
-        className="absolute inset-0 opacity-[0.09]"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(135deg, rgba(255,241,224,0.12) 0 1px, transparent 1px 22px)",
-        }}
-      />
-      <div
-        className="absolute inset-0 opacity-[0.14] mix-blend-soft-light"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 20% 20%, rgba(255,255,255,0.18) 0.8px, transparent 1px), radial-gradient(circle at 70% 35%, rgba(255,255,255,0.08) 0.6px, transparent 1px)",
-          backgroundSize: "18px 18px, 26px 26px",
-        }}
-      />
-      <div
-        className="absolute inset-0 opacity-[0.08]"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, rgba(255,241,224,0.9) 0.9px, transparent 1px)",
-          backgroundSize: "18px 18px",
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          backgroundSize: "180px",
         }}
       />
 
-      <div className="container-max relative z-10 pb-28 pt-5 sm:pt-14">
-        <div className="grid min-h-[calc(100vh-12rem)] items-center gap-14 lg:grid-cols-[minmax(0,1.02fr)_minmax(360px,0.98fr)] lg:gap-16">
-          <div className="max-w-[40rem]">
-            <motion.div
-              initial={{ opacity: 0, y: 28 }}
+      {/* Ambient glow */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          background: isDarkMode
+            ? "radial-gradient(ellipse 65% 55% at 10% 0%, rgba(200,146,58,0.10) 0%, transparent 65%), radial-gradient(ellipse 45% 40% at 90% 85%, rgba(100,60,10,0.14) 0%, transparent 60%)"
+            : "radial-gradient(ellipse 65% 55% at 10% 0%, rgba(218,176,90,0.16) 0%, transparent 65%), radial-gradient(ellipse 45% 40% at 90% 85%, rgba(180,140,80,0.10) 0%, transparent 60%)",
+        }}
+      />
+
+      {/* Vertical rule — desktop only */}
+      <div
+        className="pointer-events-none absolute inset-y-0 left-[57%] z-0 hidden w-px xl:block"
+        style={{ background: ruleLine }}
+      />
+
+      {/* ── Main layout ─────────────────────────────────────────────────────── */}
+      <div className="container-max relative z-10 flex flex-1 flex-col pt-24 pb-20 lg:pt-36">
+        <div className="grid flex-1 grid-cols-1 items-center gap-16 xl:grid-cols-[1fr_300px] xl:gap-0">
+
+          {/* ── LEFT col ──────────────────────────────────────────────────── */}
+          <div className="flex flex-col xl:pr-20">
+
+
+            {/* Name */}
+            <motion.h1
+              initial={{ opacity: 0, y: 36 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-8"
+              transition={{ duration: 0.8, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
+              style={{
+                fontFamily: "'DM Serif Display', Georgia, serif",
+                fontSize: "clamp(4.2rem, 11.5vw, 9.5rem)",
+                lineHeight: 0.87,
+                letterSpacing: "-0.04em",
+              }}
             >
-              <div className="mb-4 flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.28em] text-brand-100/55">
-                <span className="h-px w-14 bg-gradient-to-r from-brand-300 to-transparent" />
-                <span>{siteConfig.role}</span>
-              </div>
+              <span className="block" style={{ color: ink }}>
+                {firstName}
+              </span>
+              <span className="relative block italic" style={{ color: gold }}>
+                {lastName}
+                {/* Animated underline */}
+                <motion.span
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 0.8, delay: 0.92, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute -bottom-3 left-0 block h-[3px] w-full origin-left rounded-full"
+                  style={{ background: `linear-gradient(90deg, ${gold} 0%, transparent 100%)` }}
+                />
+              </span>
+            </motion.h1>
 
-              <h1
-                className="max-w-[14ch] font-display text-[clamp(4rem,11vw,6.8rem)] leading-[0.92] tracking-[-0.065em]"
-                style={{
-                  textShadow: "0 12px 34px rgba(0, 0, 0, 0.32)",
-                }}
+            {/* Role tagline */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-12 max-w-[38ch] text-xl font-medium leading-[1.6] tracking-[-0.01em]"
+              style={{ color: inkMuted }}
+            >
+              {siteConfig.hero.title}{" "}
+              <span style={{ color: ink, fontWeight: 600 }}>
+                {siteConfig.hero.titleAccent}
+              </span>
+            </motion.p>
+
+            {/* Location */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.45, delay: 0.68 }}
+              className="mt-4 flex items-center gap-2"
+            >
+              <MapPin className="h-3.5 w-3.5 shrink-0" style={{ color: gold }} />
+              <span
+                className="font-mono text-xs tracking-[0.12em]"
+                style={{ color: inkMuted }}
               >
-                <span className="block text-white">{primaryName}</span>
-                {accentName ? (
-                  <span className="block text-brand-300">{accentName}</span>
-                ) : null}
-              </h1>
+                {siteConfig.location}
+              </span>
             </motion.div>
 
-            <div className="mt-7 max-w-[34rem]">
-              <motion.p
-                initial="hidden"
-                animate="visible"
-                className="text-left text-xl font-semibold leading-snug tracking-[-0.03em] text-stone-100 sm:text-[1.6rem]"
-                aria-label={tagline}
-              >
-                <span className="sr-only">{tagline}</span>
-                <span aria-hidden="true" className="flex flex-wrap gap-x-3 gap-y-2">
-                  {taglineWords.map((word, index) => (
-                    <motion.span
-                      key={`${word}-${index}`}
-                      variants={{
-                        hidden: { opacity: 0, y: 16 },
-                        visible: { opacity: 1, y: 0 },
-                      }}
-                      transition={{
-                        duration: 0.38,
-                        delay: 0.4 + index * 0.07,
-                        ease: [0.22, 1, 0.36, 1],
-                      }}
-                      className={
-                        word === "products."
-                          ? "text-brand-200"
-                          : "text-stone-100"
-                      }
-                    >
-                      {word}
-                    </motion.span>
-                  ))}
-                </span>
-              </motion.p>
-
-              <motion.p
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.84 }}
-                className="mt-6 max-w-[35rem] text-base leading-8 text-stone-400 sm:text-lg"
-              >
-                {siteConfig.hero.subtext}
-              </motion.p>
-            </div>
-
+            {/* ── CTA row ──────────────────────────────────────────────────── */}
             <motion.div
-              initial={{ opacity: 0, y: 18 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.98 }}
-              className="mt-7 flex flex-wrap items-center gap-5 text-sm text-stone-400"
+              transition={{ duration: 0.5, delay: 0.82 }}
+              className="mt-12 flex flex-wrap items-center gap-3"
             >
-              <div className="inline-flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-brand-300" />
-                <span>{siteConfig.location}</span>
-              </div>
-              <span className="hidden h-5 w-px bg-white/10 sm:block" />
-              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-brand-100/50">
-                Full-stack systems / mobile / trading tools
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 22 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.02 }}
-              className="mt-9 flex flex-wrap items-center gap-3"
-            >
-              <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+              {/* Primary CTA */}
+              <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
                 <Link
                   href="#contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-brand-400 px-6 py-3.5 text-sm font-bold text-stone-950 shadow-[0_18px_40px_rgba(202,136,62,0.28)] transition-colors hover:bg-brand-300"
+                  className="group inline-flex items-center gap-2.5 px-7 py-4 text-sm font-semibold tracking-[0.04em] transition-all"
+                  style={{
+                    background: gold,
+                    color: "#faf8f4",
+                    boxShadow: `0 8px 28px rgba(168,114,30,0.32)`,
+                  }}
                 >
                   Start a Project
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                 </Link>
               </motion.div>
 
-              <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+              {/* CV */}
+              <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
                 <a
                   href={siteConfig.resumeUrl}
                   download
-                  className="inline-flex items-center gap-2 rounded-full border border-brand-300/24 bg-white/[0.03] px-5 py-3.5 text-sm font-bold text-stone-100 transition-colors hover:border-brand-300/40 hover:bg-white/[0.06]"
+                  className="inline-flex items-center gap-2 px-6 py-4 text-sm font-medium tracking-[0.04em] transition-colors"
+                  style={{
+                    color: inkMuted,
+                    border: `1px solid ${ruleLine}`,
+                    background: "transparent",
+                  }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLAnchorElement).style.color = ink;
+                    (e.currentTarget as HTMLAnchorElement).style.borderColor = `${gold}55`;
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLAnchorElement).style.color = inkMuted;
+                    (e.currentTarget as HTMLAnchorElement).style.borderColor = ruleLine;
+                  }}
                 >
-                  <Download className="h-4 w-4 text-brand-200" />
+                  <Download className="h-3.5 w-3.5" style={{ color: gold }} />
                   Download CV
                 </a>
               </motion.div>
 
+              {/* GitHub */}
               <motion.a
                 whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.98 }}
+                whileTap={{ scale: 0.97 }}
                 href={siteConfig.github}
                 target="_blank"
                 rel="noreferrer"
-                aria-label="Open GitHub profile"
-                title="GitHub"
-                className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-transparent text-stone-300 transition-colors hover:border-brand-300/35 hover:text-brand-200"
+                aria-label="GitHub"
+                className="inline-flex h-[52px] w-[52px] items-center justify-center transition-all"
+                style={{
+                  border: `1px solid ${ruleLine}`,
+                  color: inkMuted,
+                }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLAnchorElement).style.color = gold;
+                  (e.currentTarget as HTMLAnchorElement).style.borderColor = `${gold}66`;
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLAnchorElement).style.color = inkMuted;
+                  (e.currentTarget as HTMLAnchorElement).style.borderColor = ruleLine;
+                }}
               >
                 <Github className="h-5 w-5" />
               </motion.a>
             </motion.div>
 
+            {/* ── Inline stats row (mobile / mid) ──────────────────────────── */}
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 1.12 }}
-              className="mt-10 flex flex-wrap items-center gap-4 text-sm text-stone-300"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 1.0 }}
+              className="mt-14 grid grid-cols-3 gap-6 xl:hidden"
             >
-              {heroStats.map((stat, index) => (
-                <div key={stat.label} className="flex items-center gap-4">
-                  <HeroStat {...stat} />
-                  {index !== heroStats.length - 1 ? (
-                    <span className="hidden h-8 w-px bg-white/10 sm:block" />
-                  ) : null}
-                </div>
+              {heroStats.map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.05 + i * 0.09 }}
+                >
+                  <HeroStat {...stat} isDarkMode={isDarkMode} ink={ink} inkMuted={inkMuted} gold={gold} />
+                </motion.div>
               ))}
             </motion.div>
           </div>
 
-          <HeroVisual />
+          {/* ── RIGHT col — desktop sidebar ────────────────────────────────── */}
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.65, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            className="hidden xl:flex xl:flex-col xl:gap-8 xl:border-l xl:pl-12"
+            style={{ borderColor: ruleLine }}
+          >
+            {/* Subtext */}
+            <p className="text-sm leading-[1.95]" style={{ color: inkMuted }}>
+              {siteConfig.hero.subtext}
+            </p>
+
+            {/* Rule */}
+            <div className="h-px w-full" style={{ background: ruleLine }} />
+
+            {/* Stats */}
+            <div className="flex flex-col gap-7">
+              {heroStats.map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.9 + i * 0.1 }}
+                >
+                  <HeroStat {...stat} isDarkMode={isDarkMode} ink={ink} inkMuted={inkMuted} gold={gold} />
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Rule */}
+            <div className="h-px w-full" style={{ background: ruleLine }} />
+
+            {/* Projects list */}
+            <div className="flex flex-col gap-3">
+              <span
+                className="font-mono text-[9px] uppercase tracking-[0.3em]"
+                style={{ color: gold }}
+              >
+                Currently shipping
+              </span>
+              {siteConfig.projects.slice(0, 4).map((p, i) => (
+                <motion.div
+                  key={p.title}
+                  initial={{ opacity: 0, x: 8 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 1.1 + i * 0.08 }}
+                  className="flex items-center justify-between gap-3"
+                >
+                  <div className="flex items-center gap-2 overflow-hidden">
+                    <span
+                      className="h-1 w-1 shrink-0 rounded-full"
+                      style={{ background: gold, opacity: 0.7 }}
+                    />
+                    <span
+                      className="truncate text-xs font-medium"
+                      style={{ color: ink }}
+                    >
+                      {p.title}
+                    </span>
+                  </div>
+                  <span
+                    className="shrink-0 font-mono text-[9px] uppercase tracking-[0.14em]"
+                    style={{ color: inkFaint }}
+                  >
+                    {p.status}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </div>
 
-      <ShippingTicker />
+      {/* ── Ticker ──────────────────────────────────────────────────────────── */}
+      <ShippingTicker
+        isDarkMode={isDarkMode}
+        bg={bg}
+        ruleLine={ruleLine}
+        gold={gold}
+        ink={ink}
+        inkMuted={inkMuted}
+      />
     </section>
   );
 }

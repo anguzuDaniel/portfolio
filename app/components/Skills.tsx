@@ -1,8 +1,8 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Cpu, Globe, Layers, Smartphone, Wrench } from "lucide-react";
 import SkillCard from "./SkillCard";
-import { motion } from "framer-motion";
 
 export default function Skills({ siteConfig }: { siteConfig: { skills: { frontend: string[], backend: string[], languages: string[], mobile: string[], tools: string[] } } }) {
   const skillCategories = [
@@ -43,8 +43,8 @@ export default function Skills({ siteConfig }: { siteConfig: { skills: { fronten
     <section id="skills" className="section-padding">
       <div className="container-max">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ y: 20 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true }}
           className="mb-14 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end"
         >
@@ -63,8 +63,8 @@ export default function Skills({ siteConfig }: { siteConfig: { skills: { fronten
           {skillCategories.map((category, index) => (
             <motion.div
               key={category.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ y: 20 }}
+              whileInView={{ y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
             >

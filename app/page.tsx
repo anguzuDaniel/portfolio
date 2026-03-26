@@ -1,14 +1,11 @@
-import { getGithubRepos, getRepoDescription } from '@/lib/github';
-import Hero from './components/Hero';
-import About from './components/About';
 import { siteConfig } from '@/config/profile';
+import { getGithubRepos, getRepoDescription } from '@/lib/github';
 import ContactForm from './components/ContactForm';
-import GithubRepos from './components/GithubRepos';
-import Skills from './components/Skills';
-import LiveProjects from './components/LiveProjects';
-import Experience from './components/Experience';
 import Credentials from './components/Credentials';
-import GithubProjects from './components/GithubProjects';
+import Experience from './components/Experience';
+import GithubRepos from './components/GithubRepos';
+import Hero from './components/Hero';
+import LiveProjects from './components/LiveProjects';
 
 export default async function Page() {
   const repos = await getGithubRepos();

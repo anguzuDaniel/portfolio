@@ -1,21 +1,21 @@
 "use client";
 
-import Link from "next/link";
-import { animate, motion, useInView } from "framer-motion";
-import {
-  ArrowRight,
-  Briefcase,
-  Download,
-  FolderGit2,
-  Github,
-  MapPin,
-  Rocket,
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-import { useTheme } from "next-themes";
 import { siteConfig } from "@/config/profile";
 import { useHasMounted } from "@/lib/useHasMounted";
+import { animate, motion, useInView } from "framer-motion";
+import type { LucideIcon } from "lucide-react";
+import {
+    ArrowRight,
+    Briefcase,
+    Download,
+    FolderGit2,
+    Github,
+    MapPin,
+    Rocket
+} from "lucide-react";
+import { useTheme } from "next-themes";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 type HeroStatProps = {
   label: string;

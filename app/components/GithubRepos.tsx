@@ -1,9 +1,9 @@
 "use client";
 
+import { useHasMounted } from "@/lib/useHasMounted";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Github, Star } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useHasMounted } from "@/lib/useHasMounted";
 
 interface Repo {
   id: number;
@@ -75,10 +75,6 @@ export default function GithubRepos({ repos }: { repos: Repo[] }) {
             Featured Repositories
           </span>
         </div>
-
-        <p className="text-base leading-[1.85]" style={{ color: inkMuted }}>
-          Public code samples presented in the same compact visual language as the projects gallery.
-        </p>
       </motion.div>
 
       {/* ── Grid ────────────────────────────────────────────────────────────── */}

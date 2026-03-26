@@ -1,8 +1,8 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Cpu, Globe, Layers, Smartphone, Wrench } from "lucide-react";
 import SkillCard from "./SkillCard";
-import { motion } from "framer-motion";
 
 export default function Skills({ siteConfig }: { siteConfig: { skills: { frontend: string[], backend: string[], languages: string[], mobile: string[], tools: string[] } } }) {
   const skillCategories = [

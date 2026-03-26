@@ -1,9 +1,9 @@
 "use client";
 
-import { FaGithub } from "react-icons/fa";
-import { useTheme } from "next-themes";
 import { useHasMounted } from "@/lib/useHasMounted";
 import { motion } from "framer-motion";
+import { useTheme } from "next-themes";
+import { FaGithub } from "react-icons/fa";
 import ProjectCard from "./ProjectCard";
 
 type Repo = {
@@ -74,14 +74,6 @@ export default function GithubProjects({
           >
             Live Projects
           </h2>
-
-          {/* Subtext */}
-          <p
-            className="max-w-[42ch] text-base leading-[1.8]"
-            style={{ color: inkMuted }}
-          >
-            A curated selection of my latest open-source contributions and systems.
-          </p>
         </div>
 
         {/* GitHub CTA */}

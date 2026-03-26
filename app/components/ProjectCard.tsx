@@ -1,9 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Github, ExternalLink, Star, GitFork } from "lucide-react";
-import { useTheme } from "next-themes";
 import { useHasMounted } from "@/lib/useHasMounted";
+import { motion } from "framer-motion";
+import { ExternalLink, GitFork, Github, Star } from "lucide-react";
+import { useTheme } from "next-themes";
 
 type Repo = {
   name: string;

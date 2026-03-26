@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import { siteConfig } from "@/config/profile";
+import { useHasMounted } from "@/lib/useHasMounted";
 import { motion, Variants } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useHasMounted } from "@/lib/useHasMounted";
+import Image from "next/image";
 
 type LiveProject = {
   title: string;
@@ -149,11 +149,6 @@ export default function LiveProjects() {
         >
           Case studies and projects gallery.
         </h2>
-
-        <p className="text-base leading-[1.85]" style={{ color: inkMuted }}>
-          Recent product work presented as a tighter visual gallery with screenshot-first
-          cards, adapted to the portfolio&apos;s own color system.
-        </p>
       </motion.div>
 
       {/* ── Card grid ───────────────────────────────────────────────────────── */}

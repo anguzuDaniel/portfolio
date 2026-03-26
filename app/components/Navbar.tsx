@@ -1,14 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
+import { siteConfig } from "@/config/profile";
+import { useHasMounted } from "@/lib/useHasMounted";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Download, Menu, X } from "lucide-react";
 import { useTheme } from "next-themes";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import { ModeToggle } from "./ModeToggle";
-import { siteConfig } from "@/config/profile";
-import { useHasMounted } from "@/lib/useHasMounted";
 
 const navLinks = [
   { name: "About",      href: "#about"      },

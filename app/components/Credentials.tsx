@@ -90,7 +90,7 @@ export default function Credentials() {
                 className="flex gap-3 rounded-[1.25rem] border border-brand-200/30 bg-[rgba(255,248,240,0.92)] px-4 py-4 text-[15px] text-[#4c3524] dark:border-brand-400/10 dark:bg-white/[0.03] dark:text-stone-300"
               >
                 <span className="mt-2 h-px w-6 bg-brand-400/75 shrink-0" />
-                <span>{item}</span>
+                <span className='text-[15px] text-[#4c3524] dark:text-inherit'>{item}</span>
               </div>
             ))}
           </div>

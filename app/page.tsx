@@ -8,6 +8,7 @@ import Skills from './components/Skills';
 import LiveProjects from './components/LiveProjects';
 import Experience from './components/Experience';
 import Credentials from './components/Credentials';
+import GithubProjects from './components/GithubProjects';
 
 export default async function Page() {
   const repos = await getGithubRepos();

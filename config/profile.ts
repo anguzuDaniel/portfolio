@@ -4,7 +4,7 @@ export const siteConfig = {
   location: "Kampala, Uganda",
   email: "anguzudaniel1@gmail.com",
   github: "https://github.com/anguzuDaniel",
-  linkedIn: "https://linkedin.com/in/anguzu-daniel-7b793023a/",
+  linkedIn: "https://linkedin.com/in/anguzu-daniel-7b793023a",
   resumeUrl: "/anguzu-daniel-resume.pdf",
 
   hero: {
@@ -54,6 +54,19 @@ export const siteConfig = {
   ],
 
   projects: [
+      {
+      title: "Clipar",
+      company: "Stoic Pips Limited",
+      role: "Product Builder",
+      period: "2025 - Present",
+      status: "Live",
+      description:
+        "A clipping tool for repurposing long-form content into short-form social assets for TikTok, Reels, and Shorts.",
+      highlight:
+        "Focused on helping creators and teams turn source content into distribution-ready clips faster.",
+      tech: ["Next.js", "Creator Tools", "Content Workflows"],
+      liveUrl: "https://clipar.pro",
+    },
     {
       title: "Dunam AI",
       company: "Dunam AI",
@@ -79,19 +92,6 @@ export const siteConfig = {
         "Built the product end to end across frontend, backend, deployment, and real-time trading integrations.",
       tech: ["Next.js", "Node.js", "Express", "FastAPI", "MongoDB", "Supabase"],
       liveUrl: "https://stoicpips.com",
-    },
-    {
-      title: "Clipar",
-      company: "Stoic Pips Limited",
-      role: "Product Builder",
-      period: "2025 - Present",
-      status: "Live",
-      description:
-        "A clipping tool for repurposing long-form content into short-form social assets for TikTok, Reels, and Shorts.",
-      highlight:
-        "Focused on helping creators and teams turn source content into distribution-ready clips faster.",
-      tech: ["Next.js", "Creator Tools", "Content Workflows"],
-      liveUrl: "https://clipar.stoicpips.com",
     },
     {
       title: "Dunam Velocity",
@@ -128,7 +128,7 @@ export const siteConfig = {
       highlight:
         "Built as a polished education platform with clear school storytelling, virtual tour entry points, and application-focused user flows.",
       tech: ["Next.js", "Education Platform", "Admissions UX"],
-      liveUrl: "https://excel-international-schools-yhvv.vercel.app/",
+      liveUrl: "https://excel-international-schools-yhvv.vercel.app",
     },
   ],
 
@@ -138,7 +138,7 @@ export const siteConfig = {
       role: "Full-Stack Developer",
       period: "January 2026 - Present",
       summary:
-        "Building and Maintaining Payment system for Nooaenergies.",
+        "Building and Maintaining Payment system for Nooaenergies for both Web and Mobile applications.",
       highlights: [
         "Designed the product around total execution rather than manual chart monitoring.",
         "Shaped beta workflows for automated scalping and AI-assisted trade handling.",
@@ -146,7 +146,7 @@ export const siteConfig = {
       stack: ["AI", "Automation", "Trading Systems", "TypeScript"],
       link: {
         label: "Open Beta",
-        url: "https://dunam.stoicpips.com/login",
+        url: "https://www.nooaenergies.com",
       },
     },
     {
